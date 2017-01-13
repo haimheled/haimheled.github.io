@@ -62,7 +62,7 @@ var settings = {
 	},
 
 	"icons": {
-		"showIcons": true
+		"showIcons": false
 	}
 };
 
