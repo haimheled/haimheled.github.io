@@ -49,6 +49,7 @@ a {
 a:hover {
 	color: blue;						/* Link hover color */
 	font-weight: bold;
+	font-size: 18px;					/* Link hover Size */
 }
 
 .block {
