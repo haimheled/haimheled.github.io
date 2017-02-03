@@ -42,14 +42,14 @@ body {
 
 a {
 	color: black;						/* Link Color */
-	font-size: 16px;					/* Link Size */
+	font-size: 15px;					/* Link Size */
 	text-decoration: none;					/* Remove underlines */
 }
 
 a:hover {
 	color: blue;						/* Link hover color */
 	font-weight: bold;
-	font-size: 18px;					/* Link hover Size */
+	font-size: 17px;					/* Link hover Size */
 }
 
 .block {
