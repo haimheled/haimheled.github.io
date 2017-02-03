@@ -33,7 +33,7 @@
 body {
 	background: white;					/* Page background */
 	color: black;						/* Font color */
-	padding: 20px;						/* Padding between link blocks and edge */
+	padding: 5px;						/* Padding between link blocks and edge */
 	font-size: 20px;	
 	font-family: "Museo", "Helvetica Neue", sans-serif;	/* Font */
 	/* text-shadow: rgba(0,0,0,0.6) 1px 1px 0; 		/* Text Shadow */
