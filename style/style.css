@@ -34,7 +34,7 @@ body {
 	background: white;					/* Page background */
 	color: black;						/* Font color */
 	padding: 25px;						/* Padding between link blocks and edge */
-	font-size: 20px;	
+	font-size: 18px;	
 	font-family: "Museo", "Helvetica Neue", sans-serif;	/* Font */
 	/* text-shadow: rgba(0,0,0,0.6) 1px 1px 0; 		/* Text Shadow */
 	direction: rtl;
@@ -42,14 +42,14 @@ body {
 
 a {
 	color: black;						/* Link Color */
-	font-size: 15px;					/* Link Size */
+	font-size: 14px;					/* Link Size */
 	text-decoration: none;					/* Remove underlines */
 }
 
 a:hover {
 	color: blue;						/* Link hover color */
 	font-weight: bold;
-	font-size: 17px;					/* Link hover Size */
+	font-size: 16px;					/* Link hover Size */
 }
 
 .block {
