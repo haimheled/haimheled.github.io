@@ -37,7 +37,7 @@ body {
 	font-size: 14px;	
 	font-family: "Museo", "Helvetica Neue", sans-serif;	/* Font */
 	/* text-shadow: rgba(0,0,0,0.6) 1px 1px 0; 		/* Text Shadow */
-	direction: rtl;
+	direction: ltr;
 }
 
 a {
@@ -54,7 +54,7 @@ a:hover {
 
 .block {
 	border-left: 1px solid #999;				/* Left border of link block */
-	float: left;
+	float: right;
 	padding: 1em;						/* Padding around link block */
 	width: 100px;						/* Link block width !!!! */
 }
