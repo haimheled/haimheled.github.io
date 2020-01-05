@@ -54,7 +54,7 @@ a:hover {
 
 .block {
 	border-left: 1px solid #999;				/* Left border of link block */
-	float: right;
+	float: left;
 	padding: 1em;						/* Padding around link block */
 	width: 100px;						/* Link block width !!!! */
 }
