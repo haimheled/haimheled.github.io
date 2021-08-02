@@ -47,9 +47,9 @@ a {
 }
 
 a:hover {
-	color: blue;						/* Link hover color */
+	color: white;		/* blue; */			/* Link hover color */
 	font-weight: bold;
-	font-size: 15px;					/* Link hover Size */
+	font-size: 14px;	/* 15px; */			/* Link hover Size */
 }
 
 .block {
