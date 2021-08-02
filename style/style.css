@@ -31,8 +31,8 @@
 */
 
 body {
-	background: black;	/* white; */				/* Page background */
-	color: white;		/* black; */				/* Font color */
+	background: black;	/* white; */			/* Page background */
+	color: white;		/* black; */			/* Font color */
 	padding: 25px;						/* Padding between link blocks and edge */
 	font-size: 14px;	
 	font-family: "Museo", "Helvetica Neue", sans-serif;	/* Font */
@@ -41,7 +41,7 @@ body {
 }
 
 a {
-	color: black;						/* Link Color */
+	color: white;		/* black; */			/* Link Color */
 	font-size: 14px;					/* Link Size */
 	text-decoration: none;					/* Remove underlines */
 }
