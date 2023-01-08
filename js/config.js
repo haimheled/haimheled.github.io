@@ -70,8 +70,96 @@ const CONFIG = {
     {category: 'Development', name: 'Github Edit', url: 'https://github.com/haimheled/haimheled.github.io/edit/master/js/config.js'},
     {category: 'Development', name: 'Github Edit Old', url: 'https://github.com/haimheled/haimheled.github.io/blob/master/startpage.rwrt.old_site/index.html'},
 
-    
+    {category: 'Renesas', name: 'Auth Setup', url: 'https://aka.ms/mfasetup'},
+    {category: 'Renesas', name: 'Portal', url: 'https://urldefense.proofpoint.com/v2/url?u=https-3A__renesasgroup.sharepoint.com_sites_GIPen&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=4Kqhc4V8ADEctMewZo2ovz_tkInA2Hj3KO5aRWPhaQk&e='},
+    {category: 'Renesas', name: 'Outlook', url: 'https://urldefense.proofpoint.com/v2/url?u=https-3A__outlook.office365.com&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=YXBYvu9e3QrWTqN_1ad8BxlxgL2Lb_r0Coy94S80pzQ&e='},
+    {category: 'Renesas', name: 'Teams', url: 'https://urldefense.proofpoint.com/v2/url?u=https-3A__teams.microsoft.com_&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=ZI48vGgauYmwc5Z8e3P34MCT2xW3toYIFT_1sk_j0Hs&e='},           
+    {category: 'Renesas', name: 'Goals', url: 'https://jpn01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fperformancemanager5.successfactors.eu%2Flogin%3Fcompany%3Drenesasele%23%2Flogin&data=04%7C01%7Chaim.heled.ks%40renesas.com%7C7af5adfd98474c88f47908da1bb4846e%7C53d82571da1947e49cb4625a166a4a2a%7C0%7C0%7C637852759489302374%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000&sdata=IQYFM7WPoibj9WREZs0bm6vpH5TYLh%2F%2B2NsERq5tEK0%3D&reserved=0'}, 
+    {category: 'Renesas', name: 'Mail',          url: 'https://outlook.office365.com/mail/inbox'},
+    {category: 'Renesas', name: 'Calendar',      url: 'https://outlook.office365.com/calendar/view/month'},
+    {category: 'Renesas', name: 'SVN Project',   url: 'http://172.25.90.250/svn/celeno-sys/Project'},
+    {category: 'Renesas', name: 'SVN Personal',  url: 'http://172.25.90.250/svn/celeno-people/haim.heled'},
+    {category: 'Renesas', name: 'Cibus',         url: 'http://www.mysodexo.co.il'},
+    {category: 'Renesas', name: 'Tasks',         url: 'https://tasks.office.com/celeno.com/en-US/Home/Planner/#/mytasks'},
+    {category: 'Renesas', name: 'Soc CL6000	',   url: 'http://172.26.30.84/soc-cl6000/soconline/app/index.cgi?'},
+    {category: 'Renesas', name: 'Soc CL3000 B',  url: 'http://172.26.30.84/soc-cl3000_b0/soconline/app/index.cgi?'},
+    {category: 'Renesas', name: 'Wiki IP list',  url: 'http://172.25.90.250/wiki/index.php/Palladium_Protium_IPs'},
+    {category: 'Renesas', name: 'Jira',          url: 'https://celeno.atlassian.net/issues/?filter=10368'},
+    {category: 'Renesas', name: 'Matlab',        url: 'http://172.25.90.250/svn/celeno-sys/Project/CL3000/Algo/MatlabRelease/distrib/'},
+    {category: 'Renesas', name: 'DSP',           url: 'http://172.25.90.250/svn/dsp/code/Everest_A0/build'},
+    {category: 'Renesas', name: 'Office',        url: 'https://www.office.com/'},
+    {category: 'Renesas', name: 'Documents',     url: 'http://172.25.90.250/svn/celeno-sys/Project/CL3000/MAC%20Documents/'},
+    {category: 'Renesas', name: 'Hours Report',  url: 'https://harmony.synel.co.il/eharmonynew'},
+    {category: 'Renesas', name: 'Exceed',        url: 'https://172.29.149.65/etx'},
+    {category: 'Renesas', name: 'EDA Play',      url: 'https://www.edaplayground.com'},
+    {category: 'Renesas', name: 'IPMI EDK-4171', url: 'http://172.18.3.44/cgi/url_redirect.cgi?url_name=man_chassis'},
+    {category: 'Renesas', name: 'IPMI EDK-4172', url: 'http://172.18.3.34/cgi/url_redirect.cgi?url_name=man_chassis'},
+    {category: 'Renesas', name: 'IPMI EDK-4173', url: 'http://172.18.3.52/cgi/url_redirect.cgi?url_name=man_chassis'},
+    {category: 'Renesas', name: 'IPMI EDK-4174', url: 'http://172.18.3.38/cgi/url_redirect.cgi?url_name=man_chassis'},
+    {category: 'Renesas', name: 'IPMI EDK-4175', url: 'http://172.18.3.42/cgi/url_redirect.cgi?url_name=man_chassis'},
+    {category: 'Renesas', name: 'IPMI EDK-4177', url: 'http://172.18.3.41/cgi/url_redirect.cgi?url_name=man_chassis'},
+    {category: 'Renesas', name: 'IPMI EDK-4178', url: 'http://172.18.3.46/cgi/url_redirect.cgi?url_name=man_chassis'},
+    {category: 'Renesas', name: 'IPMI EDK-4179', url: 'http://172.18.3.50/cgi/url_redirect.cgi?url_name=man_chassis'},
+    {category: 'Renesas', name: 'Soc CL2400',    url: 'http://10.220.220.201/soc-cl2400_b0/soconline/app/'},
+    {category: 'Renesas', name: 'Soc CL3000',    url: 'http://10.220.220.201/soc-cl3000/soconline/app/'}, 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
+
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
 
 
     {
