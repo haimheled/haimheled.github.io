@@ -94,12 +94,12 @@ class Help {
                 .command-key-${i} {
                   color: ${fgcolor}; 
                   background-color:${bgcolor};
-                  border: 4px solid ${fgcolor}; 
+                  border: 4px solid ${fgcolor};
                 }   
               </style>
               <li class="command">
                 <a href="${url}" target="${this._newTab ? '_blank' : '_self'}">
-                  <span class="command-key command-key-${i}">${iconEl}</span>
+                  <!-- <span class="command-key command-key-${i}">${iconEl}</span> -->
                   <span class="command-name">${name}</span>
                 </a>
               </li>

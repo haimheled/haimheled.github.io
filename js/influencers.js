@@ -112,6 +112,46 @@ class DuckDuckGoInfluencer extends Influencer {
   }
 }
 
+
+class GoogleInfluencer extends Influencer {
+  constructor({ queryParser }) {
+    super(...arguments);
+  }
+
+  getSuggestions(rawQuery) {
+    const { query } = this._parseQuery(rawQuery);
+    if (!query) return Promise.resolve([]);
+
+    return new Promise(resolve => {
+      const endpoint = 'http://suggestqueries.google.com/complete/search';
+      const callback = 'autocompleteCallback';
+
+      window[callback] = res => {
+        const suggestions = res[1]           //   ["camel", "duck"]
+          //.map(i => i.phrase)
+          /*.filter(s => !$.ieq(s, query))
+          .slice(0, this._limit)*/;
+
+        resolve(this._addSearchPrefix(suggestions, rawQuery));
+      };
+
+      $.jsonp(`${endpoint}?callback=${callback}&client=firefox&hl=iw&q=${query}`);
+//       http://suggestqueries.google.com/complete/search?callback=JSON_CALLBACK&client=firefox&hl=en&q=haim
+    });
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 class HistoryInfluencer extends Influencer {
   constructor() {
     super(...arguments);

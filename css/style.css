@@ -25,6 +25,9 @@ pre {
 a {
   background-color: transparent;
 }
+a:hover {
+  font-weight: bold;
+}
 abbr[title] {
   border-bottom: none; /* 1 */
   text-decoration: underline; /* 2 */
@@ -271,6 +274,12 @@ a:focus {
   background: var(--background);
   color: var(--foreground);
   z-index: 2;
+
+  display: flex;
+  justify-content: top;
+  align-items: top;
+  width: 100%;
+  height: 100%;
 }
 
 .search-form>div {
@@ -284,7 +293,8 @@ a:focus {
   font-size: 1.5rem;
   font-weight: var(--font-weight-bold);
   letter-spacing: 0.1rem;
-  text-transform: uppercase;
+  margin-top: 25%;
+/*   text-transform: uppercase; */
 }
 
 .search-suggestions {
@@ -297,10 +307,11 @@ a:focus {
 
 body.suggestions .search-suggestions {
   display: flex;
+  flex-direction: column;
 }
 
 .search-suggestion {
-  padding: 0.75rem 1rem;
+  padding: 0.2rem 1rem;
   text-align: left;
   white-space: nowrap;
   cursor: pointer;
@@ -336,6 +347,7 @@ body.suggestions .search-suggestions {
   padding: 8vw;
   background: var(--background);
   z-index: 1;
+  align-items: start;
 }
 
 .category {
@@ -346,17 +358,21 @@ body.suggestions .search-suggestions {
 }
 
 .category-name {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.15rem;
   font-size: 0.75rem;
   letter-spacing: 0.15rem;
   text-transform: uppercase;
+/*   text-decoration-line: underline; */
+  border-bottom: 2px solid white;
+
 }
 
 .command a {
   display: flex;
   position: relative;
-  margin: 1rem 0;
-  line-height: 2rem;
+  margin: 0.75rem 0;
+  /* line-height: 2rem; */
+  line-height: 0.5rem;
   text-decoration: none;
 }
 

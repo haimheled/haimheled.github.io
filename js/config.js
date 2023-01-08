@@ -6,11 +6,17 @@ const CONFIG = {
    * Commands without a category don't show up in the help menu.
    * Update line 11 and 13 if you prefer using Google.
    */
-  commands: [{
-      name: 'Duckduckgo',
+//   commands: [{
+//       name: 'Duckduckgo',
+//       key: '*',
+//       url: 'https://duckduckgo.com',
+//       search: '/?q={}'
+//     },
+    commands: [{
+      name: 'Google',
       key: '*',
-      url: 'https://duckduckgo.com',
-      search: '/?q={}'
+      url: 'https://google.com',
+      search: '/search?q={}'
     },
     {
       category: 'General',
@@ -59,6 +65,83 @@ const CONFIG = {
       icon: 'discord',
       quickLaunch: false,
     },
+
+
+
+
+
+
+
+    {
+      category: 'GeneraHHH', name: 'Drive', url: 'https://drive.google.com',
+    },
+    {
+      category: 'Genera',
+      name: 'Telegram',
+      key: 'tg',
+      url: 'https://web.telegram.org',
+      color: '#5682a3',
+      icon: 'telegram',
+      quickLaunch: false,
+    },
+    {
+      category: 'Genera',
+      name: 'WhatsApp',
+      key: 'w',
+      url: 'https://web.whatsapp.com',
+      color: 'linear-gradient(135deg, #25D366, #128C7E, #075E54)',
+      icon: 'whatsapp',
+      quickLaunch: false,
+    },
+    {
+      category: 'Genera',
+      name: 'Discord',
+      key: 'dc',
+      url: 'https://discord.com/app',
+      color: '#7289da',
+      icon: 'discord',
+      quickLaunch: false,
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     {
@@ -217,7 +300,7 @@ const CONFIG = {
    * Get suggestions as you type.
    */
   suggestions: true,
-  suggestionsLimit: 4,
+  suggestionsLimit: 10,
 
   /**
    * The order and limit for each suggestion influencer. An "influencer" is
@@ -228,7 +311,7 @@ const CONFIG = {
    * - "DuckDuckGo" suggestions come from the duck duck go search api
    * - "History" suggestions come from your previously entered queries
    */
-  influencers: [{
+  influencers: [/*{
       name: 'Commands',
       limit: 2
     },
@@ -239,10 +322,14 @@ const CONFIG = {
     {
       name: 'History',
       limit: 1
-    },
+    },*/
+//     {
+//       name: 'DuckDuckGo',
+//       limit: 10 // 4
+//     },
     {
-      name: 'DuckDuckGo',
-      limit: 4
+      name: 'Google',
+      limit: 10 // 4
     },
   ],
 
@@ -268,7 +355,7 @@ const CONFIG = {
   /**
    * Dynamic overlay background colors when command domains are matched.
    */
-  colors: true,
+  colors: false,
 
   /**
    * Invert color theme
