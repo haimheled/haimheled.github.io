@@ -68,7 +68,7 @@ const CONFIG = {
 
     {category: 'Development', name: 'Github Page', url: 'https://github.com/haimheled/haimheled.github.io'},
     {category: 'Development', name: 'Github Edit', url: 'https://github.com/haimheled/haimheled.github.io/edit/master/js/config.js'},
-    {category: 'Development', name: 'Github Edit Old', url: 'https://github.com/haimheled/haimheled.github.io/edit/master/index.html'},
+    {category: 'Development', name: 'Github Edit Old', url: 'https://github.com/haimheled/haimheled.github.io/blob/master/startpage.rwrt.old_site/index.html'},
 
     
 
