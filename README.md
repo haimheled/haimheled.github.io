@@ -1,63 +1,100 @@
-# startpage.rwrt
+[![GitHub Issues](https://img.shields.io/github/issues/Ozencb/tilde-enhanced)](https://github.com/Ozencb/tilde-enhanced/issues)
+[![Stars](https://img.shields.io/github/stars/Ozencb/tilde-enhanced)](https://github.com/Ozencb/tilde-enhanced)
+[![Forks](https://img.shields.io/github/forks/Ozencb/tilde-enhanced)](https://github.com/Ozencb/tilde-enhanced)
+[![Unlicense](https://img.shields.io/github/license/Ozencb/tilde-enhanced)](../master/LICENSE)
+
+# Tilde Enhanced
+
+Based on [Cade Scroggins](https://github.com/cadejscroggins)'s [Tilde](https://github.com/cadejscroggins/tilde).
+
+## Screenshots 
+
+![Screenshot](assets/screenshot.png)
+
+
+## Added Features
+Most of the features are carried over from the original source.
+Few of the added features are:
+
+- A launch category functionality, which launches every site in a category. Enter a category index number followed by `!`, i.e. `2!` would launch everything under the second category. 
+- A "Quick Launch" functionality, which launches every site with `quickLaunch` property set to `true` upon entering `q!`.
+- An invertible color theme. Either edit config or use `invert!` command.
+- Show image or SVG as bookmark icon
+- An option to show launch keys instead of icons. Either edit config or type `keys!`.
+
+## Usage
+
+To use Tilde as your homepage, simply set your browser's home URL to
+Tilde's index file.
+To go to a site, enter the first letter of the site then hit enter.
+To view the available sites, press `?` or click on the clock.
+If your input doesn't match any of the commands,
+a generic DuckDuckGo search will be triggered. For example:
+
+- Entering `r` would redirect you to [www.reddit.com](https://www.reddit.com).
+- Entering `t` would redirect you to [twitch.tv](https://www.twitch.tv).
+- Entering `cats` would search [Cats](https://duckduckgo.com/?q=cats).
+
+Note that by default, queries are searched on DuckDuckGo but this can be
+configured easily by updating two lines on. Check [Configuration](#configuration) for details.
+
+You might have to allow pop-ups for your homepage to use quick launch feature.
+
+This version is not suitable for use on mobile as clicking on the clock will
+only bring up pre-defined sites.
+
+### Searching
+
+You can search any of the sites by typing a colon after the site's key, followed
+by your search query. For example:
+
+- Entering `g:tilde-enhanced` would search
+  [GitHub for tilde-enhanced](https://github.com/search?q=tilde-enhanced).
+- Entering `y:cats` would search
+  [Cats on YouTube](https://www.youtube.com/results?search_query=cats).
+
+### Specific Locations
+
+You can go to a specific location on a site by typing a forward slash after the
+site's key, followed by the location on the site you'd like to be redirected to.
+For example:
+
+- Entering `r/r/startpages` would redirect you to
+  [www.reddit.com/r/startpages](https://www.reddit.com/r/startpages)
+- Entering `h/popular` would redirect you to
+  [hypem.com/popular](http://hypem.com/popular).
+
+### URL Redirects
+
+If you enter in a full domain or URL, you will be redirected to said domain or
+URL. For example:
+
+- Entering `stallman.org` would redirect you to
+  [stallman.org](https://stallman.org/).
+- Entering `keep.google.com` would redirect you to
+  [keep.google.com](https://keep.google.com/).
+
+You can also use `Ctrl + Enter` key combination to launch the query with a `.com` TLD.
+
+### Query Paramater
+
+Additionally, you can pass any query via the `q` query param. For example:
+
+- Going to `file:///path/to/tilde/index.html?q=cats` would search
+  [Cats](https://duckduckgo.com/?q=cats).
+
+This allows you to invoke Tilde with your native browser search bar.
 
 ## Configuration
 
-### index.html
-This is where you add your links. But don't worry, there's no HTML skills needed.
+Open up the [config.js](js/config.js) file and read through the `CONFIG`!
 
-There's really only two places you should take a look at: Line 44, where you set the page title, and everything below line 49, where the links go. There's some instructions in the comments, but since I'm busy writing anyways, I'll just repeat myself here.
+## Setting it up for new tabs on Firefox
 
-```
-The Section Heading. This will start a new block.
-  I
-  V
-Title
-http://www.example.com || Title || Keybinding || Icon URL
-  ^                         ^           ^             ^
-  |                         |           `---------,   `-------------------------------------,
-Where you want to go ][ What you want to see ][ Keybinding to go there fast (optional) ][ URL of image to display with link (optional) ]
-```
+By default Firefox won't let you set a custom URL for new tabs but there is a work-around to circumvent the problem.
 
-The keybindings support multi-stroke bindings, so you can use ```gm``` to go to Gmail, ```gp``` to go to Google+, and so on. But beware! Shorter keybindings will get triggered first, so if you already use ```g``` to go to Google, you'll never be able to input ```gm``` or ```gp```.
+You can follow [Urimu's Guide](https://github.com/Urimu/Startpage#setting-it-up-on-firefox) to set your new tab to launch custom URLs.
 
-### settings
-Due to some issues with Chrome's XMLHttpRequest, the settings have been moved to ```js/script.js```. They can be found right at the top of the file.
+## License
 
-#### navigation
-This only has one setting: ```"newWindow"```. Set to true to have links open in a new tab/window, false to use the same window.
-
-#### clock
-Again, this has one setting: ```"showClock"```. True or false.
-
-#### animation
-This only has one setting: ```"hideLinks"```. Set to true to have links being shown/hidden automatically on
-mouse events, false to see them always.
-
-#### icons
-This only has one setting: ```"showIcons"```. Set to true to see configured icons next to links, false to hide them.
-
-#### search
-This is where it gets interesting. There's two keys:
-
-##### focusSearch
-```true``` or ```false```. This is supposed to focus the first search box when the page is opened, but that's highly dependent on the browser. It works in Firefox, but last time I checked it won't work in Chrome. There's not really anything I can do about that.
-
-##### engines
-This is the fun part. Instead of giving you predefined search engines, I thought I'd let you add some on the fly.
-
-So, ```engines``` is an array full of arrays. Each inner array needs to have three objects - The URL of your search engine, the ```GET``` argument, and a placeholder for the searchbox.
-
-How do you get that stuff? Let's take a look at Google. When you search something, you'll get redirected to this URL:
-
-```
-https://www.google.com/search?q=something
-```
-
-There's some more stuff there, but this is the part we're interested about. Everything up to ```?``` is the URL, so it goes in the first position in the array.
-
-The part between ```?``` and ```=``` is the name of the ```GET``` argument, this goes in the second position.
-
-The third position can be any string really. I suggest you choose something descriptive here, like "Google".
-
-### style/style.css
-If you know CSS, edit to your heart's contempt.
+Feel free to [use this and modify it however you like](https://github.com/Ozencb/tilde-enhanced/blob/master/LICENSE).

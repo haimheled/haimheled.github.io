@@ -1,152 +1,35 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
+<html lang="en">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<link rel="stylesheet" href="style/style.css" type="text/css" />
-	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
-	<script type="text/javascript" src="js/script.js"></script>
-
-	<!-- Page Title -->
-	<title>Home Page</title>
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <link rel="stylesheet" href="css/style.css" class="style">
+  <title>~+</title>
 </head>
+
 <body>
+  <div class="center disable-select"><time class="clock" id="clock"></time></div>
+  <form autocomplete="off" class="center overlay search-form" id="search-form" spellcheck="false">
+    <div>
+      <input class="search-input" id="search-input" title="search" type="text" />
+      <ul class="search-suggestions" id="search-suggestions"></ul>
+    </div>
+  </form>
+  <aside class="center help overlay disable-select" id="help"></aside>
 
-<!--
-	URLs go here, in the following format:
 
-Heading Text
-http://www.example.com || Title || Keybinding || images/icon.png
-
-Second Heading Text
-http://www.example.com || Another Title
--->
-
-Bills
-https://www.012mobile.co.il/n/login          || Cellular 
-https://www.hot.net.il/heb/SelfService/Login || ISP & Phone
-https://www.hotnet.net.il                    || ISP content
-https://www.cal-online.co.il                 || Credit Card	
-http://sgas.co.il                            || Super Gas
-https://www.mast.co.il/101/mail-invoice      || Water
-https://www.ramat-gan.muni.il/waterbillsubscribe || City Tax
-https://www.iec.co.il                            || Electricity
-
-	
-General
-https://www.google.com   || Google
-https://web.whatsapp.com || Whatsapp
-https://www.youtube.com  || YouTube
-	
-Shop
-https://israelpost.co.il/%d7%a9%d7%99%d7%a8%d7%95%d7%aa%d7%99%d7%9d/%d7%94%d7%97%d7%91%d7%99%d7%9c%d7%95%d7%aa-%d7%a9%d7%9c%d7%99/ || Israel Post
-https://reutbuyitforme.com || Reut Buy
-https://ali-buy.com || Ali Buy
-https://ineedit.co.il || I Need It
-
-News
-http://rotter.net/scoopscache.html || Rotter
-http://www.ynet.co.il || Ynet
-http://www.walla.co.il || Walla
-http://www.mako.co.il || Mako
-http://www.nrg.co.il || NRG
-http://www.haaretz.co.il || Haaretz
-http://www.news-israel.net || News Israel
-http://www.israelhayom.co.il || Israel Today
-https://news.google.co.il || Google News
-http://www.cnn.co.il || CNN
-http://www.cnn.co.il || Fox
-
-Sport
-http://www.sport5.co.il || Sport5
-http://www.one.co.il || One
-https://www.nba.com/games || NBA Games	
-https://nbabite.com || NBA Streams
-https://nbafullhd.com || NBA Replay
-
-Business
-http://www.globes.co.il || Globes
-http://www.themarker.co.il || The Marker
-http://www.calcalist.co.il || Calcalist
-
-Finance
-http://www.boi.org.il/he/Markets/ExchangeRates/Pages/Default.aspx || Exchange Rates
-https://services.cal-online.co.il/Card-Holders/SCREENS/AccountManagement/Login.aspx?ReturnUrl=%2fcard-holders%2fScreens%2fAccountManagement%2fHomePage.aspx || Visa
-
-Health
-https://e-services.clalit.org.il/onlineweb/general/login.aspx || Clalit
-
-Tools
-http://online.babylon.com/trans_box/myindex.php?lang=EN&affiliate=CD1 || Dictionary
-https://he.wikipedia.org || Wikipedia
-<!-- http://wgetip.com || כתובת IPv6 -->
-<!-- http://ipecho.net/plain || כתובת IPv4 -->
-http://whatip.me || IP Address
-http://www.ipligence.com/geolocation || IP Location
-http://www.speedtest.net || Speed Test
-https://www.google.co.il || Google Search
-https://150.co.il        || Remote Access
-https://pcpartpicker.com || PC Builder
-
-Radio
-http://rr-d.vidnt.com/player/?stream=radio-betM&account=iba&width=320&height=240&delivery_type=hls&autoplay=true&smil_profile=default || Kan B
-http://www.fm1.co.il/glz.html || Galaz
-ttp://www.fm1.co.il/glgltz.html || Gal Galaz
-http://www.fm1.co.il/102fm.html || TLV Radio
-http://rr-d.vidnt.com/player/?stream=radio-88fmM&account=iba&width=320&height=240&delivery_type=hls&autoplay=true&smil_profile=default || 88FM
-
-TV
-http://www.split-tv.co.il/p/il.html || Israel Split TV
-http://www.kan.org.il/live/tv.aspx?stationId=2 || Kan 11
-https://www.mako.co.il/mako-vod-live-tv/VOD-6540b8dcb64fd31006.htm || Keshet 12
-http://reshet.tv/live/ || Reshet 13
-https://ustv247.tv/    || US TV	
-
-Renesas
-https://aka.ms/mfasetup || Auth Setup
-https://urldefense.proofpoint.com/v2/url?u=https-3A__renesasgroup.sharepoint.com_sites_GIPen&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=4Kqhc4V8ADEctMewZo2ovz_tkInA2Hj3KO5aRWPhaQk&e= || Portal
-https://urldefense.proofpoint.com/v2/url?u=https-3A__outlook.office365.com&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=YXBYvu9e3QrWTqN_1ad8BxlxgL2Lb_r0Coy94S80pzQ&e= || Outlook
-https://urldefense.proofpoint.com/v2/url?u=https-3A__teams.microsoft.com_&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=ZI48vGgauYmwc5Z8e3P34MCT2xW3toYIFT_1sk_j0Hs&e= || Teams
-https://jpn01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fperformancemanager5.successfactors.eu%2Flogin%3Fcompany%3Drenesasele%23%2Flogin&data=04%7C01%7Chaim.heled.ks%40renesas.com%7C7af5adfd98474c88f47908da1bb4846e%7C53d82571da1947e49cb4625a166a4a2a%7C0%7C0%7C637852759489302374%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000&sdata=IQYFM7WPoibj9WREZs0bm6vpH5TYLh%2F%2B2NsERq5tEK0%3D&reserved=0 || Goals
-https://outlook.office365.com/mail/inbox                           || Mail
-https://outlook.office365.com/calendar/view/month                  || Calendar
-http://172.25.90.250/svn/celeno-sys/Project                        || SVN Project
-http://172.25.90.250/svn/celeno-people/haim.heled                  || SVN Personal
-http://www.mysodexo.co.il                                          || Cibus
-https://tasks.office.com/celeno.com/en-US/Home/Planner/#/mytasks   || Tasks
-http://172.26.30.84/soc-cl6000/soconline/app/index.cgi?            || Soc CL6000	
-http://172.26.30.84/soc-cl3000_b0/soconline/app/index.cgi?         || Soc CL3000 B
-http://172.25.90.250/wiki/index.php/Palladium_Protium_IPs          || Wiki IP list
-https://celeno.atlassian.net/issues/?filter=10368 || Jira
-http://172.25.90.250/svn/celeno-sys/Project/CL3000/Algo/MatlabRelease/distrib/   || Matlab
-http://172.25.90.250/svn/dsp/code/Everest_A0/build                               || DSP
-https://www.office.com/                                                          || Office
-http://172.25.90.250/svn/celeno-sys/Project/CL3000/MAC%20Documents/              || Documents
-https://harmony.synel.co.il/eharmonynew                                          || Hours Report
-https://172.29.149.65/etx                                                        || Exceed
-https://www.edaplayground.com                                                    || EDA Play
-http://172.18.3.44/cgi/url_redirect.cgi?url_name=man_chassis                     || IPMI EDK-4171
-http://172.18.3.34/cgi/url_redirect.cgi?url_name=man_chassis                     || IPMI EDK-4172
-http://172.18.3.52/cgi/url_redirect.cgi?url_name=man_chassis                     || IPMI EDK-4173
-http://172.18.3.38/cgi/url_redirect.cgi?url_name=man_chassis                     || IPMI EDK-4174
-http://172.18.3.42/cgi/url_redirect.cgi?url_name=man_chassis                     || IPMI EDK-4175
-http://172.18.3.41/cgi/url_redirect.cgi?url_name=man_chassis                     || IPMI EDK-4177
-http://172.18.3.46/cgi/url_redirect.cgi?url_name=man_chassis                     || IPMI EDK-4178
-http://172.18.3.50/cgi/url_redirect.cgi?url_name=man_chassis                     || IPMI EDK-4179
-http://10.220.220.201/soc-cl2400_b0/soconline/app/                               || Soc CL2400
-http://10.220.220.201/soc-cl3000/soconline/app/                                  || Soc CL3000
-
-Development
-https://github.com/haimheled/haimheled.github.io || Github Page
-https://github.com/haimheled/haimheled.github.io/edit/master/index.html || Github Edit	
-
-Uitilities
-http://online.babylon.com/trans_box/myindex.php?lang=EN&affiliate=CD1 || Babylon
-https://nospam.today || Quick Email
-http://www.ipligence.com/geolocation || IP Location
-http://ivory:6080/vnc.html?host=ivory&port=6080 || novnc
-
+  <script src="js/svg-inject.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/body.js"></script>
+  <script src="js/clock.js"></script>
+  <script src="js/form.js"></script>
+  <script src="js/help.js"></script>
+  <script src="js/influencers.js"></script>
+  <script src="js/queryParser.js"></script>
+  <script src="js/suggester.js"></script>
+  <script src="js/index.js"></script>
 </body>
-</html>
 
+</html>
