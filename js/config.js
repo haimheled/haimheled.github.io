@@ -155,13 +155,56 @@ const CONFIG = {
     {category: 'News', name: 'Mako',         url: 'http://www.mako.co.il'},
     {category: 'News', name: 'NRG',          url: 'http://www.nrg.co.il'},
     {category: 'News', name: 'Haaretz',      url: 'http://www.haaretz.co.il'},
-	  {category: 'News', name: 'News Israel',  url: 'http://www.news-israel.net'},
+    {category: 'News', name: 'News Israel',  url: 'http://www.news-israel.net'},
     {category: 'News', name: 'Israel Today', url: 'http://www.israelhayom.co.il'},
     {category: 'News', name: 'Google News',  url: 'https://news.google.co.il'},
     {category: 'News', name: 'CNN',          url: 'http://www.cnn.com'},
     {category: 'News', name: 'Fox',          url: 'http://www.foxnews.com'},
  
+	       
+    {category: 'Sport', name: 'Sport5',      url: 'http://www.sport5.co.il'},
+    {category: 'Sport', name: 'One',         url: 'http://www.one.co.il'},
+    {category: 'Sport', name: 'NBA Games',   url: 'https://www.nba.com/games'},
+    {category: 'Sport', name: 'NBA Streams', url: 'https://nbabite.com'},
+    {category: 'Sport', name: 'NBA Replay',  url: 'https://nbafullhd.com'},
 
+	       
+    {category: 'Business', name: 'Globes',     url: 'http://www.globes.co.il'},
+    {category: 'Business', name: 'The Marker', url: 'http://www.themarker.co.il'},
+    {category: 'Business', name: 'Calcalist',  url: 'http://www.calcalist.co.il'},
+    
+    
+    {category: 'Finance', name: 'Exchange Rates', url: 'http://www.boi.org.il/he/Markets/ExchangeRates/Pages/Default.aspx'},
+    {category: 'Finance', name: 'Visa',           url: 'https://services.cal-online.co.il/Card-Holders/SCREENS/AccountManagement/Login.aspx?ReturnUrl=%2fcard-holders%2fScreens%2fAccountManagement%2fHomePage.aspx'},
+
+
+    {category: 'Health', name: 'Clalit', url: 'https://e-services.clalit.org.il/onlineweb/general/login.aspx'},
+
+
+    {category: 'Tools', name: 'Dictionary',    url: 'http://online.babylon.com/trans_box/myindex.php?lang=EN&affiliate=CD1'},
+    {category: 'Tools', name: 'Wikipedia',     url: 'https://he.wikipedia.org'},
+    {category: 'Tools', name: 'IP Address',    url: 'http://whatip.me'},
+    {category: 'Tools', name: 'IP Location',   url: 'http://www.ipligence.com/geolocation'},
+    {category: 'Tools', name: 'Speed Test',    url: 'http://www.speedtest.net'},
+    {category: 'Tools', name: 'Google Search', url: 'https://www.google.co.il'},
+    {category: 'Tools', name: 'Remote Access', url: 'https://150.co.il'},
+    {category: 'Tools', name: 'PC Builder',    url: 'https://pcpartpicker.com'},
+
+
+    {category: 'TV', name: 'Israel Split TV', url: 'http://www.split-tv.co.il/p/il.html'},
+    {category: 'TV', name: 'Kan 11',          url: 'http://www.kan.org.il/live/tv.aspx?stationId=2'},
+    {category: 'TV', name: 'Keshet 12',       url: 'https://www.mako.co.il/mako-vod-live-tv/VOD-6540b8dcb64fd31006.htm'},
+    {category: 'TV', name: 'Reshet 13',       url: 'http://reshet.tv/live/'},
+    {category: 'TV', name: 'US TV',           url: 'https://ustv247.tv/'},
+    
+    
+    {category: 'Radio', name: 'Kan B',     url: 'http://rr-d.vidnt.com/player/?stream=radio-betM&account=iba&width=320&height=240&delivery_type=hls&autoplay=true&smil_profile=default'},
+    {category: 'Radio', name: 'Galaz',     url: 'http://www.fm1.co.il/glz.html'},
+    {category: 'Radio', name: 'Gal Galaz', url: 'http://www.fm1.co.il/glgltz.html'},
+    {category: 'Radio', name: 'TLV Radio', url: 'http://www.fm1.co.il/102fm.html'},
+    {category: 'Radio', name: '88FM',      url: 'http://rr-d.vidnt.com/player/?stream=radio-88fmM&account=iba&width=320&height=240&delivery_type=hls&autoplay=true&smil_profile=default'},
+    
+    
 
 
 
