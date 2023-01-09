@@ -413,14 +413,14 @@ const CONFIG = {
       name: 'History',
       limit: 1
     },*/
-//     {
-//       name: 'DuckDuckGo',
-//       limit: 10 // 4
-//     },
-    {
-      name: 'Google',
-      limit: 10 // 4
-    },
+     {
+       name: 'DuckDuckGo',
+       limit: 10 // 4
+     },
+//    {
+//      name: 'Google',
+//      limit: 10 // 4
+//    },
   ],
 
   /**
