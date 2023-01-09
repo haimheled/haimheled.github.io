@@ -352,7 +352,7 @@ body.suggestions .search-suggestions {
 
 .category {
   margin-bottom: 3rem;
-  padding: 25px;
+  padding: 10px 25px 10px 25px;
   width: 250px;
   min-width: 225px;
 }
@@ -474,7 +474,7 @@ body.form .search-form {
   }
 
   .category {
-    margin: 2rem 0;
+    margin: 0.5rem 0;
   }
 
   .categories {
