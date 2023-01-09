@@ -123,7 +123,7 @@ class GoogleInfluencer extends Influencer {
     if (!query) return Promise.resolve([]);
 
     return new Promise(resolve => {
-      const endpoint = 'http://suggestqueries.google.com/complete/search';
+      const endpoint = 'https://suggestqueries.google.com/complete/search';
       const callback = 'autocompleteCallback';
 
       window[callback] = res => {
@@ -135,9 +135,9 @@ class GoogleInfluencer extends Influencer {
         resolve(this._addSearchPrefix(suggestions, rawQuery));
       };
 
-    //  $.jsonp(`${endpoint}?callback=${callback}&client=firefox&hl=iw&q=${query}`);
-      $.jsonp(`${endpoint}?client=firefox&hl=iw&q=${query}`);
-//       http://suggestqueries.google.com/complete/search?callback=JSON_CALLBACK&client=firefox&hl=en&q=haim
+      $.jsonp(`${endpoint}?callback=${callback}&client=firefox&hl=iw&q=${query}`);
+      //$.jsonp(`${endpoint}?client=firefox&hl=iw&q=${query}`);
+//       https://suggestqueries.google.com/complete/search?callback=JSON_CALLBACK&client=firefox&hl=en&q=haim
     });
   }
 }
