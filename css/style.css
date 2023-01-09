@@ -452,7 +452,9 @@ body.form .search-form {
 
   .categories {
     display: grid;
-    grid-template-columns: repeat(1, 50%) 50%;
+/*     grid-template-columns: repeat(1, 50%) 50%; */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    max-width: 95%;
     justify-content: space-around;
   }
 }
@@ -476,13 +478,14 @@ body.form .search-form {
   }
 
   .categories {
-    display: flex;
-    grid-template-columns: repeat(2, 300px) 175px;
+    /*display: flex;
+    flex-wrap: wrap;*/
+/*     grid-template-columns: repeat(2, 300px) 175px; */
   }
 }
 
 @media (min-width: 1500px) {
   .categories {
-    grid-template-columns: repeat(5, 220px) 175px;
+/*     grid-template-columns: repeat(5, 220px) 175px; */
   }
 }
