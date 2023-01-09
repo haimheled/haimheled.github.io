@@ -453,7 +453,7 @@ body.form .search-form {
   .categories {
     display: grid;
 /*     grid-template-columns: repeat(1, 50%) 50%; */
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     max-width: 95%;
     justify-content: space-around;
   }
