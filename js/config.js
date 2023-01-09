@@ -415,7 +415,7 @@ const CONFIG = {
     },*/
 //     {
 //       name: 'DuckDuckGo',
-//       limit: 10 // 4
+//       limit: 4
 //     },
     {
       name: 'Google',
