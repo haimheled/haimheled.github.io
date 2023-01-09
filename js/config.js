@@ -184,7 +184,7 @@ const CONFIG = {
       quickLaunch: false,
     },
     {
-      category: 'Genera',
+      category: 'General Erase',
       name: 'Discord',
       key: 'dc',
       url: 'https://discord.com/app',
