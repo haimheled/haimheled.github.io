@@ -135,7 +135,8 @@ class GoogleInfluencer extends Influencer {
         resolve(this._addSearchPrefix(suggestions, rawQuery));
       };
 
-      $.jsonp(`${endpoint}?callback=${callback}&client=firefox&hl=iw&q=${query}`);
+    //  $.jsonp(`${endpoint}?callback=${callback}&client=firefox&hl=iw&q=${query}`);
+      $.jsonp(`${endpoint}?client=firefox&hl=iw&q=${query}`);
 //       http://suggestqueries.google.com/complete/search?callback=JSON_CALLBACK&client=firefox&hl=en&q=haim
     });
   }
