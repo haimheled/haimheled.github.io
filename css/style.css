@@ -460,7 +460,7 @@ body.form .search-form {
     margin-top: 1%;
     display: grid;
 /*     grid-template-columns: repeat(1, 50%) 50%; */
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(152px, 1fr));
 /*     grid-template-columns: repeat(4, 1fr); */
                                            /*     grid-template-rows: masonry; */
     max-width: 95%; /*95%; IMPORTANT */
