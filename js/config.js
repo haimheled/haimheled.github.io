@@ -160,10 +160,10 @@ const CONFIG = {
 //     {category: 'Utilities', name: 'IP Location',   url: 'https://www.iplocation.net/'},
 
 
-    {category: 'Development', name: 'Github Page', url: 'https://github.com/haimheled/haimheled.github.io'},
-    {category: 'Development', name: 'Github Edit', url: 'https://github.com/haimheled/haimheled.github.io/edit/master/js/config.js'},
+    {category: 'Development', name: 'Github Page',     url: 'https://github.com/haimheled/haimheled.github.io'},
+    {category: 'Development', name: 'Github Edit',     url: 'https://github.com/haimheled/haimheled.github.io/edit/master/js/config.js'},
     {category: 'Development', name: 'Github Edit Old', url: 'https://github.com/haimheled/haimheled.github.io/blob/master/startpage.rwrt.old_site/index.html'},
-
+    {category: 'Development', name: 'EDA Playgroud',   url: 'https://www.edaplayground.com'},
 
     {category: 'Renesas', name: 'Portal',        url: 'https://urldefense.proofpoint.com/v2/url?u=https-3A__renesasgroup.sharepoint.com_sites_GIPen&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=4Kqhc4V8ADEctMewZo2ovz_tkInA2Hj3KO5aRWPhaQk&e='},
     {category: 'Renesas', name: 'Mail',          url: 'https://outlook.office365.com/mail/inbox'},
@@ -186,7 +186,6 @@ const CONFIG = {
     {category: 'Renesas', name: 'Documents',     url: 'http://172.25.90.250/svn/celeno-sys/Project/CL3000/MAC%20Documents/'},
     {category: 'Renesas', name: 'Hours Report',  url: 'https://harmony.synel.co.il/eharmonynew'},
     {category: 'Renesas', name: 'Exceed',        url: 'https://172.29.149.65/etx'},
-    {category: 'Renesas', name: 'EDA Play',      url: 'https://www.edaplayground.com'},
     {category: 'Renesas', name: 'IPMI EDK-4171', url: 'http://172.18.3.44/cgi/url_redirect.cgi?url_name=man_chassis'},
     {category: 'Renesas', name: 'IPMI EDK-4172', url: 'http://172.18.3.34/cgi/url_redirect.cgi?url_name=man_chassis'},
     {category: 'Renesas', name: 'IPMI EDK-4173', url: 'http://172.18.3.52/cgi/url_redirect.cgi?url_name=man_chassis'},
