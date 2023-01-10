@@ -84,13 +84,17 @@ const CONFIG = {
 
 
     {category: 'General', name: 'Google',    url: 'https://www.google.com'},
-    {category: 'General', name: 'Whatsapp',  url: 'https://web.whatsapp.com'},
+    {category: 'General', name: 'Gmail',     url: 'https://www.gmail.com'},
     {category: 'General', name: 'YouTube',   url: 'https://www.youtube.com'},
+    {category: 'General', name: 'Whatsapp',  url: 'https://web.whatsapp.com'},
+
 
     
-    {category: 'Bills', name: 'Cellular',    url: 'https://www.012mobile.co.il/n/login'},
-    {category: 'Bills', name: 'ISP & Phone', url: 'https://www.hot.net.il/heb/SelfService/Login'},
-    {category: 'Bills', name: 'ISP content', url: 'https://www.hotnet.net.il'},
+    {category: 'Bills', name: '012 Mobile',    url: 'https://www.012mobile.co.il/n/login'},
+    {category: 'Bills', name: '019 Mobile',    url: 'https://019mobile.co.il/userarea/'},
+    {category: 'Bills', name: 'ISP & Landline',    url: 'https://bmy.bezeq.co.il/'},
+//     {category: 'Bills', name: 'ISP & Phone', url: 'https://www.hot.net.il/heb/SelfService/Login'},
+//     {category: 'Bills', name: 'ISP content', url: 'https://www.hotnet.net.il'},
     {category: 'Bills', name: 'Credit Card', url: 'https://www.cal-online.co.il'},
     {category: 'Bills', name: 'Super Gas',   url: 'http://sgas.co.il'},
     {category: 'Bills', name: 'Water',       url: 'https://www.mast.co.il/101/mail-invoice'},
@@ -104,19 +108,18 @@ const CONFIG = {
     {category: 'Utilities', name: 'novnc',          url: 'http://ivory:6080/vnc.html?host=ivory&port=6080'},
     
     
-    {category: 'Shop', name: 'Israel Post',url: 'https://israelpost.co.il/%d7%a9%d7%99%d7%a8%d7%95%d7%aa%d7%99%d7%9d/%d7%94%d7%97%d7%91%d7%99%d7%9c%d7%95%d7%aa-%d7%a9%d7%9c%d7%99/'},
-    {category: 'Shop', name: 'Reut Buy',   url: 'https://reutbuyitforme.com'},
-    {category: 'Shop', name: 'Ali Buy',    url: 'https://ali-buy.com'},
-    {category: 'Shop', name: 'I Need It',  url: 'https://ineedit.co.il'},
+    {category: 'Shopping', name: 'Israel Post',url: 'https://israelpost.co.il/%d7%a9%d7%99%d7%a8%d7%95%d7%aa%d7%99%d7%9d/%d7%94%d7%97%d7%91%d7%99%d7%9c%d7%95%d7%aa-%d7%a9%d7%9c%d7%99/'},
+    {category: 'Shopping', name: 'Reut Buy',   url: 'https://reutbuyitforme.com'},
+    {category: 'Shopping', name: 'Ali Buy',    url: 'https://ali-buy.com'},
+    {category: 'Shopping', name: 'I Need It',  url: 'https://ineedit.co.il'},
     
-    
-    {category: 'Renesas', name: 'Auth Setup',    url: 'https://aka.ms/mfasetup'},
+
     {category: 'Renesas', name: 'Portal',        url: 'https://urldefense.proofpoint.com/v2/url?u=https-3A__renesasgroup.sharepoint.com_sites_GIPen&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=4Kqhc4V8ADEctMewZo2ovz_tkInA2Hj3KO5aRWPhaQk&e='},
-    {category: 'Renesas', name: 'Outlook',       url: 'https://urldefense.proofpoint.com/v2/url?u=https-3A__outlook.office365.com&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=YXBYvu9e3QrWTqN_1ad8BxlxgL2Lb_r0Coy94S80pzQ&e='},
-    {category: 'Renesas', name: 'Teams',         url: 'https://urldefense.proofpoint.com/v2/url?u=https-3A__teams.microsoft.com_&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=ZI48vGgauYmwc5Z8e3P34MCT2xW3toYIFT_1sk_j0Hs&e='},
-    {category: 'Renesas', name: 'Goals',         url: 'https://jpn01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fperformancemanager5.successfactors.eu%2Flogin%3Fcompany%3Drenesasele%23%2Flogin&data=04%7C01%7Chaim.heled.ks%40renesas.com%7C7af5adfd98474c88f47908da1bb4846e%7C53d82571da1947e49cb4625a166a4a2a%7C0%7C0%7C637852759489302374%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000&sdata=IQYFM7WPoibj9WREZs0bm6vpH5TYLh%2F%2B2NsERq5tEK0%3D&reserved=0'},
     {category: 'Renesas', name: 'Mail',          url: 'https://outlook.office365.com/mail/inbox'},
     {category: 'Renesas', name: 'Calendar',      url: 'https://outlook.office365.com/calendar/view/month'},
+    {category: 'Renesas', name: 'Teams',         url: 'https://urldefense.proofpoint.com/v2/url?u=https-3A__teams.microsoft.com_&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=ZI48vGgauYmwc5Z8e3P34MCT2xW3toYIFT_1sk_j0Hs&e='},
+    {category: 'Renesas', name: 'Goals',         url: 'https://jpn01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fperformancemanager5.successfactors.eu%2Flogin%3Fcompany%3Drenesasele%23%2Flogin&data=04%7C01%7Chaim.heled.ks%40renesas.com%7C7af5adfd98474c88f47908da1bb4846e%7C53d82571da1947e49cb4625a166a4a2a%7C0%7C0%7C637852759489302374%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000&sdata=IQYFM7WPoibj9WREZs0bm6vpH5TYLh%2F%2B2NsERq5tEK0%3D&reserved=0'},
+    {category: 'Renesas', name: 'Auth Setup',    url: 'https://aka.ms/mfasetup'},
     {category: 'Renesas', name: 'SVN Project',   url: 'http://172.25.90.250/svn/celeno-sys/Project'},
     {category: 'Renesas', name: 'SVN Personal',  url: 'http://172.25.90.250/svn/celeno-people/haim.heled'},
     {category: 'Renesas', name: 'Cibus',         url: 'http://www.mysodexo.co.il'},
@@ -153,29 +156,32 @@ const CONFIG = {
     {category: 'News', name: 'Ynet',         url: 'http://www.ynet.co.il'},
     {category: 'News', name: 'Walla',        url: 'http://www.walla.co.il'},
     {category: 'News', name: 'Mako',         url: 'http://www.mako.co.il'},
-    {category: 'News', name: 'NRG',          url: 'http://www.nrg.co.il'},
+//     {category: 'News', name: 'NRG',          url: 'http://www.nrg.co.il'},
     {category: 'News', name: 'Haaretz',      url: 'http://www.haaretz.co.il'},
     {category: 'News', name: 'News Israel',  url: 'http://www.news-israel.net'},
     {category: 'News', name: 'Israel Today', url: 'http://www.israelhayom.co.il'},
     {category: 'News', name: 'Google News',  url: 'https://news.google.co.il'},
     {category: 'News', name: 'CNN',          url: 'http://www.cnn.com'},
     {category: 'News', name: 'Fox',          url: 'http://www.foxnews.com'},
+    {category: 'News', name: 'Tikun Olam',   url: 'https://www.richardsilverstein.com/'},
  
 	       
-    {category: 'Sport', name: 'Sport5',      url: 'http://www.sport5.co.il'},
-    {category: 'Sport', name: 'One',         url: 'http://www.one.co.il'},
-    {category: 'Sport', name: 'NBA Games',   url: 'https://www.nba.com/games'},
-    {category: 'Sport', name: 'NBA Streams', url: 'https://nbabite.com'},
-    {category: 'Sport', name: 'NBA Replay',  url: 'https://nbafullhd.com'},
+    {category: 'Sport', name: 'Sport5',          url: 'http://www.sport5.co.il'},
+    {category: 'Sport', name: 'One',             url: 'http://www.one.co.il'},
+    {category: 'Sport', name: 'NBA Games',       url: 'https://www.nba.com/games'},
+    {category: 'Sport', name: 'Wizards Streams', url: 'https://topstreams.info/nba/wizards'},
+    {category: 'Sport', name: 'NBA Streams',     url: 'https://nbabite.com'},
+    {category: 'Sport', name: 'NBA Replay',      url: 'https://nbafullhd.com'},
 
 	       
     {category: 'Business', name: 'Globes',     url: 'http://www.globes.co.il'},
     {category: 'Business', name: 'The Marker', url: 'http://www.themarker.co.il'},
     {category: 'Business', name: 'Calcalist',  url: 'http://www.calcalist.co.il'},
     
-
+    {category: 'Finance', name: 'Mizrahi Bank',   url: 'https://www.mizrahi-tefahot.co.il/login/bv5x83ut/index.html#/auth-page-he'},
+    {category: 'Finance', name: 'Discount Bank',  url: 'https://start.telebank.co.il/login/#/LOGIN_PAGE'},
     {category: 'Finance', name: 'Exchange Rates', url: 'http://www.boi.org.il/he/Markets/ExchangeRates/Pages/Default.aspx'},
-    {category: 'Finance', name: 'Visa',           url: 'https://services.cal-online.co.il/Card-Holders/SCREENS/AccountManagement/Login.aspx?ReturnUrl=%2fcard-holders%2fScreens%2fAccountManagement%2fHomePage.aspx'},
+    {category: 'Finance', name: 'Visa Cal',           url: 'https://services.cal-online.co.il/Card-Holders/SCREENS/AccountManagement/Login.aspx?ReturnUrl=%2fcard-holders%2fScreens%2fAccountManagement%2fHomePage.aspx'},
 
 
     {category: 'Health', name: 'Clalit', url: 'https://e-services.clalit.org.il/onlineweb/general/login.aspx'},
@@ -199,8 +205,8 @@ const CONFIG = {
     
 
     {category: 'Radio', name: 'Kan B',     url: 'http://rr-d.vidnt.com/player/?stream=radio-betM&account=iba&width=320&height=240&delivery_type=hls&autoplay=true&smil_profile=default'},
-    {category: 'Radio', name: 'Galaz',     url: 'http://www.fm1.co.il/glz.html'},
-    {category: 'Radio', name: 'Gal Galaz', url: 'http://www.fm1.co.il/glgltz.html'},
+    {category: 'Radio', name: 'Galaz',     url: 'http://glzwizzlv.bynetcdn.com/glz_mp3?awCollectionId=misc&awEpisodeId=glz'},
+    {category: 'Radio', name: 'Gal Galaz', url: 'http://glzwizzlv.bynetcdn.com/glglz_mp3?awCollectionId=misc&awEpisodeId=glglz'},
     {category: 'Radio', name: 'TLV Radio', url: 'http://www.fm1.co.il/102fm.html'},
     {category: 'Radio', name: '88FM',      url: 'http://rr-d.vidnt.com/player/?stream=radio-88fmM&account=iba&width=320&height=240&delivery_type=hls&autoplay=true&smil_profile=default'},
     
