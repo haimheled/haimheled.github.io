@@ -175,8 +175,9 @@ const CONFIG = {
     {category: 'Renesas', name: 'SVN Personal',  url: 'http://172.25.90.250/svn/celeno-people/haim.heled'},
     {category: 'Renesas', name: 'Cibus',         url: 'http://www.mysodexo.co.il'},
     {category: 'Renesas', name: 'Tasks',         url: 'https://tasks.office.com/celeno.com/en-US/Home/Planner/#/mytasks'},
-    {category: 'Renesas', name: 'Soc CL6000	',   url: 'http://172.26.30.84/soc-cl6000/soconline/app/index.cgi?'},
-    {category: 'Renesas', name: 'Soc CL3000 B',  url: 'http://172.26.30.84/soc-cl3000_b0/soconline/app/index.cgi?'},
+    {category: 'Renesas', name: 'Soc CL3000B',   url: 'http://172.26.30.84/soc-cl3000_b0/soconline/app/index.cgi?'},
+    {category: 'Renesas', name: 'Soc CL6000',    url: 'http://172.26.30.84/soc-cl6000/soconline/app/index.cgi?'},
+    {category: 'Renesas', name: 'Soc CL6000B',   url: 'http://172.26.30.84/soc-cl6000_b0/soconline/app/index.cgi?'},
     {category: 'Renesas', name: 'Wiki IP list',  url: 'http://172.25.90.250/wiki/index.php/Palladium_Protium_IPs'},
     {category: 'Renesas', name: 'Jira',          url: 'https://celeno.atlassian.net/issues/?filter=10368'},
     {category: 'Renesas', name: 'Matlab',        url: 'http://172.25.90.250/svn/celeno-sys/Project/CL3000/Algo/MatlabRelease/distrib/'},
@@ -194,8 +195,6 @@ const CONFIG = {
     {category: 'Renesas', name: 'IPMI EDK-4177', url: 'http://172.18.3.41/cgi/url_redirect.cgi?url_name=man_chassis'},
     {category: 'Renesas', name: 'IPMI EDK-4178', url: 'http://172.18.3.46/cgi/url_redirect.cgi?url_name=man_chassis'},
     {category: 'Renesas', name: 'IPMI EDK-4179', url: 'http://172.18.3.50/cgi/url_redirect.cgi?url_name=man_chassis'},
-    {category: 'Renesas', name: 'Soc CL2400',    url: 'http://10.220.220.201/soc-cl2400_b0/soconline/app/'},
-    {category: 'Renesas', name: 'Soc CL3000',    url: 'http://10.220.220.201/soc-cl3000/soconline/app/'},
 
 
     {category: 'Bills', name: '012 Mobile',    url: 'https://www.012mobile.co.il/n/login'},
