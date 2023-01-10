@@ -86,6 +86,7 @@ const CONFIG = {
     {category: 'General', name: 'Google',    url: 'https://www.google.com'},
     {category: 'General', name: 'Gmail',     url: 'https://www.gmail.com'},
     {category: 'General', name: 'YouTube',   url: 'https://www.youtube.com'},
+    {category: 'General', name: 'Spotify',  url: 'https://open.spotify.com'},
     {category: 'General', name: 'Whatsapp',  url: 'https://web.whatsapp.com'},
     
     
