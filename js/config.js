@@ -163,7 +163,7 @@ const CONFIG = {
     {category: 'Development', name: 'Github Page',     url: 'https://github.com/haimheled/haimheled.github.io'},
     {category: 'Development', name: 'Github Edit',     url: 'https://github.com/haimheled/haimheled.github.io/edit/master/js/config.js'},
     {category: 'Development', name: 'Github Edit Old', url: 'https://github.com/haimheled/haimheled.github.io/blob/master/startpage.rwrt.old_site/index.html'},
-    {category: 'Development', name: 'EDA Playgroud',   url: 'https://www.edaplayground.com'},
+    {category: 'Development', name: 'EDA Playground',  url: 'https://www.edaplayground.com'},
 
     {category: 'Renesas', name: 'Portal',        url: 'https://urldefense.proofpoint.com/v2/url?u=https-3A__renesasgroup.sharepoint.com_sites_GIPen&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=4Kqhc4V8ADEctMewZo2ovz_tkInA2Hj3KO5aRWPhaQk&e='},
     {category: 'Renesas', name: 'Mail',          url: 'https://outlook.office365.com/mail/inbox'},
