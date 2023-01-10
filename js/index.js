@@ -58,8 +58,8 @@ const form = new Form({
   showKeys: CONFIG.showKeys
 });
 
-new Clock({
-  delimiter: CONFIG.clockDelimiter,
-  toggleHelp: help.toggle,
-  twentyFourHourClock: CONFIG.twentyFourHourClock,
-});
+// new Clock({
+//   delimiter: CONFIG.clockDelimiter,
+//   toggleHelp: help.toggle,
+//   twentyFourHourClock: CONFIG.twentyFourHourClock,
+// });

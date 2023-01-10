@@ -229,6 +229,7 @@ li {
   margin: 0;
   padding: 0;
   list-style: none;
+  white-space: nowrap;
 }
 
 a,
@@ -352,9 +353,9 @@ body.suggestions .search-suggestions {
 
 .category {
   margin-bottom: 3rem;
-  padding: 10px 25px 10px 25px;
-  width: 250px;
-  min-width: 225px;
+  padding: 10px 15px 10px 15px; /*10px 25px 10px 25px; IMPORTANT */
+  /*width: 250px;
+  min-width: 225px;*/
 }
 
 .category-name {
@@ -451,11 +452,18 @@ body.form .search-form {
   }
 
   .categories {
+    /*display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: 30%;
+    margin-right: auto;*/
     display: grid;
 /*     grid-template-columns: repeat(1, 50%) 50%; */
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    max-width: 95%;
-    justify-content: space-around;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+/*     grid-template-columns: repeat(4, 1fr); */
+                                           /*     grid-template-rows: masonry; */
+    max-width: 100%; /*95%; IMPORTANT */
+/*     justify-content: space-around; */
   }
 }
 
@@ -474,7 +482,7 @@ body.form .search-form {
   }
 
   .category {
-    margin: 0.5rem 0;
+    margin: 0 0; /*0.5rem 0;   IMPORTANT */
   }
 
   .categories {

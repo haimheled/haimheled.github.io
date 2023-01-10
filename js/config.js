@@ -113,8 +113,8 @@ const CONFIG = {
     {category: 'Renesas', name: 'Auth Setup',    url: 'https://aka.ms/mfasetup'},
     {category: 'Renesas', name: 'Portal',        url: 'https://urldefense.proofpoint.com/v2/url?u=https-3A__renesasgroup.sharepoint.com_sites_GIPen&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=4Kqhc4V8ADEctMewZo2ovz_tkInA2Hj3KO5aRWPhaQk&e='},
     {category: 'Renesas', name: 'Outlook',       url: 'https://urldefense.proofpoint.com/v2/url?u=https-3A__outlook.office365.com&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=YXBYvu9e3QrWTqN_1ad8BxlxgL2Lb_r0Coy94S80pzQ&e='},
-    {category: 'Renesas', name: 'Teams',         url: 'https://urldefense.proofpoint.com/v2/url?u=https-3A__teams.microsoft.com_&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=ZI48vGgauYmwc5Z8e3P34MCT2xW3toYIFT_1sk_j0Hs&e='},           
-    {category: 'Renesas', name: 'Goals',         url: 'https://jpn01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fperformancemanager5.successfactors.eu%2Flogin%3Fcompany%3Drenesasele%23%2Flogin&data=04%7C01%7Chaim.heled.ks%40renesas.com%7C7af5adfd98474c88f47908da1bb4846e%7C53d82571da1947e49cb4625a166a4a2a%7C0%7C0%7C637852759489302374%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000&sdata=IQYFM7WPoibj9WREZs0bm6vpH5TYLh%2F%2B2NsERq5tEK0%3D&reserved=0'}, 
+    {category: 'Renesas', name: 'Teams',         url: 'https://urldefense.proofpoint.com/v2/url?u=https-3A__teams.microsoft.com_&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=ZI48vGgauYmwc5Z8e3P34MCT2xW3toYIFT_1sk_j0Hs&e='},
+    {category: 'Renesas', name: 'Goals',         url: 'https://jpn01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fperformancemanager5.successfactors.eu%2Flogin%3Fcompany%3Drenesasele%23%2Flogin&data=04%7C01%7Chaim.heled.ks%40renesas.com%7C7af5adfd98474c88f47908da1bb4846e%7C53d82571da1947e49cb4625a166a4a2a%7C0%7C0%7C637852759489302374%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000&sdata=IQYFM7WPoibj9WREZs0bm6vpH5TYLh%2F%2B2NsERq5tEK0%3D&reserved=0'},
     {category: 'Renesas', name: 'Mail',          url: 'https://outlook.office365.com/mail/inbox'},
     {category: 'Renesas', name: 'Calendar',      url: 'https://outlook.office365.com/calendar/view/month'},
     {category: 'Renesas', name: 'SVN Project',   url: 'http://172.25.90.250/svn/celeno-sys/Project'},
@@ -173,7 +173,7 @@ const CONFIG = {
     {category: 'Business', name: 'The Marker', url: 'http://www.themarker.co.il'},
     {category: 'Business', name: 'Calcalist',  url: 'http://www.calcalist.co.il'},
     
-    
+
     {category: 'Finance', name: 'Exchange Rates', url: 'http://www.boi.org.il/he/Markets/ExchangeRates/Pages/Default.aspx'},
     {category: 'Finance', name: 'Visa',           url: 'https://services.cal-online.co.il/Card-Holders/SCREENS/AccountManagement/Login.aspx?ReturnUrl=%2fcard-holders%2fScreens%2fAccountManagement%2fHomePage.aspx'},
 
@@ -197,15 +197,13 @@ const CONFIG = {
     {category: 'TV', name: 'Reshet 13',       url: 'http://reshet.tv/live/'},
     {category: 'TV', name: 'US TV',           url: 'https://ustv247.tv/'},
     
-    
+
     {category: 'Radio', name: 'Kan B',     url: 'http://rr-d.vidnt.com/player/?stream=radio-betM&account=iba&width=320&height=240&delivery_type=hls&autoplay=true&smil_profile=default'},
     {category: 'Radio', name: 'Galaz',     url: 'http://www.fm1.co.il/glz.html'},
     {category: 'Radio', name: 'Gal Galaz', url: 'http://www.fm1.co.il/glgltz.html'},
     {category: 'Radio', name: 'TLV Radio', url: 'http://www.fm1.co.il/102fm.html'},
     {category: 'Radio', name: '88FM',      url: 'http://rr-d.vidnt.com/player/?stream=radio-88fmM&account=iba&width=320&height=240&delivery_type=hls&autoplay=true&smil_profile=default'},
     
-    
-
 
 
 
