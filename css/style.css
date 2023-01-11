@@ -160,7 +160,7 @@ template {
   --foreground: #F1F1F1;
 
   /* fonts */
-  --base-font-size: 18px;
+  --base-font-size: 18px; /* IMPORTANT */
   --font-weight-normal: 500;
   --font-weight-bold: 900;
 }
@@ -457,13 +457,13 @@ body.form .search-form {
     flex-direction: column;
     height: 30%;
     margin-right: auto;*/
+    /*     grid-template-columns: repeat(1, 50%) 50%; */
+    /*     grid-template-columns: repeat(4, 1fr); */
+                                           /*     grid-template-rows: masonry; */
     margin-top: 1%;
     display: grid;
-/*     grid-template-columns: repeat(1, 50%) 50%; */
     grid-template-columns: repeat(auto-fit, minmax(152px, 1fr));
-/*     grid-template-columns: repeat(4, 1fr); */
-                                           /*     grid-template-rows: masonry; */
-    max-width: 95%; /*95%; IMPORTANT */
+    width: 95%; /*95%; IMPORTANT */
 /*     justify-content: space-around; */
   }
 }
