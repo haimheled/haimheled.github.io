@@ -141,6 +141,7 @@ const CONFIG = {
     {category: 'Shopping', name: 'Rami Levy',   url: 'https://www.rami-levy.co.il'},
     {category: 'Shopping', name: 'Wolt',        url: 'https://wolt.com'},
     {category: 'Shopping', name: 'Ali Express', url: 'https://www.aliexpress.com/?lan=en'},
+    {category: 'Shopping', name: 'Amazon',      url: 'https://www.amazon.com'},	       
 
     {category: 'Health', name: 'Clalit', url: 'https://e-services.clalit.org.il/onlineweb/general/login.aspx'},
 
