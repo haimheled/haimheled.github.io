@@ -134,13 +134,13 @@ const CONFIG = {
     {category: 'Finance', name: 'Visa Cal',           url: 'https://services.cal-online.co.il/Card-Holders/SCREENS/AccountManagement/Login.aspx?ReturnUrl=%2fcard-holders%2fScreens%2fAccountManagement%2fHomePage.aspx'},
     
 
-    {category: 'Shopping', name: 'Israel Post',url: 'https://israelpost.co.il/%d7%a9%d7%99%d7%a8%d7%95%d7%aa%d7%99%d7%9d/%d7%94%d7%97%d7%91%d7%99%d7%9c%d7%95%d7%aa-%d7%a9%d7%9c%d7%99/'},
-    {category: 'Shopping', name: 'Reut Buy',   url: 'https://reutbuyitforme.com'},
-    {category: 'Shopping', name: 'Ali Buy',    url: 'https://ali-buy.com'},
-    {category: 'Shopping', name: 'I Need It',  url: 'https://ineedit.co.il'},
-    {category: 'Shopping', name: 'Rami Levy',  url: 'https://www.rami-levy.co.il'},
-    {category: 'Shopping', name: 'Wolt',       url: 'https://wolt.com'},
-
+    {category: 'Shopping', name: 'Israel Post', url: 'https://israelpost.co.il/%d7%a9%d7%99%d7%a8%d7%95%d7%aa%d7%99%d7%9d/%d7%94%d7%97%d7%91%d7%99%d7%9c%d7%95%d7%aa-%d7%a9%d7%9c%d7%99/'},
+    {category: 'Shopping', name: 'Reut Buy',    url: 'https://reutbuyitforme.com'},
+    {category: 'Shopping', name: 'Ali Buy',     url: 'https://ali-buy.com'},
+    {category: 'Shopping', name: 'I Need It',   url: 'https://ineedit.co.il'},
+    {category: 'Shopping', name: 'Rami Levy',   url: 'https://www.rami-levy.co.il'},
+    {category: 'Shopping', name: 'Wolt',        url: 'https://wolt.com'},
+    {category: 'Shopping', name: 'Ali Express', url: 'https://www.aliexpress.com/?lan=en'},
 
     {category: 'Health', name: 'Clalit', url: 'https://e-services.clalit.org.il/onlineweb/general/login.aspx'},
 
