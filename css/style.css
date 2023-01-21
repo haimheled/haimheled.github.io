@@ -407,20 +407,7 @@ a:focus {
 
 
 
-.clock {
-  display: block;
-  margin-top: -0.06rem;
-  font-size: 4rem;
-  font-weight: var(--font-weight-normal);
-  text-align: center;
-  letter-spacing: 0.05rem;
-  cursor: pointer;
-}
 
-.am-pm {
-  font-size: 1rem;
-  letter-spacing: 0.1rem;
-}
 
 .search-form {
   background: var(--background);
