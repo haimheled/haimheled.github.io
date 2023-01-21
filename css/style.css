@@ -398,16 +398,20 @@ a:focus {
 
 
 
+.clock {
+  display: block;
+  margin-top: -0.06rem;
+  font-size: 4rem;
+  font-weight: var(--font-weight-normal);
+  text-align: center;
+  letter-spacing: 0.05rem;
+  cursor: pointer;
+}
 
-
-
-
-
-
-
-
-
-
+.am-pm {
+  font-size: 1rem;
+  letter-spacing: 0.1rem;
+}
 
 .search-form {
   background: var(--background);
@@ -419,5 +423,107 @@ a:focus {
   align-items: top;
   width: 100%;
   height: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.search-form>div {
+  width: 100%;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0 1rem;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.1rem;
+  margin-top: 25%;
+/*   text-transform: uppercase; */
+}
+
+.search-suggestions {
+  display: none;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+
+body.suggestions .search-suggestions {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-suggestion {
+  padding: 0.2rem 1rem;
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.search-suggestion.highlight {
+  background: var(--foreground);
+  color: var(--background);
+}
+
+.search-suggestion b {
+  position: relative;
+  font-weight: var(--font-weight-normal);
+}
+
+.search-suggestion b::after {
+  content: ' ';
+  position: absolute;
+  right: 0;
+  bottom: -0.3rem;
+  left: 0;
+  height: 2px;
+  background: var(--background);
+  opacity: 0.4;
+}
+
+.search-suggestion.highlight b::after {
+  opacity: 0;
+}
+
+.help {
+  display: block;
+  padding: 8vw;
+  background: var(--background);
+  z-index: 1;
+  align-items: start;
 }
 
