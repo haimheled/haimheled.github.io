@@ -104,3 +104,39 @@ button:-moz-focusring,
 fieldset {
   padding: 0.35em 0.75em 0.625em;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+legend {
+  box-sizing: border-box; /* 1 */
+  color: inherit; /* 2 */
+  display: table; /* 1 */
+  max-width: 100%; /* 1 */
+  padding: 0; /* 3 */
+  white-space: normal; /* 1 */
+}
+progress {
+  vertical-align: baseline;
+}
+
+
+/* == End of Normalize.css == */
