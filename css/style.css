@@ -360,3 +360,34 @@ a:focus {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+}
+
+
+
