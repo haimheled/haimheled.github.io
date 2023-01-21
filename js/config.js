@@ -156,6 +156,7 @@ const CONFIG = {
     {category: 'Utilities', name: 'Duckduckgo',    url: 'https://duckduckgo.com/'},
     {category: 'Utilities', name: 'Bing',          url: 'https://www.bing.com/'},
     {category: 'Utilities', name: 'ChatGPT',       url: 'https://chat.openai.com/auth/login'},
+    {category: 'Utilities', name: 'GPT Playground',url: 'https://beta.openai.com/playground'},       
     {category: 'Utilities', name: 'Remote Access', url: 'https://150.co.il'},
     {category: 'Utilities', name: 'PC Builder',    url: 'https://pcpartpicker.com'},
 //     {category: 'Utilities', name: 'novnc',          url: 'http://ivory:6080/vnc.html?host=ivory&port=6080'},
