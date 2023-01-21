@@ -313,3 +313,50 @@ body {
   color: var(--foreground);
 }
 
+
+
+
+
+
+
+
+
+
+
+input,
+button {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font-family: var(--font-family);
+  font-size: 1rem;
+}
+
+input,
+button,
+input:focus,
+button:focus {
+  border: 0;
+  outline: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  white-space: nowrap;
+}
+
+a,
+a:focus {
+  color: inherit;
+  outline: 0;
+}
+
+
