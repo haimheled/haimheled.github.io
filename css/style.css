@@ -527,3 +527,33 @@ body.suggestions .search-suggestions {
   align-items: start;
 }
 
+
+
+
+
+
+
+.category {
+  margin-bottom: 3rem;
+  padding: 10px 15px 10px 15px; /*10px 25px 10px 25px; IMPORTANT */
+  /*width: 250px;
+  min-width: 225px;*/
+}
+
+.category-name {
+  margin-bottom: 1.15rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.15rem;
+  text-transform: uppercase;
+/*   text-decoration-line: underline; */
+  border-bottom: 2px solid white;
+
+}
+
+
+
+
+
+
+
+
