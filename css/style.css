@@ -259,44 +259,43 @@ template {
   display: none;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* == End of Normalize.css == */
+
+
+
+
+:root {
+  /* colors */
+  --background: #0E0E0E;
+  --foreground: #F1F1F1;
+
+  /* fonts */
+  --base-font-size: 18px; /* IMPORTANT */
+  --font-weight-normal: 500;
+  --font-weight-bold: 900;
+}
+
+@font-face {
+  font-family: 'Metropolis';
+  src: local('Metropolis-Medium'), url('../assets/fonts/Metropolis-Medium.woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Metropolis';
+  src: local('Metropolis-Bold'), url('../assets/fonts/Metropolis-Black.woff2');
+  font-weight: 900;
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Metropolis", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-size: var(--base-font-size);
+  font-weight: var(--font-weight-normal);
+}
+
