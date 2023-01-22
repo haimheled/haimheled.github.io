@@ -104,100 +104,6 @@ button:-moz-focusring,
 fieldset {
   padding: 0.35em 0.75em 0.625em;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-legend {
-  box-sizing: border-box; /* 1 */
-  color: inherit; /* 2 */
-  display: table; /* 1 */
-  max-width: 100%; /* 1 */
-  padding: 0; /* 3 */
-  white-space: normal; /* 1 */
-}
-progress {
-  vertical-align: baseline;
-}
-
-
-
-
-
-
-
-
-
-
-textarea {
-  overflow: auto;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-button,
-input { /* 1 */
-  overflow: visible;
-}
-button,
-select { /* 1 */
-  text-transform: none;
-}
-button,
-[type="button"],
-[type="reset"],
-[type="submit"] {
-  -webkit-appearance: button;
-}
-button::-moz-focus-inner,
-[type="button"]::-moz-focus-inner,
-[type="reset"]::-moz-focus-inner,
-[type="submit"]::-moz-focus-inner {
-  border-style: none;
-  padding: 0;
-}
-button:-moz-focusring,
-[type="button"]:-moz-focusring,
-[type="reset"]:-moz-focusring,
-[type="submit"]:-moz-focusring {
-  outline: 1px dotted ButtonText;
-}
-
-
-fieldset {
-  padding: 0.35em 0.75em 0.625em;
-}
 legend {
   box-sizing: border-box; /* 1 */
   color: inherit; /* 2 */
@@ -217,20 +123,6 @@ textarea {
   box-sizing: border-box; /* 1 */
   padding: 0; /* 2 */
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 [type="number"]::-webkit-inner-spin-button,
 [type="number"]::-webkit-outer-spin-button {
   height: auto;
@@ -260,8 +152,6 @@ template {
 }
 
 /* == End of Normalize.css == */
-
-
 
 
 :root {
@@ -299,7 +189,6 @@ html {
   font-weight: var(--font-weight-normal);
 }
 
-
 body {
   position: absolute;
   top: 0;
@@ -312,16 +201,6 @@ body {
   background: var(--background);
   color: var(--foreground);
 }
-
-
-
-
-
-
-
-
-
-
 
 input,
 button {
@@ -359,18 +238,6 @@ a:focus {
   outline: 0;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 .center {
   display: flex;
   justify-content: center;
@@ -388,15 +255,6 @@ a:focus {
   height: 100%;
   visibility: hidden;
 }
-
-
-
-
-
-
-
-
-
 
 .clock {
   display: block;
@@ -424,40 +282,6 @@ a:focus {
   width: 100%;
   height: 100%;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .search-form>div {
   width: 100%;
@@ -527,12 +351,6 @@ body.suggestions .search-suggestions {
   align-items: start;
 }
 
-
-
-
-
-
-
 .category {
   margin-bottom: 3rem;
   padding: 10px 15px 10px 15px; /*10px 25px 10px 25px; IMPORTANT */
@@ -549,35 +367,6 @@ body.suggestions .search-suggestions {
   border-bottom: 2px solid white;
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .command a {
   display: flex;
@@ -645,34 +434,6 @@ body.form .search-form {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @media (min-width: 500px) {
   .help {
     display: flex;
@@ -704,5 +465,36 @@ body.form .search-form {
     grid-template-columns: repeat(auto-fit, minmax(152px, 1fr));
     width: 95%; /*95%; IMPORTANT */
 /*     justify-content: space-around; */
+  }
+}
+
+@media (min-width: 1000px) {
+  .help {
+    display: flex;
+    padding: 0;
+  }
+
+  .search-input {
+    font-size: 2.5rem;
+  }
+
+  .search-suggestions {
+    flex-direction: row;
+  }
+
+  .category {
+    margin: 0 0; /*0.5rem 0;   IMPORTANT */
+  }
+
+  .categories {
+    /*display: flex;
+    flex-wrap: wrap;*/
+/*     grid-template-columns: repeat(2, 300px) 175px; */
+  }
+}
+
+@media (min-width: 1500px) {
+  .categories {
+/*     grid-template-columns: repeat(5, 220px) 175px; */
   }
 }
