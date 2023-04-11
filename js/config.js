@@ -83,11 +83,13 @@ const CONFIG = {
                
 
 
-    {category: 'General', name: 'Google',    url: 'https://www.google.com'},
     {category: 'General', name: 'Gmail',     url: 'https://www.gmail.com'},
+    {category: 'General', name: 'Facebook',  url: 'https://www.facebook.com'},
+    {category: 'General', name: 'Twitter',   url: 'https://www.twitter.com'},
     {category: 'General', name: 'YouTube',   url: 'https://www.youtube.com'},
-    {category: 'General', name: 'Spotify',  url: 'https://open.spotify.com'},
+    {category: 'General', name: 'Spotify',   url: 'https://open.spotify.com'},
     {category: 'General', name: 'Whatsapp',  url: 'https://web.whatsapp.com'},
+    {category: 'General', name: 'Google',    url: 'https://www.google.com'},
     
     
     {category: 'TV & Radio', name: 'Israel Split TV', url: 'http://www.split-tv.co.il/p/il.html'},
