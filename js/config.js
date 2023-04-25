@@ -181,6 +181,7 @@ const CONFIG = {
     {category: 'Renesas', name: 'Auth Setup',    url: 'https://aka.ms/mfasetup'},
     {category: 'Renesas', name: 'SVN Project',   url: 'http://172.25.90.250/svn/celeno-sys/Project'},
     {category: 'Renesas', name: 'SVN Personal',  url: 'http://172.25.90.250/svn/celeno-people/haim.heled'},
+    {category: 'Renesas', name: 'SharePoint',  url: 'https://renesasgroup.sharepoint.com/sites/CelenoRnD'},
     {category: 'Renesas', name: 'Cibus',         url: 'http://www.mysodexo.co.il'},
     {category: 'Renesas', name: 'Tasks',         url: 'https://tasks.office.com/celeno.com/en-US/Home/Planner/#/mytasks'},
     {category: 'Renesas', name: 'Soc CL3000B',   url: 'http://172.26.30.84/soc-cl3000_b0/soconline/app/index.cgi?'},
