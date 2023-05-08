@@ -187,6 +187,7 @@ const CONFIG = {
     {category: 'Renesas', name: 'Soc CL3000B',   url: 'http://172.26.30.84/soc-cl3000_b0/soconline/app/index.cgi?'},
     {category: 'Renesas', name: 'Soc CL6000',    url: 'http://172.26.30.84/soc-cl6000/soconline/app/index.cgi?'},
     {category: 'Renesas', name: 'Soc CL6000B',   url: 'http://172.26.30.84/soc-cl6000_b0/soconline/app/index.cgi?'},
+    {category: 'Renesas', name: 'Soc CL7000',    url: 'http://172.26.30.84/soc-cl7000_a0/soconline/app/index.cgi?'},
     {category: 'Renesas', name: 'Wiki IP list',  url: 'http://172.25.90.250/wiki/index.php/Palladium_Protium_IPs'},
     {category: 'Renesas', name: 'Jira',          url: 'https://celeno.atlassian.net/jira/software/c/projects/AD/issues/?filter=myopenissues'},
 //     {category: 'Renesas', name: 'Jira',          url: 'https://celeno.atlassian.net/issues/?filter=10368'},
