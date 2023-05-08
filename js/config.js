@@ -194,7 +194,9 @@ const CONFIG = {
     {category: 'Renesas', name: 'DSP',           url: 'http://172.25.90.250/svn/dsp/code/Everest_A0/build'},
     {category: 'Renesas', name: 'Documents',     url: 'http://172.25.90.250/svn/celeno-sys/Project/CL3000/MAC%20Documents/'},
     {category: 'Renesas', name: 'Hours Report',  url: 'https://harmony.synel.co.il/eharmonynew'},
-    {category: 'Renesas', name: 'Exceed',        url: 'https://172.29.149.65/etx'},
+    {category: 'Renesas', name: 'Exceed',        url: 'https://192.168.13.65/etx'},
+    {category: 'Renesas', name: 'Exceed Old',    url: 'https://172.29.149.65/etx'},
+	       
     {category: 'Renesas', name: 'IPMI edk-4171', url: 'http://172.18.3.44/cgi/url_redirect.cgi?url_name=man_chassis'},
     {category: 'Renesas', name: 'IPMI edk-4172', url: 'http://172.18.3.34/cgi/url_redirect.cgi?url_name=man_chassis'},
     {category: 'Renesas', name: 'IPMI edk-4173', url: 'http://172.18.3.52/cgi/url_redirect.cgi?url_name=man_chassis'},
