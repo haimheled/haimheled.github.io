@@ -123,7 +123,7 @@ const CONFIG = {
     {category: 'Sport', name: 'NBA Games',       url: 'https://www.nba.com/games'},
     {category: 'Sport', name: 'Wizards Streams', url: 'https://topstreams.info/nba/wizards'},
     {category: 'Sport', name: 'NBA Streams',     url: 'https://nbabite.com'},
-    {category: 'Sport', name: 'NBA Replay',      url: 'https://nbafullhd.com'},
+    {category: 'Sport', name: 'NBA Replay',      url: 'https://nbareplay.net'},
 
 	       
     {category: 'Business', name: 'Globes',     url: 'http://www.globes.co.il'},
