@@ -207,6 +207,8 @@ const CONFIG = {
     {category: 'Renesas', name: 'IPMI edk-4178', url: 'http://172.18.3.46/cgi/url_redirect.cgi?url_name=man_chassis'},
     {category: 'Renesas', name: 'IPMI edk-4179', url: 'http://172.18.3.50/cgi/url_redirect.cgi?url_name=man_chassis'},
     {category: 'Renesas', name: 'Redwood Matlab',url: 'http://moon/svn/celeno-algo/docs/AX/Docs/Algo/TFU/HW%20Modem%20-%20Rx%20TFU%20TD%20Processing%20-%20HW%20Spec.docx'},
+    {category: 'Renesas', name: 'REL Systems',url: 'https://renesasgroup.sharepoint.com/sites/REL-portal/ISD_SYSTEM/SitePages/REL%20Systems.aspx'},
+
 
 
     {category: 'Bills', name: '012 Mobile',    url: 'https://www.012mobile.co.il/n/login'},
