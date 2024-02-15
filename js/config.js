@@ -161,7 +161,9 @@ const CONFIG = {
     {category: 'Utilities', name: 'GPT Playground',url: 'https://beta.openai.com/playground'},       
     {category: 'Utilities', name: 'Remote Access', url: 'https://150.co.il'},
     {category: 'Utilities', name: 'PC Builder',    url: 'https://pcpartpicker.com'},
-    {category: 'Utilities', name: 'PC Builder',    url: 'https://bard.google.com/'},	       	       
+    {category: 'Utilities', name: 'Gemini',        url: 'https://gemini.google.com/'},
+    {category: 'Utilities', name: 'True Caller',    url: 'https://www.truecaller.com/'},
+	       
 //     {category: 'Utilities', name: 'novnc',          url: 'http://ivory:6080/vnc.html?host=ivory&port=6080'},
 //     {category: 'Utilities', name: 'IP Address',    url: 'ifconfig.me'},
 //     {category: 'Utilities', name: 'IP Location',   url: 'https://www.iplocation.net/'},
