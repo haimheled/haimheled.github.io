@@ -163,7 +163,7 @@ const CONFIG = {
     {category: 'Utilities', name: 'PC Builder',    url: 'https://pcpartpicker.com'},
     {category: 'Utilities', name: 'Gemini',        url: 'https://gemini.google.com/'},
     {category: 'Utilities', name: 'True Caller',   url: 'https://www.truecaller.com/'},
-    {category: 'Utilities', name: 'Drum Machine',  url: 'https://www.virtualdrumming.com/drums/virtual-drum-machine-online/drum-machine-online-free.html#Online-Drum-Machine-Guide'},
+    {category: 'Utilities', name: 'Drum Machine',  url: 'https://www.virtualdrumming.com/drums/virtual-drum-machine-online/drum-machine-online-free.html'},
 	       
 	       
 //     {category: 'Utilities', name: 'novnc',          url: 'http://ivory:6080/vnc.html?host=ivory&port=6080'},
