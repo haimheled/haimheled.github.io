@@ -92,17 +92,18 @@ const CONFIG = {
     {category: 'General', name: 'Google',    url: 'https://www.google.com'},
     
     
-    {category: 'TV & Radio', name: 'Israel Split TV', url: 'http://www.split-tv.co.il/p/il.html'},
+//  {category: 'TV & Radio', name: 'Israel Split TV', url: 'http://www.split-tv.co.il/p/il.html'},
+    {category: 'TV & Radio', name: 'Split TV',        url: 'https://split-tv.blogspot.com'},	       
     {category: 'TV & Radio', name: 'Kan 11',          url: 'http://www.kan.org.il/live/tv.aspx?stationId=2'},
     {category: 'TV & Radio', name: 'Keshet 12',       url: 'https://www.mako.co.il/mako-vod-live-tv/VOD-6540b8dcb64fd31006.htm'},
     {category: 'TV & Radio', name: 'Reshet 13',       url: 'http://reshet.tv/live/'},
 //  {category: 'TV & Radio', name: 'US TV',           url: 'https://ustv247.tv/'},
     {category: 'TV & Radio', name: 'US TV',           url: 'https://tv247.us/all-channels/'},	       
-    {category: 'TV & Radio', name: 'Kan B',     url: 'http://rr-d.vidnt.com/player/?stream=radio-betM&account=iba&width=320&height=240&delivery_type=hls&autoplay=true&smil_profile=default'},
-    {category: 'TV & Radio', name: 'Galaz',     url: 'http://glzwizzlv.bynetcdn.com/glz_mp3?awCollectionId=misc&awEpisodeId=glz'},
-    {category: 'TV & Radio', name: 'Gal Galaz', url: 'http://glzwizzlv.bynetcdn.com/glglz_mp3?awCollectionId=misc&awEpisodeId=glglz'},
-    {category: 'TV & Radio', name: 'TLV Radio', url: 'http://www.fm1.co.il/102fm.html'},
-    {category: 'TV & Radio', name: '88FM',      url: 'http://rr-d.vidnt.com/player/?stream=radio-88fmM&account=iba&width=320&height=240&delivery_type=hls&autoplay=true&smil_profile=default'},
+    {category: 'TV & Radio', name: 'Kan B',           url: 'http://rr-d.vidnt.com/player/?stream=radio-betM&account=iba&width=320&height=240&delivery_type=hls&autoplay=true&smil_profile=default'},
+    {category: 'TV & Radio', name: 'Galaz',           url: 'http://glzwizzlv.bynetcdn.com/glz_mp3?awCollectionId=misc&awEpisodeId=glz'},
+    {category: 'TV & Radio', name: 'Gal Galaz',       url: 'http://glzwizzlv.bynetcdn.com/glglz_mp3?awCollectionId=misc&awEpisodeId=glglz'},
+    {category: 'TV & Radio', name: 'TLV Radio',       url: 'http://www.fm1.co.il/102fm.html'},
+    {category: 'TV & Radio', name: '88FM',            url: 'http://rr-d.vidnt.com/player/?stream=radio-88fmM&account=iba&width=320&height=240&delivery_type=hls&autoplay=true&smil_profile=default'},
 
 
     {category: 'News', name: 'Rotter',       url: 'http://rotter.net/scoopscache.html'},
