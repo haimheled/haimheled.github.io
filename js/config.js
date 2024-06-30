@@ -181,6 +181,7 @@ const CONFIG = {
     {category: 'Development', name: 'Appimage',  url: 'https://github.com/AppImageCommunity/awesome-appimage'},
 	       
 
+    {category: 'Renesas', name: 'Renesas Exceed',url: 'https://sl-etx.diasemi.com'},
     {category: 'Renesas', name: 'Portal',        url: 'https://urldefense.proofpoint.com/v2/url?u=https-3A__renesasgroup.sharepoint.com_sites_GIPen&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=4Kqhc4V8ADEctMewZo2ovz_tkInA2Hj3KO5aRWPhaQk&e='},
     {category: 'Renesas', name: 'Mail',          url: 'https://outlook.office365.com/mail/inbox'},
     {category: 'Renesas', name: 'Calendar',      url: 'https://outlook.office365.com/calendar/view/month'},
@@ -205,6 +206,7 @@ const CONFIG = {
     {category: 'Renesas', name: 'Hours Report',  url: 'https://harmony.synel.co.il/eharmonynew'},
     {category: 'Renesas', name: 'Exceed',        url: 'https://192.168.13.65/etx'},
     {category: 'Renesas', name: 'Exceed Old',    url: 'https://172.29.149.65/etx'},
+	       
 	       
     {category: 'Renesas', name: 'IPMI edk-4171', url: 'http://172.18.3.44/cgi/url_redirect.cgi?url_name=man_chassis'},
     {category: 'Renesas', name: 'IPMI edk-4172', url: 'http://172.18.3.34/cgi/url_redirect.cgi?url_name=man_chassis'},
