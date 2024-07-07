@@ -234,8 +234,7 @@ const CONFIG = {
 
 
 
-    // {category: 'Stocks', name: 'IBI NextGen',url: 'https://ibi.orbisfn.io/login'},
-    {category: 'Stocks', name: 'IBI NextGen',url: 'https://auth.ibi.co.il/login?state=hKFo2SBXOHNxQXM2NXU3OWxDVl9NcTlJR3RIaFdKa2tXTVRKV6FupWxvZ2luo3RpZNkgLTBQS1h3ZmFZTERQX1lqSHZRZ0FkWnVRdC1Xcm5zbUWjY2lk2SByd0hrRjJkWHR0MjBLSG5uZ1NhVGx1dG95QmNWQjlISQ&client=rwHkF2dXtt20KHnngSaTlutoyBcVB9HI&protocol=oauth2&prompt=login&scope=openid%20profile%20email&redirect_uri=https%3A%2F%2Fibi.orbisfn.io%2Flogin%2Fsso&ui_locales=en-US&response_type=code&response_mode=query&nonce=YmpkTnNkcy5kZmdUVUd4aVlHRlo3S2labmFDcjlBVU1LY0lIYkV2OWx1QQ%3D%3D&code_challenge=LI8SKpEVteOIgDeS3FxOqGfImDhsdJM5s5HhdKnh_Do&code_challenge_method=S256&auth0Client=eyJuYW1lIjoiYXV0aDAtcmVhY3QiLCJ2ZXJzaW9uIjoiMi4yLjQifQ%3D%3D'},	       
+    {category: 'Stocks', name: 'IBI NextGen',url: 'https://ibi.orbisfn.io/login'},
     {category: 'Stocks', name: 'IBI Spark',  url: 'https://sparkibi.ordernet.co.il/#/auth'},
 
 
