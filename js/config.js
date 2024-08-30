@@ -236,9 +236,9 @@ const CONFIG = {
 
     {category: 'Stocks', name: 'IBI NextGen',url: 'https://ibi.orbisfn.io/login'},
     {category: 'Stocks', name: 'IBI Spark',  url: 'https://sparkibi.ordernet.co.il/#/auth'},
+    {category: 'Stocks', name: 'Trading View',  url: 'https://www.tradingview.com/screener/'},
     {category: 'Stocks', name: 'Investing',  url: 'https://www.investing.com'},
-
-
+    {category: 'Stocks', name: 'Trading Economics',  url: 'https://tradingeconomics.com/calendar'},
 
 
 
