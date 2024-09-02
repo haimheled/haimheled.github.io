@@ -239,7 +239,7 @@ const CONFIG = {
     {category: 'Stocks', name: 'Trading View',  url: 'https://www.tradingview.com/screener/'},
     {category: 'Stocks', name: 'Investing',  url: 'https://www.investing.com'},
     {category: 'Stocks', name: 'Trading Economics',  url: 'https://tradingeconomics.com/calendar'},
-
+    {category: 'Stocks', name: '24H Trading',  url: 'https://robinhood.com/us/en/stocks/TSLA/'},
 
 
 
