@@ -240,7 +240,7 @@ const CONFIG = {
     {category: 'Stocks', name: 'Investing',  url: 'https://www.investing.com'},
     {category: 'Stocks', name: 'Trading Economics',  url: 'https://tradingeconomics.com/calendar'},
     {category: 'Stocks', name: '24H Trading',  url: 'https://robinhood.com/us/en/stocks/TSLA/'},
-
+    {category: 'Stocks', name: 'Extrade Pro',  url: 'https://extradepro.xnes.co.il/login'},
 
 
 
