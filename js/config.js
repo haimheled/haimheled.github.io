@@ -245,9 +245,7 @@ const CONFIG = {
     {category: 'Stocks', name: '24H Trading',  url: 'https://robinhood.com/us/en/stocks/TSLA/'},
     {category: 'Stocks', name: 'Extrade Pro',  url: 'https://extradepro.xnes.co.il/login'},
     {category: 'Stocks', name: 'Earnings Whisper',  url: 'https://www.reddit.com/r/EarningsWhisper'},
-
-
-
+    {category: 'Stocks', name: 'Market Cap',  url: 'https://companiesmarketcap.com'},
 
 
 
