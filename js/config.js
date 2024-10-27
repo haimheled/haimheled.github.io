@@ -183,19 +183,6 @@ const CONFIG = {
 	       
 
 	       
-    {category: 'Renesas', name: 'IPMI edk-4171', url: 'http://172.18.3.44/cgi/url_redirect.cgi?url_name=man_chassis'},
-    {category: 'Renesas', name: 'IPMI edk-4172', url: 'http://172.18.3.34/cgi/url_redirect.cgi?url_name=man_chassis'},
-    {category: 'Renesas', name: 'IPMI edk-4173', url: 'http://172.18.3.52/cgi/url_redirect.cgi?url_name=man_chassis'},
-    {category: 'Renesas', name: 'IPMI edk-4174', url: 'http://172.18.3.38/cgi/url_redirect.cgi?url_name=man_chassis'},
-    {category: 'Renesas', name: 'IPMI edk-4175', url: 'http://172.18.3.42/cgi/url_redirect.cgi?url_name=man_chassis'},
-    {category: 'Renesas', name: 'IPMI edk-4177', url: 'http://172.18.3.41/cgi/url_redirect.cgi?url_name=man_chassis'},
-    {category: 'Renesas', name: 'IPMI edk-4178', url: 'http://172.18.3.46/cgi/url_redirect.cgi?url_name=man_chassis'},
-    {category: 'Renesas', name: 'IPMI edk-4179', url: 'http://172.18.3.50/cgi/url_redirect.cgi?url_name=man_chassis'},
-    {category: 'Renesas', name: 'Redwood Matlab',url: 'http://moon/svn/celeno-algo/docs/AX/Docs/Algo/TFU/HW%20Modem%20-%20Rx%20TFU%20TD%20Processing%20-%20HW%20Spec.docx'},
-    {category: 'Renesas', name: 'REL Systems',url: 'https://renesasgroup.sharepoint.com/sites/REL-portal/ISD_SYSTEM/SitePages/REL%20Systems.aspx'},
-
-
-
     {category: 'Bills', name: '012 Mobile',    url: 'https://www.012mobile.co.il/n/login'},
     {category: 'Bills', name: '019 Mobile',    url: 'https://019mobile.co.il/userarea/'},
     {category: 'Bills', name: 'ISP & Landline',    url: 'https://bmy.bezeq.co.il/'},
@@ -247,7 +234,16 @@ const CONFIG = {
     {category: 'Renesas', name: 'Exceed',        url: 'https://192.168.13.65/etx'},
     {category: 'Renesas', name: 'Exceed Old',    url: 'https://172.29.149.65/etx'},
     {category: 'Renesas', name: 'ADP',    url: 'https://portal.people.adp.com'},	       
-
+    {category: 'Renesas', name: 'IPMI edk-4171', url: 'http://172.18.3.44/cgi/url_redirect.cgi?url_name=man_chassis'},
+    {category: 'Renesas', name: 'IPMI edk-4172', url: 'http://172.18.3.34/cgi/url_redirect.cgi?url_name=man_chassis'},
+    {category: 'Renesas', name: 'IPMI edk-4173', url: 'http://172.18.3.52/cgi/url_redirect.cgi?url_name=man_chassis'},
+    {category: 'Renesas', name: 'IPMI edk-4174', url: 'http://172.18.3.38/cgi/url_redirect.cgi?url_name=man_chassis'},
+    {category: 'Renesas', name: 'IPMI edk-4175', url: 'http://172.18.3.42/cgi/url_redirect.cgi?url_name=man_chassis'},
+    {category: 'Renesas', name: 'IPMI edk-4177', url: 'http://172.18.3.41/cgi/url_redirect.cgi?url_name=man_chassis'},
+    {category: 'Renesas', name: 'IPMI edk-4178', url: 'http://172.18.3.46/cgi/url_redirect.cgi?url_name=man_chassis'},
+    {category: 'Renesas', name: 'IPMI edk-4179', url: 'http://172.18.3.50/cgi/url_redirect.cgi?url_name=man_chassis'},
+    {category: 'Renesas', name: 'Redwood Matlab',url: 'http://moon/svn/celeno-algo/docs/AX/Docs/Algo/TFU/HW%20Modem%20-%20Rx%20TFU%20TD%20Processing%20-%20HW%20Spec.docx'},
+    {category: 'Renesas', name: 'REL Systems',url: 'https://renesasgroup.sharepoint.com/sites/REL-portal/ISD_SYSTEM/SitePages/REL%20Systems.aspx'},
 
 
 
