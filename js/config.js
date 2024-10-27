@@ -205,8 +205,10 @@ const CONFIG = {
     {category: 'Stocks', name: 'Extrade Pro',  url: 'https://extradepro.xnes.co.il/login'},
     {category: 'Stocks', name: 'Earnings Whisper',  url: 'https://www.reddit.com/r/EarningsWhisper'},
     {category: 'Stocks', name: 'Market Cap',  url: 'https://companiesmarketcap.com'},
+    {category: 'Stocks', name: 'Bizportal',  url: 'https://www.bizportal.co.il'},
+    {category: 'Stocks', name: 'Funder',  url: 'https://www.funder.co.il'},
 
-
+	       
 
     {category: 'Renesas', name: 'Portal',        url: 'https://urldefense.proofpoint.com/v2/url?u=https-3A__renesasgroup.sharepoint.com_sites_GIPen&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=4Kqhc4V8ADEctMewZo2ovz_tkInA2Hj3KO5aRWPhaQk&e='},
     {category: 'Renesas', name: 'Renesas Exceed',url: 'https://sl-etx.diasemi.com'},
