@@ -207,7 +207,7 @@ const CONFIG = {
     {category: 'Stocks', name: 'Market Cap',  url: 'https://companiesmarketcap.com'},
     {category: 'Stocks', name: 'Bizportal',  url: 'https://www.bizportal.co.il'},
     {category: 'Stocks', name: 'Funder',  url: 'https://www.funder.co.il'},
-    {category: 'Stocks', name: 'S&P 500 Year to Date',  url: 'https://www.slickcharts.com/sp500/returns/ytd'},
+    {category: 'Stocks', name: 'S&P 500 YTD',  url: 'https://www.slickcharts.com/sp500/returns/ytd'},
 
 	       
 
