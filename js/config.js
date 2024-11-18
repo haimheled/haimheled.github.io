@@ -208,7 +208,8 @@ const CONFIG = {
     {category: 'Stocks', name: 'Bizportal',  url: 'https://www.bizportal.co.il'},
     {category: 'Stocks', name: 'Funder',  url: 'https://www.funder.co.il'},
     {category: 'Stocks', name: 'S&P 500 YTD',  url: 'https://www.slickcharts.com/sp500/returns/ytd'},
-
+    {category: 'Stocks', name: 'Portfolio Visual',  url: 'https://www.portfoliovisualizer.com/backtest-portfolio?action=open'},
+    {category: 'Stocks', name: 'eToro',  url: 'https://www.etoro.com/watchlists'},
 	       
 
     {category: 'Renesas', name: 'Portal',        url: 'https://urldefense.proofpoint.com/v2/url?u=https-3A__renesasgroup.sharepoint.com_sites_GIPen&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=4Kqhc4V8ADEctMewZo2ovz_tkInA2Hj3KO5aRWPhaQk&e='},
