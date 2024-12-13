@@ -212,6 +212,10 @@ const CONFIG = {
     {category: 'Stocks', name: 'Portfolio Visual',  url: 'https://www.portfoliovisualizer.com/backtest-portfolio?action=open'},
     {category: 'Stocks', name: 'eToro',  url: 'https://www.etoro.com/watchlists'},
     {category: 'Stocks', name: 'Finviz',  url: 'https://finviz.com/screener.ashx'},
+    {category: 'Stocks', name: 'Bilello Blog',  url: 'https://bilello.blog/2024/the-week-in-charts-11-13-24'},
+
+	       
+	       
 	       
 	       
 
