@@ -221,6 +221,7 @@ const CONFIG = {
 
     {category: 'Renesas', name: 'Portal',        url: 'https://urldefense.proofpoint.com/v2/url?u=https-3A__renesasgroup.sharepoint.com_sites_GIPen&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=4Kqhc4V8ADEctMewZo2ovz_tkInA2Hj3KO5aRWPhaQk&e='},
     {category: 'Renesas', name: 'Renesas Exceed',url: 'https://sl-etx.diasemi.com'},
+    {category: 'Renesas', name: 'Confluence',    url: 'https://confluence.renesas.com/display/Rubium/RF+Multiplexer+-+RFMux'},
     {category: 'Renesas', name: 'Mail',          url: 'https://outlook.office365.com/mail/inbox'},
     {category: 'Renesas', name: 'Calendar',      url: 'https://outlook.office365.com/calendar/view/month'},
     {category: 'Renesas', name: 'Teams',         url: 'https://urldefense.proofpoint.com/v2/url?u=https-3A__teams.microsoft.com_&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=ZI48vGgauYmwc5Z8e3P34MCT2xW3toYIFT_1sk_j0Hs&e='},
@@ -228,7 +229,7 @@ const CONFIG = {
     {category: 'Renesas', name: 'Auth Setup',    url: 'https://aka.ms/mfasetup'},
     {category: 'Renesas', name: 'SVN Project',   url: 'http://172.25.90.250/svn/celeno-sys/Project'},
     {category: 'Renesas', name: 'SVN Personal',  url: 'http://172.25.90.250/svn/celeno-people/haim.heled'},
-    {category: 'Renesas', name: 'SharePoint',  url: 'https://renesasgroup.sharepoint.com/sites/CelenoRnD'},
+    {category: 'Renesas', name: 'SharePoint',    url: 'https://renesasgroup.sharepoint.com/sites/CelenoRnD'},
     {category: 'Renesas', name: 'Cibus',         url: 'http://www.mysodexo.co.il'},
     {category: 'Renesas', name: 'Tasks',         url: 'https://tasks.office.com/celeno.com/en-US/Home/Planner/#/mytasks'},
     {category: 'Renesas', name: 'Soc CL3000B',   url: 'http://172.26.30.84/soc-cl3000_b0/soconline/app/index.cgi?'},
