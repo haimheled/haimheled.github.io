@@ -220,7 +220,7 @@ const CONFIG = {
 	       
 
     {category: 'Renesas', name: 'Portal',        url: 'https://urldefense.proofpoint.com/v2/url?u=https-3A__renesasgroup.sharepoint.com_sites_GIPen&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=4Kqhc4V8ADEctMewZo2ovz_tkInA2Hj3KO5aRWPhaQk&e='},
-    {category: 'Renesas', name: 'Service Portal',        url: 'https://globalserviceportal.renesas.com/esc'},
+    {category: 'Renesas', name: 'Service Portal',url: 'https://globalserviceportal.renesas.com/esc'},
     {category: 'Renesas', name: 'Renesas Exceed',url: 'https://sl-etx.diasemi.com'},
     {category: 'Renesas', name: 'Confluence',    url: 'https://confluence.renesas.com/display/Rubium/RF+Multiplexer+-+RFMux'},
     {category: 'Renesas', name: 'Mail',          url: 'https://outlook.office365.com/mail/inbox'},
