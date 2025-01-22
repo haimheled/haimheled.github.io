@@ -195,7 +195,8 @@ const CONFIG = {
     {category: 'Bills', name: 'Electricity', url: 'https://www.iec.co.il'},
 
 
-
+    {category: 'Stocks', name: 'Inter IL Portal',url: 'https://www.clientam.com/sso/Login?partnerID=Inter_il'},
+    {category: 'Stocks', name: 'Inter IL',url: 'https://www.inter-il.com'},
     {category: 'Stocks', name: 'IBI NextGen',url: 'https://ibi.orbisfn.io/login'},
     {category: 'Stocks', name: 'IBI Spark',  url: 'https://sparkibi.ordernet.co.il/#/auth'},
     {category: 'Stocks', name: 'Trading View',  url: 'https://www.tradingview.com/screener/'},
