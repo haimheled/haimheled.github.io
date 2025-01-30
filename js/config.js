@@ -93,7 +93,8 @@ const CONFIG = {
     
     
 //  {category: 'TV & Radio', name: 'Israel Split TV', url: 'http://www.split-tv.co.il/p/il.html'},
-    {category: 'TV & Radio', name: 'Split TV',        url: 'https://split-tv.blogspot.com'},	       
+    {category: 'TV & Radio', name: 'Split TV',        url: 'https://split-tv.blogspot.com'},	     
+    {category: 'TV & Radio', name: 'Guru TV',         url: 'https://gurutv.online'},	       
     {category: 'TV & Radio', name: 'Kan 11',          url: 'http://www.kan.org.il/live/tv.aspx?stationId=2'},
     {category: 'TV & Radio', name: 'Keshet 12',       url: 'https://www.mako.co.il/mako-vod-live-tv/VOD-6540b8dcb64fd31006.htm'},
     {category: 'TV & Radio', name: 'Reshet 13',       url: 'http://reshet.tv/live/'},
