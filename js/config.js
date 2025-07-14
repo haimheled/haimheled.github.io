@@ -218,10 +218,10 @@ const CONFIG = {
     {category: 'Stocks', name: 'Finviz',  url: 'https://finviz.com/screener.ashx'},
     {category: 'Stocks', name: 'Bilello Blog',  url: 'https://bilello.blog/2024/the-week-in-charts-11-13-24'},
 
-	       
-	       
-	       
-	       
+    {category: 'AI', name: 'ChatGPT',       url: 'https://chat.openai.com/auth/login'}, 
+    {category: 'AI', name: 'Grok',          url: 'https://grok.com'},  
+    {category: 'AI', name: 'Gemini',        url: 'https://gemini.google.com/'},    
+    {category: 'AI', name: 'Claude',        url: 'https://claude.ai/onboarding'},
 
     {category: 'Renesas', name: 'Portal',        url: 'https://urldefense.proofpoint.com/v2/url?u=https-3A__renesasgroup.sharepoint.com_sites_GIPen&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=4Kqhc4V8ADEctMewZo2ovz_tkInA2Hj3KO5aRWPhaQk&e='},
     {category: 'Renesas', name: 'Service Portal',url: 'https://globalserviceportal.renesas.com/esc'},
