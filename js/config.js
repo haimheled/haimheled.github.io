@@ -171,7 +171,7 @@ const CONFIG = {
     {category: 'Utilities', name: 'Gemini',        url: 'https://gemini.google.com/'},
     {category: 'Utilities', name: 'True Caller',   url: 'https://www.truecaller.com/'},
     {category: 'Utilities', name: 'Drum Machine',  url: 'https://www.virtualdrumming.com/drums/virtual-drum-machine-online/drum-machine-online-free.html'},
-	{category: 'Utilities', name: 'AutoCad viewer',  url: 'https://viewer.autodesk.com'},      
+    {category: 'Utilities', name: 'AutoDesk Viewer',  url: 'https://viewer.autodesk.com'},      
 //     {category: 'Utilities', name: 'novnc',          url: 'http://ivory:6080/vnc.html?host=ivory&port=6080'},
 //     {category: 'Utilities', name: 'IP Address',    url: 'ifconfig.me'},
 //     {category: 'Utilities', name: 'IP Location',   url: 'https://www.iplocation.net/'},
