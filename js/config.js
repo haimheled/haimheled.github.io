@@ -104,7 +104,7 @@ quickLaunch: false,
     {category: 'TV & Radio', name: 'Galaz',           url: 'http://glzwizzlv.bynetcdn.com/glz_mp3?awCollectionId=misc&awEpisodeId=glz'},
     {category: 'TV & Radio', name: 'Gal Galaz',       url: 'http://glzwizzlv.bynetcdn.com/glglz_mp3?awCollectionId=misc&awEpisodeId=glglz'},
     {category: 'TV & Radio', name: 'TLV Radio',       url: 'http://www.fm1.co.il/102fm.html'},
-    {category: 'TV & Radio', name: '88FM',            url: 'http://rr-d.vidnt.com/player/?stream=radio-88fmM&account=iba&width=320&height=240&delivery_type=hls&autoplay=true&smil_profile=default'},
+    {category: 'TV & Radio', name: '88FM',            url: 'https://www.kan.org.il/player?itemId=4504&playerType=Kaltura'},
     
     
     {category: 'News', name: 'Rotter',       url: 'http://rotter.net/scoopscache.html'},
