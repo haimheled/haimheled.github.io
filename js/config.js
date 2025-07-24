@@ -103,7 +103,7 @@ quickLaunch: false,
     {category: 'TV & Radio', name: 'Kan B',           url: 'https://www.kan.org.il/player?itemId=4483&playerType=Kaltura'},
     {category: 'TV & Radio', name: 'Galaz',           url: 'http://glzwizzlv.bynetcdn.com/glz_mp3?awCollectionId=misc&awEpisodeId=glz'},
     {category: 'TV & Radio', name: 'Gal Galaz',       url: 'http://glzwizzlv.bynetcdn.com/glglz_mp3?awCollectionId=misc&awEpisodeId=glglz'},
-    {category: 'TV & Radio', name: 'TLV Radio',       url: 'http://www.fm1.co.il/102fm.html'},
+    {category: 'TV & Radio', name: 'TLV Radio',       url: 'https://102.livecdn.biz/102fm_aac'},
     {category: 'TV & Radio', name: '88FM',            url: 'https://www.kan.org.il/player?itemId=4504&playerType=Kaltura'},
     
     
