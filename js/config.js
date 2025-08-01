@@ -153,7 +153,7 @@ quickLaunch: false,
     
     {category: 'Health', name: 'Clalit', url: 'https://e-services.clalit.org.il/onlineweb/general/login.aspx'},
     {category: 'Health', name: 'My Fitness Pal', url: 'https://www.myfitnesspal.com/account/login'},
-    {category: 'Health', name: 'Cronometer', url: 'https://cronometer.com/login'},
+    {category: 'Health', name: 'Cronometer', url: 'https://cronometer.com'},
                           
     
     {category: 'Utilities', name: 'Babylon',          url: 'http://online.babylon.com/trans_box/myindex.php?lang=EN&affiliate=CD1'},
