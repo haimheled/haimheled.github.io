@@ -23,6 +23,7 @@
       justify-content: center;
       gap: 10px;
       margin-bottom: 30px;
+      flex-wrap: wrap;
     }
 
     input[type="text"] {
@@ -105,7 +106,7 @@
     </form>
 
     <!-- ChatGPT Search -->
-    <form method="GET" action="https://chat.openai.com/" target="_blank" onsubmit="redirectChatGPT(this)">
+    <form method="GET" action="https://chatgpt.com/" target="_blank" onsubmit="redirectChatGPT(this)">
       <input type="text" name="q" placeholder="Ask ChatGPT...">
       <button type="submit">Ask</button>
     </form>
@@ -148,7 +149,7 @@
     function redirectChatGPT(form) {
       let query = form.q.value.trim();
       if(query) {
-        form.action = "https://chat.openai.com/?q=" + encodeURIComponent(query);
+        form.action = "https://chatgpt.com/?q=" + encodeURIComponent(query);
       }
     }
 
