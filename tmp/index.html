@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Homepage</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #f0f0f0;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #ffffff;
+    }
+
+    .search-boxes {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+      width: 250px;
+      background: #1e1e1e;
+      color: #f0f0f0;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 6px;
+      background: #333;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #444;
+    }
+
+    .filter-box {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .category {
+      background: #1a1a1a;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    .category h2 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #333;
+      padding-bottom: 5px;
+    }
+
+    .category ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .category li {
+      margin: 6px 0;
+    }
+
+    .category a {
+      text-decoration: none;
+      color: #80cbc4;
+    }
+
+    .category a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>My Homepage</h1>
+
+  <div class="search-boxes">
+    <!-- Google Search -->
+    <form method="GET" action="https://www.google.com/search" target="_blank">
+      <input type="text" name="q" placeholder="Search Google...">
+      <button type="submit">Go</button>
+    </form>
+
+    <!-- ChatGPT Search -->
+    <form method="GET" action="https://chat.openai.com/" target="_blank" onsubmit="redirectChatGPT(this)">
+      <input type="text" name="q" placeholder="Ask ChatGPT...">
+      <button type="submit">Ask</button>
+    </form>
+  </div>
+
+  <!-- Filter links -->
+  <div class="filter-box">
+    <input type="text" id="filter" placeholder="Quick filter links...">
+  </div>
+
+  <!-- Categories -->
+  <div class="categories" id="categories">
+    <div class="category">
+      <h2>Work</h2>
+      <ul>
+        <li><a href="https://github.com/" target="_blank">GitHub</a></li>
+        <li><a href="https://stackoverflow.com/" target="_blank">Stack Overflow</a></li>
+      </ul>
+    </div>
+
+    <div class="category">
+      <h2>News</h2>
+      <ul>
+        <li><a href="https://news.ycombinator.com/" target="_blank">Hacker News</a></li>
+        <li><a href="https://www.bbc.com/" target="_blank">BBC</a></li>
+      </ul>
+    </div>
+
+    <div class="category">
+      <h2>Personal</h2>
+      <ul>
+        <li><a href="https://gmail.com/" target="_blank">Gmail</a></li>
+        <li><a href="https://calendar.google.com/" target="_blank">Google Calendar</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // ChatGPT redirect with query
+    function redirectChatGPT(form) {
+      let query = form.q.value.trim();
+      if(query) {
+        form.action = "https://chat.openai.com/?q=" + encodeURIComponent(query);
+      }
+    }
+
+    // Filter links
+    document.getElementById('filter').addEventListener('keyup', function() {
+      let filter = this.value.toLowerCase();
+      let links = document.querySelectorAll('.category li');
+      links.forEach(li => {
+        let text = li.textContent.toLowerCase();
+        li.style.display = text.includes(filter) ? '' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>
