@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Start Page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background-color: #121212; color: #e5e5e5; }
+    .card { background: #1e1e1e; border-radius: 12px; padding: 1rem; margin-bottom: 1rem; }
+    input, button, textarea, select { background: #2a2a2a; color: #fff; border-radius: 6px; padding: 0.5rem; }
+    a { color: #60a5fa; }
+  </style>
+</head>
+<body class="p-4 max-w-4xl mx-auto">
+
+  <!-- Google Search -->
+  <div class="mb-6">
+    <form action="https://www.google.com/search" method="GET" target="_blank">
+      <input name="q" type="text" placeholder="Search Google..." class="w-full p-3" />
+    </form>
+  </div>
+
+  <!-- ChatGPT Box (links to ChatGPT, or replace with API integration) -->
+  <div class="card mb-6">
+    <h2 class="text-lg font-bold mb-2">ChatGPT</h2>
+    <a href="https://chat.openai.com/" target="_blank" class="underline">Open ChatGPT</a>
+  </div>
+
+  <!-- Quick Filter -->
+  <input id="filterBox" type="text" placeholder="Filter links..." class="w-full p-3 mb-6" />
+
+  <!-- Links Container -->
+  <div id="categories"></div>
+
+  <!-- Add Category / Link -->
+  <div class="card">
+    <h2 class="text-lg font-bold mb-2">Manage Links</h2>
+    <form id="addCategoryForm" class="mb-2">
+      <input type="text" id="newCategory" placeholder="New Category" required />
+      <button type="submit">Add Category</button>
+    </form>
+
+    <form id="addLinkForm">
+      <select id="categorySelect"></select>
+      <input type="text" id="linkName" placeholder="Link Name" required />
+      <input type="url" id="linkUrl" placeholder="https://example.com" required />
+      <button type="submit">Add Link</button>
+    </form>
+  </div>
+
+<script>
+const categoriesDiv = document.getElementById("categories");
+const filterBox = document.getElementById("filterBox");
+const addCategoryForm = document.getElementById("addCategoryForm");
+const addLinkForm = document.getElementById("addLinkForm");
+const categorySelect = document.getElementById("categorySelect");
+
+// Load from localStorage
+let data = JSON.parse(localStorage.getItem("startPageData")) || {};
+
+// Render categories + links
+function render() {
+  categoriesDiv.innerHTML = "";
+  categorySelect.innerHTML = "";
+  for (const [cat, links] of Object.entries(data)) {
+    // Add to dropdown
+    let opt = document.createElement("option");
+    opt.value = cat;
+    opt.textContent = cat;
+    categorySelect.appendChild(opt);
+
+    // Render category card
+    let card = document.createElement("div");
+    card.className = "card";
+    let title = document.createElement("h3");
+    title.className = "text-md font-bold mb-2";
+    title.textContent = cat;
+    card.appendChild(title);
+
+    let list = document.createElement("ul");
+    for (let l of links) {
+      let li = document.createElement("li");
+      li.innerHTML = `<a href="${l.url}" target="_blank">${l.name}</a>`;
+      list.appendChild(li);
+    }
+    card.appendChild(list);
+    categoriesDiv.appendChild(card);
+  }
+}
+
+// Save state
+function save() {
+  localStorage.setItem("startPageData", JSON.stringify(data));
+}
+
+// Add Category
+addCategoryForm.addEventListener("submit", e => {
+  e.preventDefault();
+  const cat = document.getElementById("newCategory").value.trim();
+  if (!cat || data[cat]) return;
+  data[cat] = [];
+  save(); render();
+  addCategoryForm.reset();
+});
+
+// Add Link
+addLinkForm.addEventListener("submit", e => {
+  e.preventDefault();
+  const cat = categorySelect.value;
+  const name = document.getElementById("linkName").value.trim();
+  const url = document.getElementById("linkUrl").value.trim();
+  if (!cat || !name || !url) return;
+  data[cat].push({ name, url });
+  save(); render();
+  addLinkForm.reset();
+});
+
+// Filter Links
+filterBox.addEventListener("input", () => {
+  const query = filterBox.value.toLowerCase();
+  document.querySelectorAll("#categories .card").forEach(card => {
+    card.style.display = card.innerText.toLowerCase().includes(query) ? "" : "none";
+  });
+});
+
+// Initial render
+render();
+</script>
+</body>
+</html>
