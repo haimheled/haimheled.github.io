@@ -52,12 +52,13 @@
     }
 
     button {
-      padding: 8px 12px;
+      padding: 6px 10px;
       border: none;
       border-radius: 6px;
       background: #333;
       color: #fff;
       cursor: pointer;
+      font-size: 0.9rem;
     }
 
     button:hover {
@@ -92,9 +93,15 @@
       margin-bottom: 10px;
     }
 
-    .category h2 {
+    .category-header h2 {
       font-size: 1.2rem;
       margin: 0;
+      flex: 1;
+    }
+
+    .header-buttons {
+      display: flex;
+      gap: 5px;
     }
 
     .category ul {
@@ -108,6 +115,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 5px;
     }
 
     .category a {
@@ -180,7 +188,7 @@
   </div>
 
   <script>
-    // Initial data (if nothing in localStorage)
+    // Initial data
     let data = JSON.parse(localStorage.getItem("homepageData")) || {
       "Work": [
         { name: "GitHub", url: "https://github.com/" },
@@ -227,13 +235,31 @@
         let title = document.createElement("h2");
         title.textContent = cat;
 
-        // Delete category button
+        // Buttons container
+        let btns = document.createElement("div");
+        btns.className = "header-buttons";
+
+        // Rename category
+        let editBtn = document.createElement("button");
+        editBtn.textContent = "✏️";
+        editBtn.style.background = "none";
+        editBtn.style.color = "#888";
+        editBtn.style.border = "none";
+        editBtn.onclick = () => {
+          let newName = prompt("Rename category:", cat);
+          if (newName && newName.trim() && !data[newName]) {
+            data[newName] = data[cat];
+            delete data[cat];
+            save(); render();
+          }
+        };
+
+        // Delete category
         let delCatBtn = document.createElement("button");
         delCatBtn.textContent = "🗑️";
         delCatBtn.style.background = "none";
         delCatBtn.style.color = "#888";
         delCatBtn.style.border = "none";
-        delCatBtn.style.cursor = "pointer";
         delCatBtn.onclick = () => {
           if (confirm(`Delete category "${cat}" and all its links?`)) {
             delete data[cat];
@@ -241,8 +267,10 @@
           }
         };
 
+        btns.appendChild(editBtn);
+        btns.appendChild(delCatBtn);
         header.appendChild(title);
-        header.appendChild(delCatBtn);
+        header.appendChild(btns);
         card.appendChild(header);
 
         let ul = document.createElement("ul");
@@ -254,13 +282,27 @@
           a.textContent = link.name;
           a.target = "_blank";
 
-          // Delete link button
+          // Edit link
+          let editLinkBtn = document.createElement("button");
+          editLinkBtn.textContent = "✏️";
+          editLinkBtn.style.background = "none";
+          editLinkBtn.style.color = "#888";
+          editLinkBtn.style.border = "none";
+          editLinkBtn.onclick = () => {
+            let newName = prompt("Edit link name:", link.name);
+            let newUrl = prompt("Edit link URL:", link.url);
+            if (newName && newUrl) {
+              data[cat][i] = { name: newName.trim(), url: newUrl.trim() };
+              save(); render();
+            }
+          };
+
+          // Delete link
           let delBtn = document.createElement("button");
-          delBtn.textContent = "×";
+          delBtn.textContent = "❌";
           delBtn.style.background = "none";
           delBtn.style.color = "#888";
           delBtn.style.border = "none";
-          delBtn.style.cursor = "pointer";
           delBtn.onclick = () => {
             data[cat].splice(i, 1);
             if (data[cat].length === 0) delete data[cat];
@@ -268,6 +310,7 @@
           };
 
           li.appendChild(a);
+          li.appendChild(editLinkBtn);
           li.appendChild(delBtn);
           ul.appendChild(li);
         });
