@@ -1,131 +1,271 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Start Page</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <title>My Homepage</title>
   <style>
-    body { background-color: #121212; color: #e5e5e5; }
-    .card { background: #1e1e1e; border-radius: 12px; padding: 1rem; margin-bottom: 1rem; }
-    input, button, textarea, select { background: #2a2a2a; color: #fff; border-radius: 6px; padding: 0.5rem; }
-    a { color: #60a5fa; }
+    body {
+      background-color: #121212;
+      color: #f0f0f0;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #ffffff;
+    }
+
+    .search-boxes {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    input[type="text"], input[type="url"], select {
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+      background: #1e1e1e;
+      color: #f0f0f0;
+      width: 250px;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 6px;
+      background: #333;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #444;
+    }
+
+    .filter-box {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .category {
+      background: #1a1a1a;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    .category h2 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #333;
+      padding-bottom: 5px;
+    }
+
+    .category ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .category li {
+      margin: 6px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .category a {
+      text-decoration: none;
+      color: #80cbc4;
+      flex: 1;
+    }
+
+    .category a:hover {
+      text-decoration: underline;
+    }
+
+    .manage-box {
+      margin-top: 30px;
+      background: #1a1a1a;
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    .manage-box h2 {
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
   </style>
 </head>
-<body class="p-4 max-w-4xl mx-auto">
+<body>
+  <h1>My Homepage</h1>
 
-  <!-- Google Search -->
-  <div class="mb-6">
-    <form action="https://www.google.com/search" method="GET" target="_blank">
-      <input name="q" type="text" placeholder="Search Google..." class="w-full p-3" />
+  <!-- Search boxes -->
+  <div class="search-boxes">
+    <!-- Google Search -->
+    <form method="GET" action="https://www.google.com/search">
+      <input type="text" name="q" placeholder="Search Google...">
+      <button type="submit">Go</button>
+    </form>
+
+    <!-- ChatGPT Search -->
+    <form method="GET" action="https://chatgpt.com/" onsubmit="redirectChatGPT(this)">
+      <input type="text" name="q" placeholder="Ask ChatGPT...">
+      <button type="submit">Ask</button>
     </form>
   </div>
 
-  <!-- ChatGPT Box (links to ChatGPT, or replace with API integration) -->
-  <div class="card mb-6">
-    <h2 class="text-lg font-bold mb-2">ChatGPT</h2>
-    <a href="https://chat.openai.com/" target="_blank" class="underline">Open ChatGPT</a>
+  <!-- Filter -->
+  <div class="filter-box">
+    <input type="text" id="filter" placeholder="Quick filter links...">
   </div>
 
-  <!-- Quick Filter -->
-  <input id="filterBox" type="text" placeholder="Filter links..." class="w-full p-3 mb-6" />
+  <!-- Categories -->
+  <div class="categories" id="categories"></div>
 
-  <!-- Links Container -->
-  <div id="categories"></div>
-
-  <!-- Add Category / Link -->
-  <div class="card">
-    <h2 class="text-lg font-bold mb-2">Manage Links</h2>
-    <form id="addCategoryForm" class="mb-2">
-      <input type="text" id="newCategory" placeholder="New Category" required />
+  <!-- Manage Links -->
+  <div class="manage-box">
+    <h2>Manage Categories & Links</h2>
+    <form id="addCategoryForm">
+      <input type="text" id="newCategory" placeholder="New Category" required>
       <button type="submit">Add Category</button>
     </form>
-
+    <br>
     <form id="addLinkForm">
       <select id="categorySelect"></select>
-      <input type="text" id="linkName" placeholder="Link Name" required />
-      <input type="url" id="linkUrl" placeholder="https://example.com" required />
+      <input type="text" id="linkName" placeholder="Link Name" required>
+      <input type="url" id="linkUrl" placeholder="https://example.com" required>
       <button type="submit">Add Link</button>
     </form>
   </div>
 
-<script>
-const categoriesDiv = document.getElementById("categories");
-const filterBox = document.getElementById("filterBox");
-const addCategoryForm = document.getElementById("addCategoryForm");
-const addLinkForm = document.getElementById("addLinkForm");
-const categorySelect = document.getElementById("categorySelect");
+  <script>
+    // Initial data (loaded once if nothing in storage)
+    let data = JSON.parse(localStorage.getItem("homepageData")) || {
+      "Work": [
+        { name: "GitHub", url: "https://github.com/" },
+        { name: "Stack Overflow", url: "https://stackoverflow.com/" }
+      ],
+      "News": [
+        { name: "Hacker News", url: "https://news.ycombinator.com/" },
+        { name: "BBC", url: "https://www.bbc.com/" }
+      ],
+      "Personal": [
+        { name: "Gmail", url: "https://gmail.com/" },
+        { name: "Google Calendar", url: "https://calendar.google.com/" }
+      ]
+    };
 
-// Load from localStorage
-let data = JSON.parse(localStorage.getItem("startPageData")) || {};
+    const categoriesDiv = document.getElementById("categories");
+    const categorySelect = document.getElementById("categorySelect");
 
-// Render categories + links
-function render() {
-  categoriesDiv.innerHTML = "";
-  categorySelect.innerHTML = "";
-  for (const [cat, links] of Object.entries(data)) {
-    // Add to dropdown
-    let opt = document.createElement("option");
-    opt.value = cat;
-    opt.textContent = cat;
-    categorySelect.appendChild(opt);
-
-    // Render category card
-    let card = document.createElement("div");
-    card.className = "card";
-    let title = document.createElement("h3");
-    title.className = "text-md font-bold mb-2";
-    title.textContent = cat;
-    card.appendChild(title);
-
-    let list = document.createElement("ul");
-    for (let l of links) {
-      let li = document.createElement("li");
-      li.innerHTML = `<a href="${l.url}" target="_blank">${l.name}</a>`;
-      list.appendChild(li);
+    function save() {
+      localStorage.setItem("homepageData", JSON.stringify(data));
     }
-    card.appendChild(list);
-    categoriesDiv.appendChild(card);
-  }
-}
 
-// Save state
-function save() {
-  localStorage.setItem("startPageData", JSON.stringify(data));
-}
+    function render() {
+      categoriesDiv.innerHTML = "";
+      categorySelect.innerHTML = "";
 
-// Add Category
-addCategoryForm.addEventListener("submit", e => {
-  e.preventDefault();
-  const cat = document.getElementById("newCategory").value.trim();
-  if (!cat || data[cat]) return;
-  data[cat] = [];
-  save(); render();
-  addCategoryForm.reset();
-});
+      for (const [cat, links] of Object.entries(data)) {
+        // Category select dropdown
+        let opt = document.createElement("option");
+        opt.value = cat;
+        opt.textContent = cat;
+        categorySelect.appendChild(opt);
 
-// Add Link
-addLinkForm.addEventListener("submit", e => {
-  e.preventDefault();
-  const cat = categorySelect.value;
-  const name = document.getElementById("linkName").value.trim();
-  const url = document.getElementById("linkUrl").value.trim();
-  if (!cat || !name || !url) return;
-  data[cat].push({ name, url });
-  save(); render();
-  addLinkForm.reset();
-});
+        // Category card
+        let card = document.createElement("div");
+        card.className = "category";
 
-// Filter Links
-filterBox.addEventListener("input", () => {
-  const query = filterBox.value.toLowerCase();
-  document.querySelectorAll("#categories .card").forEach(card => {
-    card.style.display = card.innerText.toLowerCase().includes(query) ? "" : "none";
-  });
-});
+        let title = document.createElement("h2");
+        title.textContent = cat;
+        card.appendChild(title);
 
-// Initial render
-render();
-</script>
+        let ul = document.createElement("ul");
+        links.forEach((link, i) => {
+          let li = document.createElement("li");
+
+          let a = document.createElement("a");
+          a.href = link.url;
+          a.textContent = link.name;
+          a.target = "_blank";
+
+          // Delete button
+          let delBtn = document.createElement("button");
+          delBtn.textContent = "×";
+          delBtn.style.background = "none";
+          delBtn.style.color = "#888";
+          delBtn.style.border = "none";
+          delBtn.style.cursor = "pointer";
+          delBtn.onclick = () => {
+            data[cat].splice(i, 1);
+            if (data[cat].length === 0) delete data[cat];
+            save(); render();
+          };
+
+          li.appendChild(a);
+          li.appendChild(delBtn);
+          ul.appendChild(li);
+        });
+        card.appendChild(ul);
+        categoriesDiv.appendChild(card);
+      }
+    }
+
+    // Add Category
+    document.getElementById("addCategoryForm").addEventListener("submit", e => {
+      e.preventDefault();
+      let cat = document.getElementById("newCategory").value.trim();
+      if (!cat || data[cat]) return;
+      data[cat] = [];
+      save(); render();
+      e.target.reset();
+    });
+
+    // Add Link
+    document.getElementById("addLinkForm").addEventListener("submit", e => {
+      e.preventDefault();
+      let cat = categorySelect.value;
+      let name = document.getElementById("linkName").value.trim();
+      let url = document.getElementById("linkUrl").value.trim();
+      if (!cat || !name || !url) return;
+      data[cat].push({ name, url });
+      save(); render();
+      e.target.reset();
+    });
+
+    // Filter
+    document.getElementById("filter").addEventListener("keyup", function() {
+      let filter = this.value.toLowerCase();
+      document.querySelectorAll(".category").forEach(cat => {
+        cat.style.display = cat.innerText.toLowerCase().includes(filter) ? "" : "none";
+      });
+    });
+
+    // ChatGPT redirect
+    function redirectChatGPT(form) {
+      let query = form.q.value.trim();
+      if (query) {
+        form.action = "https://chatgpt.com/?q=" + encodeURIComponent(query);
+      }
+    }
+
+    render();
+  </script>
 </body>
 </html>
