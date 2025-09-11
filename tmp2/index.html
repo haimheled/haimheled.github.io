@@ -11,24 +11,17 @@ body {
   margin: 0;
   padding: 20px;
 }
-
-h1 { text-align: center; margin-bottom: 20px; color: #fff; }
+h1 { text-align:center; margin-bottom:20px; color:#fff; }
 
 #optionsBtn {
-  position: fixed;
-  top: 15px; right: 15px;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #aaa;
+  position:fixed; top:15px; right:15px;
+  background:none; border:none; font-size:1.5rem; cursor:pointer; color:#aaa;
 }
-#optionsBtn:hover { color: #fff; }
+#optionsBtn:hover { color:#fff; }
 
-.search-boxes { display: flex; justify-content: center; gap: 10px; margin-bottom:30px; flex-wrap: wrap; }
+.search-boxes { display:flex; justify-content:center; gap:10px; margin-bottom:30px; flex-wrap:wrap; }
 input[type="text"], input[type="url"], select {
-  padding: 10px; border-radius:6px; border:none; outline:none;
-  background:#1e1e1e; color:#f0f0f0; width:250px;
+  padding:10px; border-radius:6px; border:none; outline:none; background:#1e1e1e; color:#f0f0f0; width:250px;
 }
 button { padding:6px 10px; border:none; border-radius:6px; background:#333; color:#fff; cursor:pointer; font-size:0.9rem; }
 button:hover { background:#444; }
@@ -36,10 +29,7 @@ button:hover { background:#444; }
 .filter-box { display:flex; justify-content:center; margin-bottom:20px; }
 .categories { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:20px; }
 
-.category {
-  background:#1a1a1a; border-radius:10px; padding:15px;
-  box-shadow:0 0 10px rgba(0,0,0,0.3);
-}
+.category { background:#1a1a1a; border-radius:10px; padding:15px; box-shadow:0 0 10px rgba(0,0,0,0.3); }
 .category-header { display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #333; padding-bottom:5px; margin-bottom:10px; cursor:default; }
 .category-header h2 { font-size:1.2rem; margin:0; flex:1; }
 .header-buttons { display:flex; gap:5px; }
@@ -119,17 +109,15 @@ function render(){
     let header=document.createElement("div"); header.className="category-header";
 
     let dragHandleHeader=document.createElement("span"); dragHandleHeader.className="drag-handle"; dragHandleHeader.draggable=true; dragHandleHeader.textContent="⋮⋮";
-
     let title=document.createElement("h2"); title.textContent=cat;
-    let btns=document.createElement("div"); btns.className="header-buttons";
 
+    let btns=document.createElement("div"); btns.className="header-buttons";
     let editBtn=document.createElement("button"); editBtn.textContent="✏️"; editBtn.style.background="none"; editBtn.style.color="#888"; editBtn.style.border="none";
     editBtn.onclick=()=>{ let newName=prompt("Rename category:",cat); if(newName && newName.trim() && !data[newName]){ data[newName]=data[cat]; delete data[cat]; save(); render(); }};
-
     let delCatBtn=document.createElement("button"); delCatBtn.textContent="🗑️"; delCatBtn.style.background="none"; delCatBtn.style.color="#888"; delCatBtn.style.border="none";
     delCatBtn.onclick=()=>{ if(confirm(`Delete category "${cat}" and all its links?`)){ delete data[cat]; save(); render(); }};
-
     btns.appendChild(editBtn); btns.appendChild(delCatBtn);
+
     header.appendChild(dragHandleHeader); header.appendChild(title); header.appendChild(btns);
     card.appendChild(header);
 
@@ -138,7 +126,6 @@ function render(){
     links.forEach((link,i)=>{
       let li=document.createElement("li");
       let dragHandleLink=document.createElement("span"); dragHandleLink.className="drag-handle"; dragHandleLink.draggable=true; dragHandleLink.textContent="⋮⋮";
-
       let a=document.createElement("a"); a.href=link.url; a.textContent=link.name; a.target="_blank";
       let editLinkBtn=document.createElement("button"); editLinkBtn.textContent="✏️"; editLinkBtn.style.background="none"; editLinkBtn.style.color="#888"; editLinkBtn.style.border="none";
       editLinkBtn.onclick=()=>{ let newName=prompt("Edit link name:",link.name); let newUrl=prompt("Edit link URL:",link.url); if(newName && newUrl){ data[cat][i]={name:newName.trim(),url:newUrl.trim()}; save(); render(); }};
@@ -148,22 +135,22 @@ function render(){
       li.appendChild(dragHandleLink); li.appendChild(a); li.appendChild(editLinkBtn); li.appendChild(delBtn);
       ul.appendChild(li);
 
-      // Drag events for link
+      // Link drag events
       dragHandleLink.addEventListener("dragstart",(e)=>{ e.dataTransfer.setData("text/plain",JSON.stringify({type:"link",cat,index:i})); e.stopPropagation(); });
       li.addEventListener("dragover",(e)=>{ e.preventDefault(); let dragged=JSON.parse(e.dataTransfer.getData("text/plain")); if(dragged.type==="link"){ let rect=li.getBoundingClientRect(); li.classList.remove("drop-before","drop-after"); if(e.clientY-rect.top<rect.height/2) li.classList.add("drop-before"); else li.classList.add("drop-after"); } });
       li.addEventListener("dragleave",()=>li.classList.remove("drop-before","drop-after"));
-      li.addEventListener("drop",(e)=>{ e.preventDefault(); let dragged=JSON.parse(e.dataTransfer.getData("text/plain")); if(dragged.type==="link"){ let item=data[dragged.cat].splice(dragged.index,1)[0]; let rect=li.getBoundingClientRect(); let insertIndex=(e.clientY-rect.top<rect.height/2)?i:i+1; data[cat].splice(insertIndex,0,item); if(data[dragged.cat]&&data[dragged.cat].length===0) delete data[dragged.cat]; save(); render(); }});
+      li.addEventListener("drop",(e)=>{ e.preventDefault(); li.classList.remove("drop-before","drop-after"); let dragged=JSON.parse(e.dataTransfer.getData("text/plain")); if(dragged.type==="link"){ let item=data[dragged.cat].splice(dragged.index,1)[0]; let rect=li.getBoundingClientRect(); let insertIndex=(e.clientY-rect.top<rect.height/2)?i:i+1; data[cat].splice(insertIndex,0,item); if(data[dragged.cat].length===0) delete data[dragged.cat]; save(); render(); }});
     });
 
-    // Drop empty category
+    // Empty ul drop
     ul.addEventListener("dragover",(e)=>{ e.preventDefault(); ul.classList.add("drag-over"); });
     ul.addEventListener("dragleave",()=>ul.classList.remove("drag-over"));
-    ul.addEventListener("drop",(e)=>{ e.preventDefault(); ul.classList.remove("drag-over"); let dragged=JSON.parse(e.dataTransfer.getData("text/plain")); if(dragged.type==="link"){ let item=data[dragged.cat].splice(dragged.index,1)[0]; data[cat].push(item); if(data[dragged.cat]&&data[dragged.cat].length===0) delete data[dragged.cat]; save(); render(); } });
+    ul.addEventListener("drop",(e)=>{ e.preventDefault(); ul.classList.remove("drag-over"); let dragged=JSON.parse(e.dataTransfer.getData("text/plain")); if(dragged.type==="link"){ let item=data[dragged.cat].splice(dragged.index,1)[0]; data[cat].push(item); if(data[dragged.cat].length===0) delete data[dragged.cat]; save(); render(); }});
 
     card.appendChild(ul);
     categoriesDiv.appendChild(card);
 
-    // Category drag
+    // Category drag events
     dragHandleHeader.addEventListener("dragstart",(e)=>{ e.dataTransfer.setData("text/plain",JSON.stringify({type:"category",catIndex})); e.stopPropagation(); });
     card.addEventListener("dragover",(e)=>{ e.preventDefault(); let dragged=JSON.parse(e.dataTransfer.getData("text/plain")); if(dragged.type==="category"){ let rect=card.getBoundingClientRect(); card.classList.remove("drop-before","drop-after"); if(e.clientY-rect.top<rect.height/2) card.classList.add("drop-before"); else card.classList.add("drop-after"); }});
     card.addEventListener("dragleave",()=>card.classList.remove("drop-before","drop-after"));
@@ -171,11 +158,10 @@ function render(){
   });
 }
 
-document.getElementById("addCategoryForm").addEventListener("submit",e=>{ e.preventDefault(); let cat=document.getElementById("newCategory").value.trim(); if(!cat || data[cat]) return; data[cat]=[]; save(); render(); e.target.reset(); });
+// Forms & filter
+document.getElementById("addCategoryForm").addEventListener("submit",e=>{ e.preventDefault(); let cat=document.getElementById("newCategory").value.trim(); if(!cat||data[cat]) return; data[cat]=[]; save(); render(); e.target.reset(); });
 document.getElementById("addLinkForm").addEventListener("submit",e=>{ e.preventDefault(); let cat=categorySelect.value; let name=document.getElementById("linkName").value.trim(); let url=document.getElementById("linkUrl").value.trim(); if(!cat||!name||!url) return; data[cat].push({name,url}); save(); render(); e.target.reset(); });
-
 document.getElementById("filter").addEventListener("keyup",function(){ let filter=this.value.toLowerCase(); document.querySelectorAll(".category").forEach(cat=>{ cat.style.display=cat.innerText.toLowerCase().includes(filter)?"":"none"; }); });
-
 function redirectChatGPT(form){ let query=form.q.value.trim(); if(query){ form.action="https://chatgpt.com/?q="+encodeURIComponent(query); } }
 optionsBtn.addEventListener("click",()=>{ manageBox.style.display=(manageBox.style.display===""||manageBox.style.display==="none")?"block":"none"; });
 
