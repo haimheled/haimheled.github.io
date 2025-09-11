@@ -18,6 +18,21 @@
       color: #ffffff;
     }
 
+    /* Options button */
+    #optionsBtn {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #aaa;
+    }
+    #optionsBtn:hover {
+      color: #fff;
+    }
+
     .search-boxes {
       display: flex;
       justify-content: center;
@@ -37,7 +52,7 @@
     }
 
     button {
-      padding: 10px 15px;
+      padding: 8px 12px;
       border: none;
       border-radius: 6px;
       background: #333;
@@ -68,11 +83,18 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.3);
     }
 
-    .category h2 {
-      font-size: 1.2rem;
-      margin-bottom: 10px;
+    .category-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       border-bottom: 1px solid #333;
       padding-bottom: 5px;
+      margin-bottom: 10px;
+    }
+
+    .category h2 {
+      font-size: 1.2rem;
+      margin: 0;
     }
 
     .category ul {
@@ -103,6 +125,7 @@
       background: #1a1a1a;
       padding: 15px;
       border-radius: 10px;
+      display: none; /* hidden by default */
     }
 
     .manage-box h2 {
@@ -113,6 +136,9 @@
 </head>
 <body>
   <h1>My Homepage</h1>
+
+  <!-- Options Button -->
+  <button id="optionsBtn">⚙️</button>
 
   <!-- Search boxes -->
   <div class="search-boxes">
@@ -138,7 +164,7 @@
   <div class="categories" id="categories"></div>
 
   <!-- Manage Links -->
-  <div class="manage-box">
+  <div class="manage-box" id="manageBox">
     <h2>Manage Categories & Links</h2>
     <form id="addCategoryForm">
       <input type="text" id="newCategory" placeholder="New Category" required>
@@ -154,7 +180,7 @@
   </div>
 
   <script>
-    // Initial data (loaded once if nothing in storage)
+    // Initial data (if nothing in localStorage)
     let data = JSON.parse(localStorage.getItem("homepageData")) || {
       "Work": [
         { name: "GitHub", url: "https://github.com/" },
@@ -172,6 +198,8 @@
 
     const categoriesDiv = document.getElementById("categories");
     const categorySelect = document.getElementById("categorySelect");
+    const manageBox = document.getElementById("manageBox");
+    const optionsBtn = document.getElementById("optionsBtn");
 
     function save() {
       localStorage.setItem("homepageData", JSON.stringify(data));
@@ -182,7 +210,7 @@
       categorySelect.innerHTML = "";
 
       for (const [cat, links] of Object.entries(data)) {
-        // Category select dropdown
+        // Add to select dropdown
         let opt = document.createElement("option");
         opt.value = cat;
         opt.textContent = cat;
@@ -192,9 +220,30 @@
         let card = document.createElement("div");
         card.className = "category";
 
+        // Category header
+        let header = document.createElement("div");
+        header.className = "category-header";
+
         let title = document.createElement("h2");
         title.textContent = cat;
-        card.appendChild(title);
+
+        // Delete category button
+        let delCatBtn = document.createElement("button");
+        delCatBtn.textContent = "🗑️";
+        delCatBtn.style.background = "none";
+        delCatBtn.style.color = "#888";
+        delCatBtn.style.border = "none";
+        delCatBtn.style.cursor = "pointer";
+        delCatBtn.onclick = () => {
+          if (confirm(`Delete category "${cat}" and all its links?`)) {
+            delete data[cat];
+            save(); render();
+          }
+        };
+
+        header.appendChild(title);
+        header.appendChild(delCatBtn);
+        card.appendChild(header);
 
         let ul = document.createElement("ul");
         links.forEach((link, i) => {
@@ -205,7 +254,7 @@
           a.textContent = link.name;
           a.target = "_blank";
 
-          // Delete button
+          // Delete link button
           let delBtn = document.createElement("button");
           delBtn.textContent = "×";
           delBtn.style.background = "none";
@@ -264,6 +313,12 @@
         form.action = "https://chatgpt.com/?q=" + encodeURIComponent(query);
       }
     }
+
+    // Toggle manage box
+    optionsBtn.addEventListener("click", () => {
+      manageBox.style.display = (manageBox.style.display === "none" || manageBox.style.display === "") 
+        ? "block" : "none";
+    });
 
     render();
   </script>
