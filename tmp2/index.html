@@ -113,6 +113,8 @@
       align-items: center;
       gap: 5px;
       cursor: grab;
+      padding: 3px 5px;
+      border-radius: 5px;
     }
 
     .category a {
@@ -133,7 +135,11 @@
 
     .manage-box h2 { margin-bottom: 10px; font-size: 1.1rem; }
 
-    .drag-over { border: 2px dashed #666; }
+    /* Drop indicator line */
+    .drop-before { border-top: 2px solid #60a5fa; }
+    .drop-after  { border-bottom: 2px solid #60a5fa; }
+
+    .drag-over { outline: 2px dashed #666; }
   </style>
 </head>
 <body>
@@ -302,13 +308,41 @@
           li.addEventListener("dragstart", e => {
             e.dataTransfer.setData("text/plain", JSON.stringify({ type: "link", cat, index: i }));
           });
+
+          // Drop indicator
+          li.addEventListener("dragover", e => {
+            e.preventDefault();
+            let dragged = JSON.parse(e.dataTransfer.getData("text/plain"));
+            if (dragged.type === "link") {
+              let rect = li.getBoundingClientRect();
+              let offset = e.clientY - rect.top;
+              li.classList.remove("drop-before", "drop-after");
+              if (offset < rect.height / 2) {
+                li.classList.add("drop-before");
+              } else {
+                li.classList.add("drop-after");
+              }
+            }
+          });
+          li.addEventListener("dragleave", () => li.classList.remove("drop-before", "drop-after"));
+
+          li.addEventListener("drop", e => {
+            e.preventDefault();
+            let dragged = JSON.parse(e.dataTransfer.getData("text/plain"));
+            if (dragged.type === "link") {
+              let item = data[dragged.cat].splice(dragged.index, 1)[0];
+              let rect = li.getBoundingClientRect();
+              let offset = e.clientY - rect.top;
+              let insertIndex = offset < rect.height / 2 ? i : i + 1;
+              data[cat].splice(insertIndex, 0, item);
+              if (data[dragged.cat] && data[dragged.cat].length === 0) delete data[dragged.cat];
+              save(); render();
+            }
+          });
         });
 
-        // Allow dropping into category (end of list)
-        ul.addEventListener("dragover", e => {
-          e.preventDefault();
-          ul.classList.add("drag-over");
-        });
+        // Drop at empty category
+        ul.addEventListener("dragover", e => { e.preventDefault(); ul.classList.add("drag-over"); });
         ul.addEventListener("dragleave", () => ul.classList.remove("drag-over"));
         ul.addEventListener("drop", e => {
           e.preventDefault();
@@ -317,7 +351,7 @@
           if (dragged.type === "link") {
             let item = data[dragged.cat].splice(dragged.index, 1)[0];
             data[cat].push(item);
-            if (data[dragged.cat].length === 0) delete data[dragged.cat];
+            if (data[dragged.cat] && data[dragged.cat].length === 0) delete data[dragged.cat];
             save(); render();
           }
         });
@@ -329,10 +363,7 @@
         card.addEventListener("dragstart", e => {
           e.dataTransfer.setData("text/plain", JSON.stringify({ type: "category", catIndex }));
         });
-        card.addEventListener("dragover", e => {
-          e.preventDefault();
-          card.classList.add("drag-over");
-        });
+        card.addEventListener("dragover", e => { e.preventDefault(); card.classList.add("drag-over"); });
         card.addEventListener("dragleave", () => card.classList.remove("drag-over"));
         card.addEventListener("drop", e => {
           e.preventDefault();
