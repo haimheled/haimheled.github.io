@@ -135,9 +135,9 @@
 
     .manage-box h2 { margin-bottom: 10px; font-size: 1.1rem; }
 
-    /* Drop indicator line */
-    .drop-before { border-top: 2px solid #60a5fa; }
-    .drop-after  { border-bottom: 2px solid #60a5fa; }
+    /* Drop indicators */
+    .drop-before { border-top: 2px solid #60a5fa !important; }
+    .drop-after  { border-bottom: 2px solid #60a5fa !important; }
 
     .drag-over { outline: 2px dashed #666; }
   </style>
@@ -304,12 +304,11 @@
           li.appendChild(delBtn);
           ul.appendChild(li);
 
-          // Drag start
+          // --- Link drag logic with indicators ---
           li.addEventListener("dragstart", e => {
             e.dataTransfer.setData("text/plain", JSON.stringify({ type: "link", cat, index: i }));
           });
 
-          // Drop indicator
           li.addEventListener("dragover", e => {
             e.preventDefault();
             let dragged = JSON.parse(e.dataTransfer.getData("text/plain"));
@@ -317,11 +316,8 @@
               let rect = li.getBoundingClientRect();
               let offset = e.clientY - rect.top;
               li.classList.remove("drop-before", "drop-after");
-              if (offset < rect.height / 2) {
-                li.classList.add("drop-before");
-              } else {
-                li.classList.add("drop-after");
-              }
+              if (offset < rect.height / 2) li.classList.add("drop-before");
+              else li.classList.add("drop-after");
             }
           });
           li.addEventListener("dragleave", () => li.classList.remove("drop-before", "drop-after"));
@@ -341,7 +337,7 @@
           });
         });
 
-        // Drop at empty category
+        // Drop into empty category
         ul.addEventListener("dragover", e => { e.preventDefault(); ul.classList.add("drag-over"); });
         ul.addEventListener("dragleave", () => ul.classList.remove("drag-over"));
         ul.addEventListener("drop", e => {
@@ -359,20 +355,39 @@
         card.appendChild(ul);
         categoriesDiv.appendChild(card);
 
-        // Drag & drop categories
+        // --- Category drag logic with blue line indicator ---
         card.addEventListener("dragstart", e => {
           e.dataTransfer.setData("text/plain", JSON.stringify({ type: "category", catIndex }));
         });
-        card.addEventListener("dragover", e => { e.preventDefault(); card.classList.add("drag-over"); });
-        card.addEventListener("dragleave", () => card.classList.remove("drag-over"));
+
+        card.addEventListener("dragover", e => {
+          e.preventDefault();
+          let dragged = JSON.parse(e.dataTransfer.getData("text/plain"));
+          if (dragged.type === "category") {
+            let rect = card.getBoundingClientRect();
+            let offset = e.clientY - rect.top;
+            card.classList.remove("drop-before", "drop-after");
+            if (offset < rect.height / 2) card.classList.add("drop-before");
+            else card.classList.add("drop-after");
+          }
+        });
+
+        card.addEventListener("dragleave", () => card.classList.remove("drop-before", "drop-after"));
+
         card.addEventListener("drop", e => {
           e.preventDefault();
-          card.classList.remove("drag-over");
+          card.classList.remove("drop-before", "drop-after");
           let dragged = JSON.parse(e.dataTransfer.getData("text/plain"));
           if (dragged.type === "category") {
             let keys = Object.keys(data);
             let draggedKey = keys.splice(dragged.catIndex, 1)[0];
-            keys.splice(catIndex, 0, draggedKey);
+
+            // Insert before/after based on position
+            let rect = card.getBoundingClientRect();
+            let offset = e.clientY - rect.top;
+            let insertIndex = offset < rect.height / 2 ? catIndex : catIndex + 1;
+            keys.splice(insertIndex, 0, draggedKey);
+
             let newData = {};
             keys.forEach(k => newData[k] = data[k]);
             data = newData;
