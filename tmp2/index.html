@@ -1,171 +1,369 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>My Homepage</title>
-<style>
-body {
-  background-color: #121212;
-  color: #f0f0f0;
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 20px;
-}
-h1 { text-align:center; margin-bottom:20px; color:#fff; }
+  <meta charset="UTF-8">
+  <title>My Homepage</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #f0f0f0;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
 
-#optionsBtn {
-  position:fixed; top:15px; right:15px;
-  background:none; border:none; font-size:1.5rem; cursor:pointer; color:#aaa;
-}
-#optionsBtn:hover { color:#fff; }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #ffffff;
+    }
 
-.search-boxes { display:flex; justify-content:center; gap:10px; margin-bottom:30px; flex-wrap:wrap; }
-input[type="text"], input[type="url"], select {
-  padding:10px; border-radius:6px; border:none; outline:none; background:#1e1e1e; color:#f0f0f0; width:250px;
-}
-button { padding:6px 10px; border:none; border-radius:6px; background:#333; color:#fff; cursor:pointer; font-size:0.9rem; }
-button:hover { background:#444; }
+    /* Options button */
+    #optionsBtn {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #aaa;
+    }
+    #optionsBtn:hover {
+      color: #fff;
+    }
 
-.filter-box { display:flex; justify-content:center; margin-bottom:20px; }
-.categories { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:20px; }
+    .search-boxes {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
 
-.category { background:#1a1a1a; border-radius:10px; padding:15px; box-shadow:0 0 10px rgba(0,0,0,0.3); }
-.category-header { display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #333; padding-bottom:5px; margin-bottom:10px; cursor:default; }
-.category-header h2 { font-size:1.2rem; margin:0; flex:1; }
-.header-buttons { display:flex; gap:5px; }
-.drag-handle { cursor:grab; color:#888; margin-right:5px; }
+    input[type="text"], input[type="url"], select {
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+      background: #1e1e1e;
+      color: #f0f0f0;
+      width: 250px;
+    }
 
-.category ul { list-style:none; padding:0; margin:0; min-height:20px; }
-.category li { margin:6px 0; display:flex; justify-content:space-between; align-items:center; gap:5px; padding:3px 5px; border-radius:5px; }
+    button {
+      padding: 6px 10px;
+      border: none;
+      border-radius: 6px;
+      background: #333;
+      color: #fff;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
 
-.category a { text-decoration:none; color:#80cbc4; flex:1; }
-.category a:hover { text-decoration:underline; }
+    button:hover {
+      background: #444;
+    }
 
-.manage-box { margin-top:30px; background:#1a1a1a; padding:15px; border-radius:10px; display:none; }
-.manage-box h2 { margin-bottom:10px; font-size:1.1rem; }
+    .filter-box {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
 
-.drop-before { border-top:2px solid #60a5fa !important; }
-.drop-after { border-bottom:2px solid #60a5fa !important; }
-.drag-over { outline:2px dashed #666; }
-</style>
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .category {
+      background: #1a1a1a;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    .category-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #333;
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+    }
+
+    .category-header h2 {
+      font-size: 1.2rem;
+      margin: 0;
+      flex: 1;
+    }
+
+    .header-buttons {
+      display: flex;
+      gap: 5px;
+    }
+
+    .category ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .category li {
+      margin: 6px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .category a {
+      text-decoration: none;
+      color: #80cbc4;
+      flex: 1;
+    }
+
+    .category a:hover {
+      text-decoration: underline;
+    }
+
+    .manage-box {
+      margin-top: 30px;
+      background: #1a1a1a;
+      padding: 15px;
+      border-radius: 10px;
+      display: none; /* hidden by default */
+    }
+
+    .manage-box h2 {
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+  </style>
 </head>
 <body>
-<h1>My Homepage</h1>
+  <h1>My Homepage</h1>
 
-<button id="optionsBtn">⚙️</button>
+  <!-- Options Button -->
+  <button id="optionsBtn">⚙️</button>
 
-<div class="search-boxes">
-<form method="GET" action="https://www.google.com/search">
-<input type="text" name="q" placeholder="Search Google...">
-<button type="submit">Go</button>
-</form>
-<form method="GET" action="https://chatgpt.com/" onsubmit="redirectChatGPT(this)">
-<input type="text" name="q" placeholder="Ask ChatGPT...">
-<button type="submit">Ask</button>
-</form>
-</div>
+  <!-- Search boxes -->
+  <div class="search-boxes">
+    <!-- Google Search -->
+    <form method="GET" action="https://www.google.com/search">
+      <input type="text" name="q" placeholder="Search Google...">
+      <button type="submit">Go</button>
+    </form>
 
-<div class="filter-box">
-<input type="text" id="filter" placeholder="Quick filter links...">
-</div>
+    <!-- ChatGPT Search -->
+    <form method="GET" action="https://chatgpt.com/" onsubmit="redirectChatGPT(this)">
+      <input type="text" name="q" placeholder="Ask ChatGPT...">
+      <button type="submit">Ask</button>
+    </form>
+  </div>
 
-<div class="categories" id="categories"></div>
+  <!-- Filter -->
+  <div class="filter-box">
+    <input type="text" id="filter" placeholder="Quick filter links...">
+  </div>
 
-<div class="manage-box" id="manageBox">
-<h2>Manage Categories & Links</h2>
-<form id="addCategoryForm">
-<input type="text" id="newCategory" placeholder="New Category" required>
-<button type="submit">Add Category</button>
-</form>
-<br>
-<form id="addLinkForm">
-<select id="categorySelect"></select>
-<input type="text" id="linkName" placeholder="Link Name" required>
-<input type="url" id="linkUrl" placeholder="https://example.com" required>
-<button type="submit">Add Link</button>
-</form>
-</div>
+  <!-- Categories -->
+  <div class="categories" id="categories"></div>
 
-<script>
-let data = JSON.parse(localStorage.getItem("homepageData")) || {
-  "Work":[{name:"GitHub",url:"https://github.com/"},{name:"Stack Overflow",url:"https://stackoverflow.com/"}],
-  "News":[{name:"Hacker News",url:"https://news.ycombinator.com/"},{name:"BBC",url:"https://www.bbc.com/"}],
-  "Personal":[{name:"Gmail",url:"https://gmail.com/"},{name:"Google Calendar",url:"https://calendar.google.com/"}]
-};
+  <!-- Manage Links -->
+  <div class="manage-box" id="manageBox">
+    <h2>Manage Categories & Links</h2>
+    <form id="addCategoryForm">
+      <input type="text" id="newCategory" placeholder="New Category" required>
+      <button type="submit">Add Category</button>
+    </form>
+    <br>
+    <form id="addLinkForm">
+      <select id="categorySelect"></select>
+      <input type="text" id="linkName" placeholder="Link Name" required>
+      <input type="url" id="linkUrl" placeholder="https://example.com" required>
+      <button type="submit">Add Link</button>
+    </form>
+  </div>
 
-const categoriesDiv=document.getElementById("categories");
-const categorySelect=document.getElementById("categorySelect");
-const manageBox=document.getElementById("manageBox");
-const optionsBtn=document.getElementById("optionsBtn");
+  <script>
+    // Initial data
+    let data = JSON.parse(localStorage.getItem("homepageData")) || {
+      "Work": [
+        { name: "GitHub", url: "https://github.com/" },
+        { name: "Stack Overflow", url: "https://stackoverflow.com/" }
+      ],
+      "News": [
+        { name: "Hacker News", url: "https://news.ycombinator.com/" },
+        { name: "BBC", url: "https://www.bbc.com/" }
+      ],
+      "Personal": [
+        { name: "Gmail", url: "https://gmail.com/" },
+        { name: "Google Calendar", url: "https://calendar.google.com/" }
+      ]
+    };
 
-function save(){ localStorage.setItem("homepageData",JSON.stringify(data)); }
+    const categoriesDiv = document.getElementById("categories");
+    const categorySelect = document.getElementById("categorySelect");
+    const manageBox = document.getElementById("manageBox");
+    const optionsBtn = document.getElementById("optionsBtn");
 
-function render(){
-  categoriesDiv.innerHTML=""; categorySelect.innerHTML="";
-  Object.entries(data).forEach(([cat,links],catIndex)=>{
-    let opt=document.createElement("option"); opt.value=cat; opt.textContent=cat; categorySelect.appendChild(opt);
+    function save() {
+      localStorage.setItem("homepageData", JSON.stringify(data));
+    }
 
-    let card=document.createElement("div"); card.className="category";
-    let header=document.createElement("div"); header.className="category-header";
+    function render() {
+      categoriesDiv.innerHTML = "";
+      categorySelect.innerHTML = "";
 
-    let dragHandleHeader=document.createElement("span"); dragHandleHeader.className="drag-handle"; dragHandleHeader.draggable=true; dragHandleHeader.textContent="⋮⋮";
-    let title=document.createElement("h2"); title.textContent=cat;
+      for (const [cat, links] of Object.entries(data)) {
+        // Add to select dropdown
+        let opt = document.createElement("option");
+        opt.value = cat;
+        opt.textContent = cat;
+        categorySelect.appendChild(opt);
 
-    let btns=document.createElement("div"); btns.className="header-buttons";
-    let editBtn=document.createElement("button"); editBtn.textContent="✏️"; editBtn.style.background="none"; editBtn.style.color="#888"; editBtn.style.border="none";
-    editBtn.onclick=()=>{ let newName=prompt("Rename category:",cat); if(newName && newName.trim() && !data[newName]){ data[newName]=data[cat]; delete data[cat]; save(); render(); }};
-    let delCatBtn=document.createElement("button"); delCatBtn.textContent="🗑️"; delCatBtn.style.background="none"; delCatBtn.style.color="#888"; delCatBtn.style.border="none";
-    delCatBtn.onclick=()=>{ if(confirm(`Delete category "${cat}" and all its links?`)){ delete data[cat]; save(); render(); }};
-    btns.appendChild(editBtn); btns.appendChild(delCatBtn);
+        // Category card
+        let card = document.createElement("div");
+        card.className = "category";
 
-    header.appendChild(dragHandleHeader); header.appendChild(title); header.appendChild(btns);
-    card.appendChild(header);
+        // Category header
+        let header = document.createElement("div");
+        header.className = "category-header";
 
-    let ul=document.createElement("ul"); ul.dataset.cat=cat;
+        let title = document.createElement("h2");
+        title.textContent = cat;
 
-    links.forEach((link,i)=>{
-      let li=document.createElement("li");
-      let dragHandleLink=document.createElement("span"); dragHandleLink.className="drag-handle"; dragHandleLink.draggable=true; dragHandleLink.textContent="⋮⋮";
-      let a=document.createElement("a"); a.href=link.url; a.textContent=link.name; a.target="_blank";
-      let editLinkBtn=document.createElement("button"); editLinkBtn.textContent="✏️"; editLinkBtn.style.background="none"; editLinkBtn.style.color="#888"; editLinkBtn.style.border="none";
-      editLinkBtn.onclick=()=>{ let newName=prompt("Edit link name:",link.name); let newUrl=prompt("Edit link URL:",link.url); if(newName && newUrl){ data[cat][i]={name:newName.trim(),url:newUrl.trim()}; save(); render(); }};
-      let delBtn=document.createElement("button"); delBtn.textContent="❌"; delBtn.style.background="none"; delBtn.style.color="#888"; delBtn.style.border="none";
-      delBtn.onclick=()=>{ data[cat].splice(i,1); if(data[cat].length===0) delete data[cat]; save(); render(); };
+        // Buttons container
+        let btns = document.createElement("div");
+        btns.className = "header-buttons";
 
-      li.appendChild(dragHandleLink); li.appendChild(a); li.appendChild(editLinkBtn); li.appendChild(delBtn);
-      ul.appendChild(li);
+        // Rename category
+        let editBtn = document.createElement("button");
+        editBtn.textContent = "✏️";
+        editBtn.style.background = "none";
+        editBtn.style.color = "#888";
+        editBtn.style.border = "none";
+        editBtn.onclick = () => {
+          let newName = prompt("Rename category:", cat);
+          if (newName && newName.trim() && !data[newName]) {
+            data[newName] = data[cat];
+            delete data[cat];
+            save(); render();
+          }
+        };
 
-      // Link drag events
-      dragHandleLink.addEventListener("dragstart",(e)=>{ e.dataTransfer.setData("text/plain",JSON.stringify({type:"link",cat,index:i})); e.stopPropagation(); });
-      li.addEventListener("dragover",(e)=>{ e.preventDefault(); let dragged=JSON.parse(e.dataTransfer.getData("text/plain")); if(dragged.type==="link"){ let rect=li.getBoundingClientRect(); li.classList.remove("drop-before","drop-after"); if(e.clientY-rect.top<rect.height/2) li.classList.add("drop-before"); else li.classList.add("drop-after"); } });
-      li.addEventListener("dragleave",()=>li.classList.remove("drop-before","drop-after"));
-      li.addEventListener("drop",(e)=>{ e.preventDefault(); li.classList.remove("drop-before","drop-after"); let dragged=JSON.parse(e.dataTransfer.getData("text/plain")); if(dragged.type==="link"){ let item=data[dragged.cat].splice(dragged.index,1)[0]; let rect=li.getBoundingClientRect(); let insertIndex=(e.clientY-rect.top<rect.height/2)?i:i+1; data[cat].splice(insertIndex,0,item); if(data[dragged.cat].length===0) delete data[dragged.cat]; save(); render(); }});
+        // Delete category
+        let delCatBtn = document.createElement("button");
+        delCatBtn.textContent = "🗑️";
+        delCatBtn.style.background = "none";
+        delCatBtn.style.color = "#888";
+        delCatBtn.style.border = "none";
+        delCatBtn.onclick = () => {
+          if (confirm(`Delete category "${cat}" and all its links?`)) {
+            delete data[cat];
+            save(); render();
+          }
+        };
+
+        btns.appendChild(editBtn);
+        btns.appendChild(delCatBtn);
+        header.appendChild(title);
+        header.appendChild(btns);
+        card.appendChild(header);
+
+        let ul = document.createElement("ul");
+        links.forEach((link, i) => {
+          let li = document.createElement("li");
+
+          let a = document.createElement("a");
+          a.href = link.url;
+          a.textContent = link.name;
+          a.target = "_blank";
+
+          // Edit link
+          let editLinkBtn = document.createElement("button");
+          editLinkBtn.textContent = "✏️";
+          editLinkBtn.style.background = "none";
+          editLinkBtn.style.color = "#888";
+          editLinkBtn.style.border = "none";
+          editLinkBtn.onclick = () => {
+            let newName = prompt("Edit link name:", link.name);
+            let newUrl = prompt("Edit link URL:", link.url);
+            if (newName && newUrl) {
+              data[cat][i] = { name: newName.trim(), url: newUrl.trim() };
+              save(); render();
+            }
+          };
+
+          // Delete link
+          let delBtn = document.createElement("button");
+          delBtn.textContent = "❌";
+          delBtn.style.background = "none";
+          delBtn.style.color = "#888";
+          delBtn.style.border = "none";
+          delBtn.onclick = () => {
+            data[cat].splice(i, 1);
+            if (data[cat].length === 0) delete data[cat];
+            save(); render();
+          };
+
+          li.appendChild(a);
+          li.appendChild(editLinkBtn);
+          li.appendChild(delBtn);
+          ul.appendChild(li);
+        });
+        card.appendChild(ul);
+        categoriesDiv.appendChild(card);
+      }
+    }
+
+    // Add Category
+    document.getElementById("addCategoryForm").addEventListener("submit", e => {
+      e.preventDefault();
+      let cat = document.getElementById("newCategory").value.trim();
+      if (!cat || data[cat]) return;
+      data[cat] = [];
+      save(); render();
+      e.target.reset();
     });
 
-    // Empty ul drop
-    ul.addEventListener("dragover",(e)=>{ e.preventDefault(); ul.classList.add("drag-over"); });
-    ul.addEventListener("dragleave",()=>ul.classList.remove("drag-over"));
-    ul.addEventListener("drop",(e)=>{ e.preventDefault(); ul.classList.remove("drag-over"); let dragged=JSON.parse(e.dataTransfer.getData("text/plain")); if(dragged.type==="link"){ let item=data[dragged.cat].splice(dragged.index,1)[0]; data[cat].push(item); if(data[dragged.cat].length===0) delete data[dragged.cat]; save(); render(); }});
+    // Add Link
+    document.getElementById("addLinkForm").addEventListener("submit", e => {
+      e.preventDefault();
+      let cat = categorySelect.value;
+      let name = document.getElementById("linkName").value.trim();
+      let url = document.getElementById("linkUrl").value.trim();
+      if (!cat || !name || !url) return;
+      data[cat].push({ name, url });
+      save(); render();
+      e.target.reset();
+    });
 
-    card.appendChild(ul);
-    categoriesDiv.appendChild(card);
+    // Filter
+    document.getElementById("filter").addEventListener("keyup", function() {
+      let filter = this.value.toLowerCase();
+      document.querySelectorAll(".category").forEach(cat => {
+        cat.style.display = cat.innerText.toLowerCase().includes(filter) ? "" : "none";
+      });
+    });
 
-    // Category drag events
-    dragHandleHeader.addEventListener("dragstart",(e)=>{ e.dataTransfer.setData("text/plain",JSON.stringify({type:"category",catIndex})); e.stopPropagation(); });
-    card.addEventListener("dragover",(e)=>{ e.preventDefault(); let dragged=JSON.parse(e.dataTransfer.getData("text/plain")); if(dragged.type==="category"){ let rect=card.getBoundingClientRect(); card.classList.remove("drop-before","drop-after"); if(e.clientY-rect.top<rect.height/2) card.classList.add("drop-before"); else card.classList.add("drop-after"); }});
-    card.addEventListener("dragleave",()=>card.classList.remove("drop-before","drop-after"));
-    card.addEventListener("drop",(e)=>{ e.preventDefault(); card.classList.remove("drop-before","drop-after"); let dragged=JSON.parse(e.dataTransfer.getData("text/plain")); if(dragged.type==="category"){ let keys=Object.keys(data); let draggedKey=keys.splice(dragged.catIndex,1)[0]; let rect=card.getBoundingClientRect(); let insertIndex=(e.clientY-rect.top<rect.height/2)?catIndex:catIndex+1; keys.splice(insertIndex,0,draggedKey); let newData={}; keys.forEach(k=>newData[k]=data[k]); data=newData; save(); render(); }});
-  });
-}
+    // ChatGPT redirect
+    function redirectChatGPT(form) {
+      let query = form.q.value.trim();
+      if (query) {
+        form.action = "https://chatgpt.com/?q=" + encodeURIComponent(query);
+      }
+    }
 
-// Forms & filter
-document.getElementById("addCategoryForm").addEventListener("submit",e=>{ e.preventDefault(); let cat=document.getElementById("newCategory").value.trim(); if(!cat||data[cat]) return; data[cat]=[]; save(); render(); e.target.reset(); });
-document.getElementById("addLinkForm").addEventListener("submit",e=>{ e.preventDefault(); let cat=categorySelect.value; let name=document.getElementById("linkName").value.trim(); let url=document.getElementById("linkUrl").value.trim(); if(!cat||!name||!url) return; data[cat].push({name,url}); save(); render(); e.target.reset(); });
-document.getElementById("filter").addEventListener("keyup",function(){ let filter=this.value.toLowerCase(); document.querySelectorAll(".category").forEach(cat=>{ cat.style.display=cat.innerText.toLowerCase().includes(filter)?"":"none"; }); });
-function redirectChatGPT(form){ let query=form.q.value.trim(); if(query){ form.action="https://chatgpt.com/?q="+encodeURIComponent(query); } }
-optionsBtn.addEventListener("click",()=>{ manageBox.style.display=(manageBox.style.display===""||manageBox.style.display==="none")?"block":"none"; });
+    // Toggle manage box
+    optionsBtn.addEventListener("click", () => {
+      manageBox.style.display = (manageBox.style.display === "none" || manageBox.style.display === "") 
+        ? "block" : "none";
+    });
 
-render();
-</script>
+    render();
+  </script>
 </body>
 </html>
