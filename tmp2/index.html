@@ -372,85 +372,53 @@
           }
         });
       });
-
-  // LINK DRAG
-  document.querySelectorAll(".category li").forEach(li => {
-    li.addEventListener("dragstart", e => {
-      dragSrc = { type: "link", cat: +li.dataset.catIndex, index: +li.dataset.linkIndex };
-      e.dataTransfer.effectAllowed = "move";
-    });
-    li.addEventListener("dragover", e => {
-      if (dragSrc?.type === "link") {
-        e.preventDefault();
-        e.stopPropagation(); // prevent category drop
-        li.classList.add("drag-over");
-      }
-    });
-    li.addEventListener("dragleave", e => {
-      li.classList.remove("drag-over");
-    });
-    li.addEventListener("drop", e => {
-      if (dragSrc?.type !== "link") return;
-      e.preventDefault();
-      e.stopPropagation();
-      li.classList.remove("drag-over");
-
-      let fromCat = dragSrc.cat;
-      let fromLink = dragSrc.index;
-      let toCat = +li.dataset.catIndex;
-      let toLink = +li.dataset.linkIndex;
-
-      let moved = data[fromCat].links.splice(fromLink, 1)[0];
-
-      if (fromCat === toCat) {
-        // same category reorder
-        if (fromLink < toLink) toLink--; // adjust index shift
-        data[toCat].links.splice(toLink, 0, moved);
-      } else {
-        // move between categories
-        data[toCat].links.splice(toLink, 0, moved);
-        if (data[fromCat].links.length === 0) {
-          data.splice(fromCat, 1);
-        }
-      }
-
-      save(); render();
-    });
-  });
-}
-
-
+    
+      // LINK DRAG
       document.querySelectorAll(".category li").forEach(li => {
         li.addEventListener("dragstart", e => {
           dragSrc = { type: "link", cat: +li.dataset.catIndex, index: +li.dataset.linkIndex };
           e.dataTransfer.effectAllowed = "move";
         });
         li.addEventListener("dragover", e => {
-          e.preventDefault();
-          li.classList.add("drag-over");
-        });
-        li.addEventListener("dragleave", () => li.classList.remove("drag-over"));
-        li.addEventListener("drop", e => {
-          e.preventDefault();
-          li.classList.remove("drag-over");
-          if (dragSrc && dragSrc.type === "link") {
-            let fromCat = dragSrc.cat;
-            let fromLink = dragSrc.index;
-            let toCat = +li.dataset.catIndex;
-            let toLink = +li.dataset.linkIndex;
-            if (fromCat === toCat) {
-              let moved = data[fromCat].links.splice(fromLink, 1)[0];
-              data[toCat].links.splice(toLink, 0, moved);
-            } else {
-              let moved = data[fromCat].links.splice(fromLink, 1)[0];
-              data[toCat].links.splice(toLink, 0, moved);
-              if (data[fromCat].links.length === 0) data.splice(fromCat, 1);
-            }
-            save(); render();
+          if (dragSrc?.type === "link") {
+            e.preventDefault();
+            e.stopPropagation(); // prevent category drop
+            li.classList.add("drag-over");
           }
+        });
+        li.addEventListener("dragleave", e => {
+          li.classList.remove("drag-over");
+        });
+        li.addEventListener("drop", e => {
+          if (dragSrc?.type !== "link") return;
+          e.preventDefault();
+          e.stopPropagation();
+          li.classList.remove("drag-over");
+    
+          let fromCat = dragSrc.cat;
+          let fromLink = dragSrc.index;
+          let toCat = +li.dataset.catIndex;
+          let toLink = +li.dataset.linkIndex;
+    
+          let moved = data[fromCat].links.splice(fromLink, 1)[0];
+    
+          if (fromCat === toCat) {
+            // same category reorder
+            if (fromLink < toLink) toLink--; // adjust index shift
+            data[toCat].links.splice(toLink, 0, moved);
+          } else {
+            // move between categories
+            data[toCat].links.splice(toLink, 0, moved);
+            if (data[fromCat].links.length === 0) {
+              data.splice(fromCat, 1);
+            }
+          }
+    
+          save(); render();
         });
       });
     }
+
 
     // Add category
     document.getElementById("addCategoryForm").addEventListener("submit", e => {
