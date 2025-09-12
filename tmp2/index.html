@@ -140,6 +140,15 @@
       margin-bottom: 10px;
       font-size: 1.1rem;
     }
+    .edit-btn, .delete-btn {
+      display: none;
+    }
+    
+    body.edit-mode .edit-btn,
+    body.edit-mode .delete-btn {
+      display: inline-block;
+    }
+
   </style>
 </head>
 <body>
@@ -243,6 +252,7 @@
         // Rename category
         let editBtn = document.createElement("button");
         editBtn.textContent = "✏️";
+        editBtn.className = "edit-btn"; 
         editBtn.style.background = "none";
         editBtn.style.color = "#888";
         editBtn.style.border = "none";
@@ -258,6 +268,7 @@
         // Delete category
         let delCatBtn = document.createElement("button");
         delCatBtn.textContent = "🗑️";
+        delCatBtn.className = "delete-btn";  
         delCatBtn.style.background = "none";
         delCatBtn.style.color = "#888";
         delCatBtn.style.border = "none";
@@ -286,6 +297,7 @@
           // Edit link
           let editLinkBtn = document.createElement("button");
           editLinkBtn.textContent = "✏️";
+          editLinkBtn.className = "edit-btn";  
           editLinkBtn.style.background = "none";
           editLinkBtn.style.color = "#888";
           editLinkBtn.style.border = "none";
@@ -301,6 +313,7 @@
           // Delete link
           let delBtn = document.createElement("button");
           delBtn.textContent = "❌";
+          delBtn.className = "delete-btn";
           delBtn.style.background = "none";
           delBtn.style.color = "#888";
           delBtn.style.border = "none";
@@ -359,10 +372,14 @@
     }
 
     // Toggle manage box
+    let isEditMode = false;
     optionsBtn.addEventListener("click", () => {
-      manageBox.style.display = (manageBox.style.display === "none" || manageBox.style.display === "") 
-        ? "block" : "none";
+      isEditMode = !isEditMode;
+      document.body.classList.toggle("edit-mode", isEditMode);
+    
+      manageBox.style.display = isEditMode ? "block" : "none";
     });
+
 
     render();
   </script>
