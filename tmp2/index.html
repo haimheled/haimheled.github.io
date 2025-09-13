@@ -29,6 +29,9 @@
       cursor: pointer;
       color: #aaa;
     }
+    #optionsBtn.edit-mode {
+      color: red;
+    }
     #optionsBtn:hover {
       color: #fff;
     }
@@ -91,7 +94,6 @@
       border-bottom: 1px solid #333;
       padding-bottom: 5px;
       margin-bottom: 10px;
-      cursor: grab;
     }
 
     .category-header h2 {
@@ -100,9 +102,13 @@
       flex: 1;
     }
 
-    .header-buttons {
-      display: flex;
+    .header-buttons, .link-buttons {
+      display: none;
       gap: 5px;
+    }
+    body.edit-mode .header-buttons,
+    body.edit-mode .link-buttons {
+      display: flex;
     }
 
     .category ul {
@@ -117,7 +123,6 @@
       justify-content: space-between;
       align-items: center;
       gap: 5px;
-      cursor: grab;
     }
 
     .category a {
@@ -142,24 +147,10 @@
       margin-bottom: 10px;
       font-size: 1.1rem;
     }
-
-    /* Edit mode buttons hidden by default */
-    .edit-btn, .delete-btn {
-      display: none;
-    }
-    body.edit-mode .edit-btn,
-    body.edit-mode .delete-btn {
-      display: inline-block;
-    }
-
-    /* Drag over highlight */
-    .drag-over {
-      border: 2px dashed #80cbc4;
-    }
   </style>
 </head>
 <body>
-  <!-- Manage Links (top) -->
+  <!-- Manage Links -->
   <div class="manage-box" id="manageBox">
     <h2>Manage Categories & Links</h2>
     <form id="addCategoryForm">
@@ -173,6 +164,8 @@
       <input type="url" id="linkUrl" placeholder="https://example.com" required>
       <button type="submit">Add Link</button>
     </form>
+    <br>
+    <button id="exportBtn">Export & Reset</button>
   </div>
 
   <h1>My Homepage</h1>
@@ -201,113 +194,127 @@
   <div class="categories" id="categories"></div>
 
   <script>
-    // Initial data
-    let data = JSON.parse(localStorage.getItem("homepageData")) || [
-      {
-        name: "Work",
-        links: [
-          { name: "GitHub", url: "https://github.com/" },
-          { name: "Stack Overflow", url: "https://stackoverflow.com/" }
-        ]
-      },
-      {
-        name: "News",
-        links: [
-          { name: "Hacker News", url: "https://news.ycombinator.com/" },
-          { name: "BBC", url: "https://www.bbc.com/" }
-        ]
-      },
-      {
-        name: "Personal",
-        links: [
-          { name: "Gmail", url: "https://gmail.com/" },
-          { name: "Google Calendar", url: "https://calendar.google.com/" }
-        ]
-      }
-    ];
-
+    let baseData = [];
+    let data = [];
     const categoriesDiv = document.getElementById("categories");
     const categorySelect = document.getElementById("categorySelect");
     const manageBox = document.getElementById("manageBox");
     const optionsBtn = document.getElementById("optionsBtn");
 
-    let isEditMode = false;
+    function parseINI(text) {
+      let categories = [];
+      let current = null;
+      text.split(/\r?\n/).forEach(line => {
+        line = line.trim();
+        if (!line || line.startsWith(";") || line.startsWith("#")) return;
+        if (line.startsWith("[") && line.endsWith("]")) {
+          current = { name: line.slice(1, -1).trim(), links: [] };
+          categories.push(current);
+        } else if (line.includes("=") && current) {
+          let [name, url] = line.split("=").map(x => x.trim());
+          current.links.push({ name, url });
+        }
+      });
+      return categories;
+    }
+
+    function toINI(categories) {
+      return categories.map(cat => {
+        let lines = [`[${cat.name}]`];
+        cat.links.forEach(l => lines.push(`${l.name} = ${l.url}`));
+        return lines.join("\n");
+      }).join("\n\n");
+    }
+
+    async function loadData() {
+      let local = localStorage.getItem("homepageData");
+      if (local) {
+        data = JSON.parse(local);
+        markDirty(true);
+      } else {
+        let res = await fetch("data.txt");
+        let text = await res.text();
+        baseData = parseINI(text);
+        data = JSON.parse(JSON.stringify(baseData));
+        markDirty(false);
+      }
+      render();
+    }
 
     function save() {
       localStorage.setItem("homepageData", JSON.stringify(data));
+      markDirty(true);
+    }
+
+    function markDirty(dirty) {
+      if (dirty) {
+        optionsBtn.classList.add("edit-mode");
+      } else {
+        optionsBtn.classList.remove("edit-mode");
+      }
     }
 
     function render() {
       categoriesDiv.innerHTML = "";
       categorySelect.innerHTML = "";
 
-      data.forEach((catObj, catIndex) => {
-        // Select dropdown option
+      data.forEach((cat, catIndex) => {
         let opt = document.createElement("option");
         opt.value = catIndex;
-        opt.textContent = catObj.name;
+        opt.textContent = cat.name;
         categorySelect.appendChild(opt);
 
-        // Category card
         let card = document.createElement("div");
         card.className = "category";
-        card.setAttribute("data-cat-index", catIndex);
-        card.draggable = isEditMode;
 
-        // Category header
         let header = document.createElement("div");
         header.className = "category-header";
 
         let title = document.createElement("h2");
-        title.textContent = catObj.name;
+        title.textContent = cat.name;
 
-        // Buttons
         let btns = document.createElement("div");
         btns.className = "header-buttons";
 
         let editBtn = document.createElement("button");
         editBtn.textContent = "✏️";
-        editBtn.className = "edit-btn";
         editBtn.onclick = () => {
-          let newName = prompt("Rename category:", catObj.name);
-          if (newName && newName.trim() && !data.some(c => c.name === newName)) {
-            data[catIndex].name = newName.trim();
+          let newName = prompt("Rename category:", cat.name);
+          if (newName && newName.trim()) {
+            cat.name = newName.trim();
             save(); render();
           }
         };
 
-        let delCatBtn = document.createElement("button");
-        delCatBtn.textContent = "🗑️";
-        delCatBtn.className = "delete-btn";
-        delCatBtn.onclick = () => {
-          if (confirm(`Delete category "${catObj.name}"?`)) {
+        let delBtn = document.createElement("button");
+        delBtn.textContent = "🗑️";
+        delBtn.onclick = () => {
+          if (confirm(`Delete category "${cat.name}"?`)) {
             data.splice(catIndex, 1);
             save(); render();
           }
         };
 
         btns.appendChild(editBtn);
-        btns.appendChild(delCatBtn);
+        btns.appendChild(delBtn);
         header.appendChild(title);
         header.appendChild(btns);
         card.appendChild(header);
 
-        // Links
         let ul = document.createElement("ul");
-        catObj.links.forEach((link, linkIndex) => {
+        cat.links.forEach((link, linkIndex) => {
           let li = document.createElement("li");
-          li.setAttribute("data-cat-index", catIndex);
-          li.setAttribute("data-link-index", linkIndex);
-          li.draggable = isEditMode;
 
           let a = document.createElement("a");
           a.href = link.url;
           a.textContent = link.name;
           a.target = "_blank";
 
+          let linkBtns = document.createElement("div");
+          linkBtns.className = "link-buttons";
+
           let editLinkBtn = document.createElement("button");
           editLinkBtn.textContent = "✏️";
-          editLinkBtn.className = "edit-btn";
           editLinkBtn.onclick = () => {
             let newName = prompt("Edit link name:", link.name);
             let newUrl = prompt("Edit link URL:", link.url);
@@ -317,126 +324,41 @@
             }
           };
 
-          let delBtn = document.createElement("button");
-          delBtn.textContent = "❌";
-          delBtn.className = "delete-btn";
-          delBtn.onclick = () => {
+          let delLinkBtn = document.createElement("button");
+          delLinkBtn.textContent = "❌";
+          delLinkBtn.onclick = () => {
             data[catIndex].links.splice(linkIndex, 1);
-            if (data[catIndex].links.length === 0) data.splice(catIndex, 1);
             save(); render();
           };
 
+          linkBtns.appendChild(editLinkBtn);
+          linkBtns.appendChild(delLinkBtn);
           li.appendChild(a);
-          li.appendChild(editLinkBtn);
-          li.appendChild(delBtn);
+          li.appendChild(linkBtns);
           ul.appendChild(li);
         });
         card.appendChild(ul);
         categoriesDiv.appendChild(card);
       });
-
-      enableDragAndDrop();
     }
 
-    // Drag-and-drop
-    function enableDragAndDrop() {
-      if (!isEditMode) return;
-    
-      let dragSrc = null;
-    
-      // CATEGORY DRAG
-      document.querySelectorAll(".category").forEach(cat => {
-        cat.addEventListener("dragstart", e => {
-          if (e.target.classList.contains("category")) {
-            dragSrc = { type: "category", index: +cat.dataset.catIndex };
-            e.dataTransfer.effectAllowed = "move";
-          }
-        });
-        cat.addEventListener("dragover", e => {
-          if (dragSrc?.type === "category") {
-            e.preventDefault();
-            cat.classList.add("drag-over");
-          }
-        });
-        cat.addEventListener("dragleave", () => cat.classList.remove("drag-over"));
-        cat.addEventListener("drop", e => {
-          if (dragSrc?.type !== "category") return;
-          e.preventDefault();
-          cat.classList.remove("drag-over");
-          let from = dragSrc.index;
-          let to = +cat.dataset.catIndex;
-          if (from !== to) {
-            let moved = data.splice(from, 1)[0];
-            data.splice(to, 0, moved);
-            save(); render();
-          }
-        });
-      });
-    
-      // LINK DRAG
-      document.querySelectorAll(".category li").forEach(li => {
-        li.addEventListener("dragstart", e => {
-          dragSrc = { type: "link", cat: +li.dataset.catIndex, index: +li.dataset.linkIndex };
-          e.dataTransfer.effectAllowed = "move";
-        });
-        li.addEventListener("dragover", e => {
-          if (dragSrc?.type === "link") {
-            e.preventDefault();
-            e.stopPropagation(); // prevent category drop
-            li.classList.add("drag-over");
-          }
-        });
-        li.addEventListener("dragleave", e => {
-          li.classList.remove("drag-over");
-        });
-        li.addEventListener("drop", e => {
-          if (dragSrc?.type !== "link") return;
-          e.preventDefault();
-          e.stopPropagation();
-          li.classList.remove("drag-over");
-    
-          let fromCat = dragSrc.cat;
-          let fromLink = dragSrc.index;
-          let toCat = +li.dataset.catIndex;
-          let toLink = +li.dataset.linkIndex;
-    
-          let moved = data[fromCat].links.splice(fromLink, 1)[0];
-    
-          if (fromCat === toCat) {
-            // same category reorder
-            if (fromLink < toLink) toLink--; // adjust index shift
-            data[toCat].links.splice(toLink, 0, moved);
-          } else {
-            // move between categories
-            data[toCat].links.splice(toLink, 0, moved);
-            if (data[fromCat].links.length === 0) {
-              data.splice(fromCat, 1);
-            }
-          }
-    
-          save(); render();
-        });
-      });
-    }
-
-
-    // Add category
+    // Add Category
     document.getElementById("addCategoryForm").addEventListener("submit", e => {
       e.preventDefault();
-      let cat = document.getElementById("newCategory").value.trim();
-      if (!cat || data.some(c => c.name === cat)) return;
-      data.push({ name: cat, links: [] });
+      let name = document.getElementById("newCategory").value.trim();
+      if (!name) return;
+      data.push({ name, links: [] });
       save(); render();
       e.target.reset();
     });
 
-    // Add link
+    // Add Link
     document.getElementById("addLinkForm").addEventListener("submit", e => {
       e.preventDefault();
-      let catIndex = parseInt(categorySelect.value, 10);
+      let catIndex = categorySelect.value;
       let name = document.getElementById("linkName").value.trim();
       let url = document.getElementById("linkUrl").value.trim();
-      if (isNaN(catIndex) || !name || !url) return;
+      if (!name || !url) return;
       data[catIndex].links.push({ name, url });
       save(); render();
       e.target.reset();
@@ -453,20 +375,27 @@
     // ChatGPT redirect
     function redirectChatGPT(form) {
       let query = form.q.value.trim();
-      if (query) {
-        form.action = "https://chatgpt.com/?q=" + encodeURIComponent(query);
-      }
+      if (query) form.action = "https://chatgpt.com/?q=" + encodeURIComponent(query);
     }
 
     // Toggle edit mode
     optionsBtn.addEventListener("click", () => {
-      isEditMode = !isEditMode;
-      document.body.classList.toggle("edit-mode", isEditMode);
-      manageBox.style.display = isEditMode ? "block" : "none";
-      render();
+      document.body.classList.toggle("edit-mode");
+      manageBox.style.display = document.body.classList.contains("edit-mode") ? "block" : "none";
     });
 
-    render();
+    // Export
+    document.getElementById("exportBtn").addEventListener("click", () => {
+      let blob = new Blob([toINI(data)], { type: "text/plain" });
+      let a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "homepage-settings.txt";
+      a.click();
+      localStorage.removeItem("homepageData");
+      loadData();
+    });
+
+    loadData();
   </script>
 </body>
 </html>
