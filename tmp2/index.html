@@ -1,401 +1,563 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
   <title>My Homepage</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
-    body {
-      background-color: #121212;
-      color: #f0f0f0;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
+    :root {
+      --bg: #121212;
+      --card: #1a1a1a;
+      --muted: #aaa;
+      --accent: #80cbc4;
+      --btn: #333;
+      --btn-hover: #444;
+      --danger: #ff4d4d;
     }
+    html,body { height: 100%; margin: 0; background: var(--bg); color: #f0f0f0; font-family: system-ui, Arial, sans-serif; }
+    .wrap { max-width: 1100px; margin: 20px auto; padding: 0 18px; }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #ffffff;
-    }
-
-    /* Options button */
-    #optionsBtn {
-      position: fixed;
-      top: 15px;
-      right: 15px;
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: #aaa;
-    }
-    #optionsBtn.edit-mode {
-      color: red;
-    }
-    #optionsBtn:hover {
-      color: #fff;
-    }
-
-    .search-boxes {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 30px;
-      flex-wrap: wrap;
-    }
-
+    /* header/manage */
+    .manage-box { background: var(--card); padding: 14px; border-radius: 10px; margin-bottom: 18px; display: none; }
+    .manage-row { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
     input[type="text"], input[type="url"], select {
-      padding: 10px;
-      border-radius: 6px;
-      border: none;
-      outline: none;
-      background: #1e1e1e;
-      color: #f0f0f0;
-      width: 250px;
+      padding:8px 10px; border-radius:8px; border: none; outline: none; background:#141414; color:inherit;
+      min-width: 200px;
     }
+    button { padding:8px 10px; border-radius:8px; border:none; background:var(--btn); color:#fff; cursor:pointer; }
+    button:hover { background:var(--btn-hover); }
+    #optionsBtn { position: fixed; top: 14px; right: 14px; width:42px; height:42px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:18px; background:transparent; border:none; color:var(--muted); cursor:pointer; }
+    #optionsBtn.dirty { color: var(--danger); }
+    #optionsBtn:hover { color: #fff; }
 
-    button {
-      padding: 6px 10px;
-      border: none;
-      border-radius: 6px;
-      background: #333;
-      color: #fff;
-      cursor: pointer;
-      font-size: 0.9rem;
-    }
+    h1 { text-align:center; margin: 6px 0 18px 0; font-size: 1.8rem; color: #fff; }
 
-    button:hover {
-      background: #444;
-    }
+    /* search/filter */
+    .search-boxes { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:14px; }
+    .filter-box { display:flex; justify-content:center; margin-bottom:14px; }
 
-    .filter-box {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
+    /* categories grid */
+    .categories { display:grid; gap:18px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .category { background: var(--card); border-radius:12px; padding:14px; box-shadow: 0 6px 14px rgba(0,0,0,0.4); }
+    .category-header { display:flex; align-items:center; gap:8px; border-bottom:1px solid rgba(255,255,255,0.03); padding-bottom:8px; margin-bottom:10px; }
+    .category-header h2 { margin:0; font-size:1.06rem; color:var(--accent); flex:1; }
+    .header-buttons, .link-buttons { display:none; gap:6px; }
+    body.edit-mode .header-buttons, body.edit-mode .link-buttons { display:flex; }
+    .category ul { list-style:none; padding:0; margin:0; }
+    .category li { display:flex; gap:8px; align-items:center; margin:6px 0; }
+    .category a { color: var(--accent); text-decoration:none; flex:1; word-break:break-word; }
+    .category a:hover { text-decoration: underline; }
 
-    .categories {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
+    /* drag helpers */
+    .drag-over { outline: 2px dashed rgba(128,203,196,0.9); border-radius:10px; }
+    .drag-handle { cursor:grab; margin-right:6px; color:var(--muted); display:inline-flex; align-items:center; }
+    .drag-handle:active { cursor:grabbing; }
 
-    .category {
-      background: #1a1a1a;
-      border-radius: 10px;
-      padding: 15px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    }
-
-    .category-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #333;
-      padding-bottom: 5px;
-      margin-bottom: 10px;
-    }
-
-    .category-header h2 {
-      font-size: 1.2rem;
-      margin: 0;
-      flex: 1;
-    }
-
-    .header-buttons, .link-buttons {
-      display: none;
-      gap: 5px;
-    }
-    body.edit-mode .header-buttons,
-    body.edit-mode .link-buttons {
-      display: flex;
-    }
-
-    .category ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .category li {
-      margin: 6px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .category a {
-      text-decoration: none;
-      color: #80cbc4;
-      flex: 1;
-    }
-
-    .category a:hover {
-      text-decoration: underline;
-    }
-
-    .manage-box {
-      margin-bottom: 20px;
-      background: #1a1a1a;
-      padding: 15px;
-      border-radius: 10px;
-      display: none;
-    }
-
-    .manage-box h2 {
-      margin-bottom: 10px;
-      font-size: 1.1rem;
+    /* small screens */
+    @media (max-width:520px) {
+      .manage-row { flex-direction:column; align-items:stretch; }
+      input[type="text"], input[type="url"], select { min-width: 100%; }
     }
   </style>
 </head>
 <body>
-  <!-- Manage Links -->
-  <div class="manage-box" id="manageBox">
-    <h2>Manage Categories & Links</h2>
-    <form id="addCategoryForm">
-      <input type="text" id="newCategory" placeholder="New Category" required>
-      <button type="submit">Add Category</button>
-    </form>
-    <br>
-    <form id="addLinkForm">
-      <select id="categorySelect"></select>
-      <input type="text" id="linkName" placeholder="Link Name" required>
-      <input type="url" id="linkUrl" placeholder="https://example.com" required>
-      <button type="submit">Add Link</button>
-    </form>
-    <br>
-    <button id="exportBtn">Export & Reset</button>
+  <button id="optionsBtn" title="Toggle edit mode">⚙️</button>
+
+  <div class="wrap">
+    <!-- Manage box (top) -->
+    <div class="manage-box" id="manageBox" aria-hidden="true">
+      <h2 style="margin-top:0">Manage Categories & Links</h2>
+      <div class="manage-row">
+        <form id="addCategoryForm" style="display:flex; gap:8px; align-items:center;">
+          <input type="text" id="newCategory" placeholder="New Category" required />
+          <button type="submit">Add Category</button>
+        </form>
+
+        <form id="addLinkForm" style="display:flex; gap:8px; align-items:center;">
+          <select id="categorySelect" title="Choose category"></select>
+          <input type="text" id="linkName" placeholder="Link Name" required />
+          <input type="url" id="linkUrl" placeholder="https://example.com" required />
+          <button type="submit">Add Link</button>
+        </form>
+
+        <div style="margin-left:auto; display:flex; gap:8px; align-items:center;">
+          <button id="exportBtn" title="Export current settings to INI and reset to baseline">Export & Reset</button>
+          <button id="resetLocalBtn" title="Discard local edits and reload baseline">Discard Local</button>
+        </div>
+      </div>
+    </div>
+
+    <h1>My Homepage</h1>
+
+    <!-- Search & quick -->
+    <div class="search-boxes">
+      <form method="GET" action="https://www.google.com/search" style="display:flex; gap:8px;">
+        <input name="q" type="text" placeholder="Search Google..." />
+        <button type="submit">Go</button>
+      </form>
+
+      <form method="GET" action="https://chatgpt.com/" onsubmit="redirectChatGPT(this)" style="display:flex; gap:8px;">
+        <input name="q" type="text" placeholder="Ask ChatGPT..." />
+        <button type="submit">Ask</button>
+      </form>
+    </div>
+
+    <div class="filter-box">
+      <input id="filter" type="text" placeholder="Quick filter links..." style="min-width:300px" />
+    </div>
+
+    <div class="categories" id="categories" aria-live="polite"></div>
   </div>
-
-  <h1>My Homepage</h1>
-
-  <!-- Options Button -->
-  <button id="optionsBtn">⚙️</button>
-
-  <!-- Search boxes -->
-  <div class="search-boxes">
-    <form method="GET" action="https://www.google.com/search">
-      <input type="text" name="q" placeholder="Search Google...">
-      <button type="submit">Go</button>
-    </form>
-    <form method="GET" action="https://chatgpt.com/" onsubmit="redirectChatGPT(this)">
-      <input type="text" name="q" placeholder="Ask ChatGPT...">
-      <button type="submit">Ask</button>
-    </form>
-  </div>
-
-  <!-- Filter -->
-  <div class="filter-box">
-    <input type="text" id="filter" placeholder="Quick filter links...">
-  </div>
-
-  <!-- Categories -->
-  <div class="categories" id="categories"></div>
 
   <script>
-    let baseData = [];
-    let data = [];
-    const categoriesDiv = document.getElementById("categories");
-    const categorySelect = document.getElementById("categorySelect");
-    const manageBox = document.getElementById("manageBox");
-    const optionsBtn = document.getElementById("optionsBtn");
+    // -------------------------
+    // CONFIG
+    const BASE_FILENAME = 'data.txt'; // must be in same dir as index.html
+    const COMMENT_PREFIX = '#'; // you asked: use # for comments
+    // -------------------------
 
+    // app state
+    let baseData = []; // parsed from file
+    let data = [];     // working copy (array of {name,links:[]})
+    let isEditMode = false;
+
+    // DOM
+    const categoriesDiv = document.getElementById('categories');
+    const categorySelect = document.getElementById('categorySelect');
+    const manageBox = document.getElementById('manageBox');
+    const optionsBtn = document.getElementById('optionsBtn');
+    const exportBtn = document.getElementById('exportBtn');
+    const resetLocalBtn = document.getElementById('resetLocalBtn');
+
+    // -------------------------
+    // UTIL: parse INI-style (with # comments)
     function parseINI(text) {
-      let categories = [];
+      const lines = text.split(/\r?\n/);
+      const cats = [];
       let current = null;
-      text.split(/\r?\n/).forEach(line => {
-        line = line.trim();
-        if (!line || line.startsWith(";") || line.startsWith("#")) return;
-        if (line.startsWith("[") && line.endsWith("]")) {
-          current = { name: line.slice(1, -1).trim(), links: [] };
-          categories.push(current);
-        } else if (line.includes("=") && current) {
-          let [name, url] = line.split("=").map(x => x.trim());
-          current.links.push({ name, url });
+      for (let rawLine of lines) {
+        let line = rawLine.trim();
+        if (!line) continue;
+        if (line.startsWith(COMMENT_PREFIX)) continue;
+        if (line.startsWith('[') && line.endsWith(']')) {
+          const name = line.slice(1, -1).trim();
+          current = { name, links: [] };
+          cats.push(current);
+          continue;
         }
+        if (!current) continue; // skip content before first category
+        const idx = line.indexOf('=');
+        if (idx >= 0) {
+          const name = line.slice(0, idx).trim();
+          const url = line.slice(idx + 1).trim();
+          if (name) current.links.push({ name, url });
+        }
+      }
+      return cats;
+    }
+
+    function toINI(arr) {
+      return arr.map(cat => {
+        const lines = [`[${cat.name}]`];
+        for (const l of cat.links) lines.push(`${l.name} = ${l.url}`);
+        return lines.join('\n');
+      }).join('\n\n');
+    }
+
+    // deep compare arrays/objects (order matters)
+    function deepEqual(a, b) {
+      if (a === b) return true;
+      if (typeof a !== typeof b) return false;
+      if (Array.isArray(a)) {
+        if (!Array.isArray(b) || a.length !== b.length) return false;
+        for (let i = 0; i < a.length; i++) if (!deepEqual(a[i], b[i])) return false;
+        return true;
+      }
+      if (a && typeof a === 'object') {
+        const aKeys = Object.keys(a);
+        const bKeys = Object.keys(b);
+        if (aKeys.length !== bKeys.length) return false;
+        for (const k of aKeys) {
+          if (!deepEqual(a[k], b[k])) return false;
+        }
+        return true;
+      }
+      return false;
+    }
+
+    // helper to clone
+    function clone(obj) { return JSON.parse(JSON.stringify(obj)); }
+
+    // MARK dirty: compare data vs baseData
+    function updateDirtyFlag() {
+      const dirty = !deepEqual(data, baseData);
+      if (dirty) optionsBtn.classList.add('dirty');
+      else optionsBtn.classList.remove('dirty');
+    }
+
+    // Save local changes (localStorage)
+    function persistLocal() {
+      localStorage.setItem('homepageData', JSON.stringify(data));
+      updateDirtyFlag();
+    }
+
+    function clearLocalAndReloadBaseline() {
+      localStorage.removeItem('homepageData');
+      loadBaseline().catch(err => {
+        console.error('Failed reload baseline:', err);
       });
-      return categories;
     }
 
-    function toINI(categories) {
-      return categories.map(cat => {
-        let lines = [`[${cat.name}]`];
-        cat.links.forEach(l => lines.push(`${l.name} = ${l.url}`));
-        return lines.join("\n");
-      }).join("\n\n");
-    }
-
-    async function loadData() {
-      let local = localStorage.getItem("homepageData");
-      if (local) {
-        data = JSON.parse(local);
-        markDirty(true);
-      } else {
-        let res = await fetch("data.txt");
-        let text = await res.text();
-        baseData = parseINI(text);
-        data = JSON.parse(JSON.stringify(baseData));
-        markDirty(false);
-      }
-      render();
-    }
-
-    function save() {
-      localStorage.setItem("homepageData", JSON.stringify(data));
-      markDirty(true);
-    }
-
-    function markDirty(dirty) {
-      if (dirty) {
-        optionsBtn.classList.add("edit-mode");
-      } else {
-        optionsBtn.classList.remove("edit-mode");
+    // -------------------------
+    // Load baseline from data.txt and set baseData
+    async function loadBaseline() {
+      try {
+        const res = await fetch(BASE_FILENAME, { cache: 'no-cache' });
+        if (!res.ok) throw new Error('Failed to fetch baseline file');
+        const txt = await res.text();
+        baseData = parseINI(txt);
+        // If no local overrides -> use baseline
+        const local = localStorage.getItem('homepageData');
+        if (local) {
+          try {
+            data = JSON.parse(local);
+          } catch { data = clone(baseData); }
+        } else {
+          data = clone(baseData);
+        }
+        updateDirtyFlag();
+        render();
+      } catch (err) {
+        console.error(err);
+        // fallback: if fetch fails and local exists, use local; else empty
+        const local = localStorage.getItem('homepageData');
+        if (local) data = JSON.parse(local);
+        else data = [];
+        baseData = clone(data);
+        updateDirtyFlag();
+        render();
       }
     }
 
+    // -------------------------
+    // RENDER / UI
     function render() {
-      categoriesDiv.innerHTML = "";
-      categorySelect.innerHTML = "";
+      categoriesDiv.innerHTML = '';
+      categorySelect.innerHTML = '';
 
-      data.forEach((cat, catIndex) => {
-        let opt = document.createElement("option");
-        opt.value = catIndex;
+      data.forEach((cat, ci) => {
+        // category select for add link form
+        const opt = document.createElement('option');
+        opt.value = ci;
         opt.textContent = cat.name;
         categorySelect.appendChild(opt);
 
-        let card = document.createElement("div");
-        card.className = "category";
+        // card
+        const card = document.createElement('div');
+        card.className = 'category';
+        card.dataset.catIndex = ci;
+        card.draggable = isEditMode;
 
-        let header = document.createElement("div");
-        header.className = "category-header";
+        // header
+        const header = document.createElement('div');
+        header.className = 'category-header';
 
-        let title = document.createElement("h2");
-        title.textContent = cat.name;
+        // drag handle (visible in edit-mode)
+        const handle = document.createElement('span');
+        handle.className = 'drag-handle';
+        handle.textContent = '≡';
+        if (!isEditMode) handle.style.visibility = 'hidden';
+        header.appendChild(handle);
 
-        let btns = document.createElement("div");
-        btns.className = "header-buttons";
+        const h2 = document.createElement('h2');
+        h2.textContent = cat.name;
+        header.appendChild(h2);
 
-        let editBtn = document.createElement("button");
-        editBtn.textContent = "✏️";
-        editBtn.onclick = () => {
-          let newName = prompt("Rename category:", cat.name);
-          if (newName && newName.trim()) {
-            cat.name = newName.trim();
-            save(); render();
+        const hdrBtns = document.createElement('div');
+        hdrBtns.className = 'header-buttons';
+
+        const editCatBtn = document.createElement('button');
+        editCatBtn.textContent = '✏️';
+        editCatBtn.title = 'Rename category';
+        editCatBtn.addEventListener('click', () => {
+          const n = prompt('Rename category:', cat.name);
+          if (!n) return;
+          cat.name = n.trim();
+          // if category empty name or duplicate, revert:
+          if (!cat.name) { alert('Name cannot be empty'); return; }
+          // avoid duplicate names (optional)
+          // ensure uniqueness by appending suffix if necessary
+          let duplicate = data.some((c, idx) => idx !== ci && c.name === cat.name);
+          if (duplicate) {
+            alert('Another category with that name exists.');
+            return;
           }
-        };
+          persistLocal();
+          render();
+        });
 
-        let delBtn = document.createElement("button");
-        delBtn.textContent = "🗑️";
-        delBtn.onclick = () => {
-          if (confirm(`Delete category "${cat.name}"?`)) {
-            data.splice(catIndex, 1);
-            save(); render();
-          }
-        };
+        const delCatBtn = document.createElement('button');
+        delCatBtn.textContent = '🗑️';
+        delCatBtn.title = 'Delete category';
+        delCatBtn.addEventListener('click', () => {
+          if (!confirm(`Delete category "${cat.name}" and all its links?`)) return;
+          data.splice(ci, 1);
+          // after removal, auto-clean empty categories handled below, then persist
+          persistLocal();
+          render();
+        });
 
-        btns.appendChild(editBtn);
-        btns.appendChild(delBtn);
-        header.appendChild(title);
-        header.appendChild(btns);
+        hdrBtns.appendChild(editCatBtn);
+        hdrBtns.appendChild(delCatBtn);
+        header.appendChild(hdrBtns);
         card.appendChild(header);
 
-        let ul = document.createElement("ul");
-        cat.links.forEach((link, linkIndex) => {
-          let li = document.createElement("li");
+        // links
+        const ul = document.createElement('ul');
 
-          let a = document.createElement("a");
+        cat.links.forEach((link, li) => {
+          const liEl = document.createElement('li');
+          liEl.dataset.catIndex = ci;
+          liEl.dataset.linkIndex = li;
+          liEl.draggable = isEditMode;
+
+          const a = document.createElement('a');
           a.href = link.url;
           a.textContent = link.name;
-          a.target = "_blank";
+          a.target = '_blank';
+          liEl.appendChild(a);
 
-          let linkBtns = document.createElement("div");
-          linkBtns.className = "link-buttons";
+          const linkBtns = document.createElement('div');
+          linkBtns.className = 'link-buttons';
 
-          let editLinkBtn = document.createElement("button");
-          editLinkBtn.textContent = "✏️";
-          editLinkBtn.onclick = () => {
-            let newName = prompt("Edit link name:", link.name);
-            let newUrl = prompt("Edit link URL:", link.url);
-            if (newName && newUrl) {
-              data[catIndex].links[linkIndex] = { name: newName.trim(), url: newUrl.trim() };
-              save(); render();
-            }
-          };
+          const editL = document.createElement('button');
+          editL.textContent = '✏️';
+          editL.title = 'Edit link';
+          editL.addEventListener('click', () => {
+            const nn = prompt('Link name:', link.name);
+            const uu = prompt('Link URL:', link.url);
+            if (!nn || !uu) return;
+            data[ci].links[li] = { name: nn.trim(), url: uu.trim() };
+            persistLocal();
+            render();
+          });
 
-          let delLinkBtn = document.createElement("button");
-          delLinkBtn.textContent = "❌";
-          delLinkBtn.onclick = () => {
-            data[catIndex].links.splice(linkIndex, 1);
-            save(); render();
-          };
+          const delL = document.createElement('button');
+          delL.textContent = '❌';
+          delL.title = 'Delete link';
+          delL.addEventListener('click', () => {
+            data[ci].links.splice(li, 1);
+            // if category becomes empty, remove it
+            if (data[ci].links.length === 0) data.splice(ci, 1);
+            persistLocal();
+            render();
+          });
 
-          linkBtns.appendChild(editLinkBtn);
-          linkBtns.appendChild(delLinkBtn);
-          li.appendChild(a);
-          li.appendChild(linkBtns);
-          ul.appendChild(li);
+          linkBtns.appendChild(editL);
+          linkBtns.appendChild(delL);
+          liEl.appendChild(linkBtns);
+          ul.appendChild(liEl);
         });
+
         card.appendChild(ul);
         categoriesDiv.appendChild(card);
       });
+
+      // After building DOM, attach DnD handlers if in edit mode
+      setupDragAndDrop();
+      updateDirtyFlag();
     }
 
-    // Add Category
-    document.getElementById("addCategoryForm").addEventListener("submit", e => {
+    // -------------------------
+    // DRAG & DROP (vanilla, edit-mode only)
+    function setupDragAndDrop() {
+      // no-op if not edit mode
+      if (!isEditMode) return;
+
+      let dragSrc = null; // {type: "category"|"link", cat, index}
+
+      // Category-level handlers (for reordering categories or dropping links into category)
+      document.querySelectorAll('.category').forEach(catEl => {
+        catEl.addEventListener('dragstart', (e) => {
+          // Only start category drag when dragging the header/handle (not when link dragged)
+          // But since card is draggable, detect what element initiated the drag:
+          const isCategoryDrag = e.target.classList.contains('category') || e.target.closest('.category-header');
+          if (!isCategoryDrag) return;
+          dragSrc = { type: 'category', index: +catEl.dataset.catIndex };
+          e.dataTransfer.effectAllowed = 'move';
+        });
+
+        catEl.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          const dt = dragSrc?.type;
+          // show highlight when dragging category OR link
+          if (dt === 'category' || dt === 'link') catEl.classList.add('drag-over');
+        });
+
+        catEl.addEventListener('dragleave', () => catEl.classList.remove('drag-over'));
+
+        catEl.addEventListener('drop', (e) => {
+          e.preventDefault();
+          catEl.classList.remove('drag-over');
+          if (!dragSrc) return;
+
+          const targetCatIndex = +catEl.dataset.catIndex;
+
+          if (dragSrc.type === 'category') {
+            const from = dragSrc.index, to = targetCatIndex;
+            if (from !== to) {
+              const moved = data.splice(from, 1)[0];
+              // if removing earlier index affects destination index, adjust:
+              const adjTo = (from < to) ? to - 1 : to;
+              data.splice(adjTo, 0, moved);
+              persistLocal();
+              render();
+            }
+          } else if (dragSrc.type === 'link') {
+            const { cat: fromCat, index: fromLink } = dragSrc;
+            // remove moved
+            const moved = data[fromCat].links.splice(fromLink, 1)[0];
+            // push to end of target category
+            data[targetCatIndex].links.push(moved);
+            // if source category now empty, remove it
+            if (data[fromCat].links.length === 0) {
+              // If removing earlier index affects target index, adjust:
+              if (fromCat < targetCatIndex) {
+                data.splice(fromCat, 1);
+                // moved target index decreased by 1
+              } else {
+                data.splice(fromCat, 1);
+              }
+            }
+            persistLocal();
+            render();
+          }
+
+          dragSrc = null;
+        });
+      });
+
+      // Link-level handlers (for reordering within same category or inserting before a link)
+      document.querySelectorAll('.category li').forEach(liEl => {
+        liEl.addEventListener('dragstart', (e) => {
+          dragSrc = { type: 'link', cat: +liEl.dataset.catIndex, index: +liEl.dataset.linkIndex };
+          e.dataTransfer.effectAllowed = 'move';
+        });
+
+        liEl.addEventListener('dragover', (e) => {
+          if (!dragSrc || dragSrc.type !== 'link') return;
+          e.preventDefault();
+          e.stopPropagation(); // important: prevent category from handling
+          liEl.classList.add('drag-over');
+        });
+
+        liEl.addEventListener('dragleave', () => liEl.classList.remove('drag-over'));
+
+        liEl.addEventListener('drop', (e) => {
+          if (!dragSrc || dragSrc.type !== 'link') return;
+          e.preventDefault();
+          e.stopPropagation();
+          liEl.classList.remove('drag-over');
+
+          const fromCat = dragSrc.cat;
+          const fromIdx = dragSrc.index;
+          const toCat = +liEl.dataset.catIndex;
+          let toIdx = +liEl.dataset.linkIndex;
+
+          const moved = data[fromCat].links.splice(fromIdx, 1)[0];
+
+          if (fromCat === toCat) {
+            // if dragging forward, the removal shifts index left
+            if (fromIdx < toIdx) toIdx--;
+            data[toCat].links.splice(toIdx, 0, moved);
+          } else {
+            data[toCat].links.splice(toIdx, 0, moved);
+            // if source becomes empty, remove it
+            if (data[fromCat].links.length === 0) {
+              data.splice(fromCat, 1);
+            }
+          }
+          persistLocal();
+          render();
+          dragSrc = null;
+        });
+      });
+    }
+
+    // -------------------------
+    // FORM handlers - add category/link
+    document.getElementById('addCategoryForm').addEventListener('submit', (e) => {
       e.preventDefault();
-      let name = document.getElementById("newCategory").value.trim();
+      const name = document.getElementById('newCategory').value.trim();
       if (!name) return;
       data.push({ name, links: [] });
-      save(); render();
+      persistLocal();
+      render();
       e.target.reset();
     });
 
-    // Add Link
-    document.getElementById("addLinkForm").addEventListener("submit", e => {
+    document.getElementById('addLinkForm').addEventListener('submit', (e) => {
       e.preventDefault();
-      let catIndex = categorySelect.value;
-      let name = document.getElementById("linkName").value.trim();
-      let url = document.getElementById("linkUrl").value.trim();
-      if (!name || !url) return;
+      const catIndex = parseInt(categorySelect.value, 10);
+      const name = document.getElementById('linkName').value.trim();
+      const url = document.getElementById('linkUrl').value.trim();
+      if (isNaN(catIndex) || !name || !url) return;
       data[catIndex].links.push({ name, url });
-      save(); render();
+      persistLocal();
+      render();
       e.target.reset();
     });
 
-    // Filter
-    document.getElementById("filter").addEventListener("keyup", function() {
-      let filter = this.value.toLowerCase();
-      document.querySelectorAll(".category").forEach(cat => {
-        cat.style.display = cat.innerText.toLowerCase().includes(filter) ? "" : "none";
+    // filter
+    document.getElementById('filter').addEventListener('input', function () {
+      const f = this.value.toLowerCase();
+      document.querySelectorAll('.category').forEach(cat => {
+        cat.style.display = cat.innerText.toLowerCase().includes(f) ? '' : 'none';
       });
     });
 
-    // ChatGPT redirect
+    // ChatGPT redirect small helper
     function redirectChatGPT(form) {
-      let query = form.q.value.trim();
-      if (query) form.action = "https://chatgpt.com/?q=" + encodeURIComponent(query);
+      const q = form.q.value.trim();
+      if (q) form.action = 'https://chatgpt.com/?q=' + encodeURIComponent(q);
     }
 
+    // -------------------------
     // Toggle edit mode
-    optionsBtn.addEventListener("click", () => {
-      document.body.classList.toggle("edit-mode");
-      manageBox.style.display = document.body.classList.contains("edit-mode") ? "block" : "none";
+    optionsBtn.addEventListener('click', () => {
+      isEditMode = !isEditMode;
+      document.body.classList.toggle('edit-mode', isEditMode);
+      manageBox.style.display = isEditMode ? 'block' : 'none';
+      // re-render to enable/disable draggable flags and show/hide buttons
+      render();
     });
 
-    // Export
-    document.getElementById("exportBtn").addEventListener("click", () => {
-      let blob = new Blob([toINI(data)], { type: "text/plain" });
-      let a = document.createElement("a");
+    // Export: download current INI, clear local, reload baseline
+    exportBtn.addEventListener('click', () => {
+      const ini = toINI(data);
+      const blob = new Blob([ini], { type: 'text/plain;charset=utf-8' });
+      const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = "homepage-settings.txt";
+      a.download = 'homepage-settings.txt';
       a.click();
-      localStorage.removeItem("homepageData");
-      loadData();
+      // after export we clear local and reload baseline
+      localStorage.removeItem('homepageData');
+      loadBaseline();
     });
 
-    loadData();
+    // Discard local edits (reset to baseline)
+    resetLocalBtn.addEventListener('click', () => {
+      if (!confirm('Discard local edits and reload baseline from data.txt?')) return;
+      clearLocalAndReloadBaseline();
+    });
+
+    // -------------------------
+    // initial load
+    (function init() {
+      // If there's localStorage, we'll still fetch baseline so updateDirtyFlag can compare
+      // load baseline then overlay local if present
+      loadBaseline();
+    })();
   </script>
 </body>
 </html>
