@@ -1,0 +1,12 @@
+# My homepage categories
+[Work]
+GitHub = https://github.com/
+Stack Overflow = https://stackoverflow.com/
+
+[News]
+Hacker News = https://news.ycombinator.com/
+BBC = https://www.bbc.com/
+
+[Personal]
+Gmail = https://mail.google.com/
+Google Calendar = https://calendar.google.com/
