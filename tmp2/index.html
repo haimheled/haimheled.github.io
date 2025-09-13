@@ -12,10 +12,10 @@
       --accent: #80cbc4;
       --btn: #333;
       --btn-hover: #444;
-      --danger: #ff4d4d;
+      --danger: #b55e5e; /*#ff4d4d;*/
     }
     html,body { height: 100%; margin: 0; background: var(--bg); color: #f0f0f0; font-family: system-ui, Arial, sans-serif; }
-    .wrap { max-width: 1100px; margin: 20px auto; padding: 0 18px; }
+    .wrap { margin: 20px auto; padding: 0 18px; }
 
     /* header/manage */
     .manage-box { background: var(--card); padding: 14px; border-radius: 10px; margin-bottom: 18px; display: none; }
@@ -27,7 +27,9 @@
     button { padding:8px 10px; border-radius:8px; border:none; background:var(--btn); color:#fff; cursor:pointer; }
     button:hover { background:var(--btn-hover); }
     #optionsBtn { position: fixed; top: 14px; right: 14px; width:42px; height:42px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:18px; background:transparent; border:none; color:var(--muted); cursor:pointer; }
-    #optionsBtn.dirty { color: var(--danger); }
+    /*#optionsBtn.dirty { color: var(--danger); }*/
+    /* A. background highlight (default) */ #optionsBtn.dirty { background: var(--danger);color: #fff; }
+
     #optionsBtn:hover { color: #fff; }
 
     h1 { text-align:center; margin: 6px 0 18px 0; font-size: 1.8rem; color: #fff; }
@@ -41,7 +43,7 @@
     .category { background: var(--card); border-radius:12px; padding:14px; box-shadow: 0 6px 14px rgba(0,0,0,0.4); }
     .category-header { display:flex; align-items:center; gap:8px; border-bottom:1px solid rgba(255,255,255,0.03); padding-bottom:8px; margin-bottom:10px; }
     .category-header h2 { margin:0; font-size:1.06rem; color:var(--accent); flex:1; }
-    .header-buttons, .link-buttons { display:none; gap:6px; }
+    .header-buttons, .link-buttons { display:none; gap:6px; align-items:center; }
     body.edit-mode .header-buttons, body.edit-mode .link-buttons { display:flex; }
     .category ul { list-style:none; padding:0; margin:0; }
     .category li { display:flex; gap:8px; align-items:center; margin:6px 0; }
@@ -113,12 +115,12 @@
     // -------------------------
     // CONFIG
     const BASE_FILENAME = 'data.txt'; // must be in same dir as index.html
-    const COMMENT_PREFIX = '#'; // you asked: use # for comments
+    const COMMENT_PREFIX = '#';
     // -------------------------
 
     // app state
-    let baseData = []; // parsed from file
-    let data = [];     // working copy (array of {name,links:[]})
+    let baseData = [];
+    let data = [];
     let isEditMode = false;
 
     // DOM
@@ -145,7 +147,7 @@
           cats.push(current);
           continue;
         }
-        if (!current) continue; // skip content before first category
+        if (!current) continue;
         const idx = line.indexOf('=');
         if (idx >= 0) {
           const name = line.slice(0, idx).trim();
@@ -164,7 +166,6 @@
       }).join('\n\n');
     }
 
-    // deep compare arrays/objects (order matters)
     function deepEqual(a, b) {
       if (a === b) return true;
       if (typeof a !== typeof b) return false;
@@ -185,17 +186,14 @@
       return false;
     }
 
-    // helper to clone
     function clone(obj) { return JSON.parse(JSON.stringify(obj)); }
 
-    // MARK dirty: compare data vs baseData
     function updateDirtyFlag() {
       const dirty = !deepEqual(data, baseData);
       if (dirty) optionsBtn.classList.add('dirty');
       else optionsBtn.classList.remove('dirty');
     }
 
-    // Save local changes (localStorage)
     function persistLocal() {
       localStorage.setItem('homepageData', JSON.stringify(data));
       updateDirtyFlag();
@@ -208,15 +206,12 @@
       });
     }
 
-    // -------------------------
-    // Load baseline from data.txt and set baseData
     async function loadBaseline() {
       try {
         const res = await fetch(BASE_FILENAME, { cache: 'no-cache' });
         if (!res.ok) throw new Error('Failed to fetch baseline file');
         const txt = await res.text();
         baseData = parseINI(txt);
-        // If no local overrides -> use baseline
         const local = localStorage.getItem('homepageData');
         if (local) {
           try {
@@ -229,7 +224,6 @@
         render();
       } catch (err) {
         console.error(err);
-        // fallback: if fetch fails and local exists, use local; else empty
         const local = localStorage.getItem('homepageData');
         if (local) data = JSON.parse(local);
         else data = [];
@@ -246,28 +240,17 @@
       categorySelect.innerHTML = '';
 
       data.forEach((cat, ci) => {
-        // category select for add link form
         const opt = document.createElement('option');
         opt.value = ci;
         opt.textContent = cat.name;
         categorySelect.appendChild(opt);
 
-        // card
         const card = document.createElement('div');
         card.className = 'category';
         card.dataset.catIndex = ci;
-        card.draggable = isEditMode;
 
-        // header
         const header = document.createElement('div');
         header.className = 'category-header';
-
-        // drag handle (visible in edit-mode)
-        const handle = document.createElement('span');
-        handle.className = 'drag-handle';
-        handle.textContent = '≡';
-        if (!isEditMode) handle.style.visibility = 'hidden';
-        header.appendChild(handle);
 
         const h2 = document.createElement('h2');
         h2.textContent = cat.name;
@@ -276,6 +259,19 @@
         const hdrBtns = document.createElement('div');
         hdrBtns.className = 'header-buttons';
 
+
+        const handle = document.createElement('span');
+        handle.className = 'drag-handle';
+        handle.textContent = '≡';
+        if (!isEditMode) handle.style.visibility = 'hidden';
+        handle.addEventListener('dragstart', (e) => {
+          dragSrc = { type: 'category', index: ci };
+          e.dataTransfer.effectAllowed = 'move';
+        });
+        handle.draggable = isEditMode;
+        hdrBtns.appendChild(handle);
+
+
         const editCatBtn = document.createElement('button');
         editCatBtn.textContent = '✏️';
         editCatBtn.title = 'Rename category';
@@ -283,10 +279,7 @@
           const n = prompt('Rename category:', cat.name);
           if (!n) return;
           cat.name = n.trim();
-          // if category empty name or duplicate, revert:
           if (!cat.name) { alert('Name cannot be empty'); return; }
-          // avoid duplicate names (optional)
-          // ensure uniqueness by appending suffix if necessary
           let duplicate = data.some((c, idx) => idx !== ci && c.name === cat.name);
           if (duplicate) {
             alert('Another category with that name exists.');
@@ -295,6 +288,7 @@
           persistLocal();
           render();
         });
+        hdrBtns.appendChild(editCatBtn);
 
         const delCatBtn = document.createElement('button');
         delCatBtn.textContent = '🗑️';
@@ -302,24 +296,20 @@
         delCatBtn.addEventListener('click', () => {
           if (!confirm(`Delete category "${cat.name}" and all its links?`)) return;
           data.splice(ci, 1);
-          // after removal, auto-clean empty categories handled below, then persist
           persistLocal();
           render();
         });
-
-        hdrBtns.appendChild(editCatBtn);
         hdrBtns.appendChild(delCatBtn);
+
+
         header.appendChild(hdrBtns);
         card.appendChild(header);
 
-        // links
         const ul = document.createElement('ul');
-
         cat.links.forEach((link, li) => {
           const liEl = document.createElement('li');
           liEl.dataset.catIndex = ci;
           liEl.dataset.linkIndex = li;
-          liEl.draggable = isEditMode;
 
           const a = document.createElement('a');
           a.href = link.url;
@@ -329,6 +319,17 @@
 
           const linkBtns = document.createElement('div');
           linkBtns.className = 'link-buttons';
+
+          const linkHandle = document.createElement('span');
+          linkHandle.className = 'drag-handle';
+          linkHandle.textContent = '≡';
+          if (!isEditMode) linkHandle.style.visibility = 'hidden';
+          linkHandle.addEventListener('dragstart', (e) => {
+            dragSrc = { type: 'link', cat: ci, index: li };
+            e.dataTransfer.effectAllowed = 'move';
+          });
+          linkHandle.draggable = isEditMode;
+          linkBtns.appendChild(linkHandle);
 
           const editL = document.createElement('button');
           editL.textContent = '✏️';
@@ -341,20 +342,22 @@
             persistLocal();
             render();
           });
+          linkBtns.appendChild(editL);
 
           const delL = document.createElement('button');
           delL.textContent = '❌';
           delL.title = 'Delete link';
           delL.addEventListener('click', () => {
             data[ci].links.splice(li, 1);
-            // if category becomes empty, remove it
-            // if (data[ci].links.length === 0) data.splice(ci, 1);
+            // if (data[ci].links.length === 0) {
+            //   data.splice(ci, 1);
+            // }
             persistLocal();
             render();
           });
-
-          linkBtns.appendChild(editL);
           linkBtns.appendChild(delL);
+
+
           liEl.appendChild(linkBtns);
           ul.appendChild(liEl);
         });
@@ -363,35 +366,21 @@
         categoriesDiv.appendChild(card);
       });
 
-      // After building DOM, attach DnD handlers if in edit mode
       setupDragAndDrop();
       updateDirtyFlag();
     }
 
     // -------------------------
-    // DRAG & DROP (vanilla, edit-mode only)
+    // DRAG & DROP
+    let dragSrc = null;
+
     function setupDragAndDrop() {
-      // no-op if not edit mode
       if (!isEditMode) return;
 
-      let dragSrc = null; // {type: "category"|"link", cat, index}
-
-      // Category-level handlers (for reordering categories or dropping links into category)
       document.querySelectorAll('.category').forEach(catEl => {
-        catEl.addEventListener('dragstart', (e) => {
-          // Only start category drag when dragging the header/handle (not when link dragged)
-          // But since card is draggable, detect what element initiated the drag:
-          const isCategoryDrag = e.target.classList.contains('category') || e.target.closest('.category-header');
-          if (!isCategoryDrag) return;
-          dragSrc = { type: 'category', index: +catEl.dataset.catIndex };
-          e.dataTransfer.effectAllowed = 'move';
-        });
-
         catEl.addEventListener('dragover', (e) => {
           e.preventDefault();
-          const dt = dragSrc?.type;
-          // show highlight when dragging category OR link
-          if (dt === 'category' || dt === 'link') catEl.classList.add('drag-over');
+          if (dragSrc) catEl.classList.add('drag-over');
         });
 
         catEl.addEventListener('dragleave', () => catEl.classList.remove('drag-over'));
@@ -400,14 +389,12 @@
           e.preventDefault();
           catEl.classList.remove('drag-over');
           if (!dragSrc) return;
-
           const targetCatIndex = +catEl.dataset.catIndex;
 
           if (dragSrc.type === 'category') {
             const from = dragSrc.index, to = targetCatIndex;
             if (from !== to) {
               const moved = data.splice(from, 1)[0];
-              // if removing earlier index affects destination index, adjust:
               const adjTo = (from < to) ? to - 1 : to;
               data.splice(adjTo, 0, moved);
               persistLocal();
@@ -415,39 +402,23 @@
             }
           } else if (dragSrc.type === 'link') {
             const { cat: fromCat, index: fromLink } = dragSrc;
-            // remove moved
             const moved = data[fromCat].links.splice(fromLink, 1)[0];
-            // push to end of target category
             data[targetCatIndex].links.push(moved);
-            // if source category now empty, remove it
-            if (data[fromCat].links.length === 0) {
-              // If removing earlier index affects target index, adjust:
-              if (fromCat < targetCatIndex) {
-                data.splice(fromCat, 1);
-                // moved target index decreased by 1
-              } else {
-                data.splice(fromCat, 1);
-              }
+            if (data[fromCat] && data[fromCat].links.length === 0) {
+              data.splice(fromCat, 1);
             }
             persistLocal();
             render();
           }
-
           dragSrc = null;
         });
       });
 
-      // Link-level handlers (for reordering within same category or inserting before a link)
       document.querySelectorAll('.category li').forEach(liEl => {
-        liEl.addEventListener('dragstart', (e) => {
-          dragSrc = { type: 'link', cat: +liEl.dataset.catIndex, index: +liEl.dataset.linkIndex };
-          e.dataTransfer.effectAllowed = 'move';
-        });
-
         liEl.addEventListener('dragover', (e) => {
           if (!dragSrc || dragSrc.type !== 'link') return;
           e.preventDefault();
-          e.stopPropagation(); // important: prevent category from handling
+          e.stopPropagation();
           liEl.classList.add('drag-over');
         });
 
@@ -467,16 +438,15 @@
           const moved = data[fromCat].links.splice(fromIdx, 1)[0];
 
           if (fromCat === toCat) {
-            // if dragging forward, the removal shifts index left
             if (fromIdx < toIdx) toIdx--;
             data[toCat].links.splice(toIdx, 0, moved);
           } else {
             data[toCat].links.splice(toIdx, 0, moved);
-            // if source becomes empty, remove it
-            if (data[fromCat].links.length === 0) {
-              data.splice(fromCat, 1);
-            }
+            // if (data[fromCat].links.length === 0) {
+            //   data.splice(fromCat, 1);
+            // }
           }
+
           persistLocal();
           render();
           dragSrc = null;
@@ -485,79 +455,79 @@
     }
 
     // -------------------------
-    // FORM handlers - add category/link
-    document.getElementById('addCategoryForm').addEventListener('submit', (e) => {
+    // EVENT HANDLERS
+    document.getElementById('addCategoryForm').addEventListener('submit', e => {
       e.preventDefault();
-      const name = document.getElementById('newCategory').value.trim();
+      const input = document.getElementById('newCategory');
+      const name = input.value.trim();
       if (!name) return;
+      if (data.some(c => c.name === name)) {
+        alert('Category already exists.');
+        return;
+      }
       data.push({ name, links: [] });
+      input.value = '';
       persistLocal();
       render();
-      e.target.reset();
     });
 
-    document.getElementById('addLinkForm').addEventListener('submit', (e) => {
+    document.getElementById('addLinkForm').addEventListener('submit', e => {
       e.preventDefault();
-      const catIndex = parseInt(categorySelect.value, 10);
+      const ci = +categorySelect.value;
       const name = document.getElementById('linkName').value.trim();
       const url = document.getElementById('linkUrl').value.trim();
-      if (isNaN(catIndex) || !name || !url) return;
-      data[catIndex].links.push({ name, url });
+      if (!name || !url) return;
+      data[ci].links.push({ name, url });
+      document.getElementById('linkName').value = '';
+      document.getElementById('linkUrl').value = '';
       persistLocal();
       render();
-      e.target.reset();
     });
 
-    // filter
-    document.getElementById('filter').addEventListener('input', function () {
-      const f = this.value.toLowerCase();
-      document.querySelectorAll('.category').forEach(cat => {
-        cat.style.display = cat.innerText.toLowerCase().includes(f) ? '' : 'none';
-      });
-    });
-
-    // ChatGPT redirect small helper
-    function redirectChatGPT(form) {
-      const q = form.q.value.trim();
-      if (q) form.action = 'https://chatgpt.com/?q=' + encodeURIComponent(q);
-    }
-
-    // -------------------------
-    // Toggle edit mode
     optionsBtn.addEventListener('click', () => {
       isEditMode = !isEditMode;
       document.body.classList.toggle('edit-mode', isEditMode);
       manageBox.style.display = isEditMode ? 'block' : 'none';
-      // re-render to enable/disable draggable flags and show/hide buttons
       render();
     });
 
-    // Export: download current INI, clear local, reload baseline
     exportBtn.addEventListener('click', () => {
-      const ini = toINI(data);
-      const blob = new Blob([ini], { type: 'text/plain;charset=utf-8' });
+      const blob = new Blob([toINI(data)], { type: 'text/plain' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = 'homepage-settings.txt';
+      a.download = BASE_FILENAME;
       a.click();
-      // after export we clear local and reload baseline
-      localStorage.removeItem('homepageData');
-      loadBaseline();
-    });
-
-    // Discard local edits (reset to baseline)
-    resetLocalBtn.addEventListener('click', () => {
-      if (!confirm('Discard local edits and reload baseline from data.txt?')) return;
       clearLocalAndReloadBaseline();
     });
 
+    resetLocalBtn.addEventListener('click', () => {
+      if (!confirm('Discard local edits and reload baseline?')) return;
+      clearLocalAndReloadBaseline();
+    });
+
+    document.getElementById('filter').addEventListener('input', e => {
+      const q = e.target.value.trim().toLowerCase();
+      document.querySelectorAll('.category').forEach(catEl => {
+        let showCat = false;
+        catEl.querySelectorAll('li').forEach(liEl => {
+          const a = liEl.querySelector('a');
+          const match = a.textContent.toLowerCase().includes(q);
+          liEl.style.display = match ? '' : 'none';
+          if (match) showCat = true;
+        });
+        catEl.style.display = showCat ? '' : 'none';
+      });
+    });
+
+    function redirectChatGPT(form) {
+      const q = form.q.value.trim();
+      if (!q) return;
+      form.action = `https://chatgpt.com/?q=${encodeURIComponent(q)}`;
+    }
+
     // -------------------------
-    // initial load
-    (function init() {
-      // If there's localStorage, we'll still fetch baseline so updateDirtyFlag can compare
-      // load baseline then overlay local if present
-      loadBaseline();
-    })();
+    // INIT
+    loadBaseline();
   </script>
 </body>
 </html>
