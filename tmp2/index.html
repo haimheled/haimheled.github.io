@@ -83,6 +83,7 @@
         </form>
 
         <div style="margin-left:auto; display:flex; gap:8px; align-items:center;">
+          <button id="exportGithubBtn" title="Copy and open GitHub edit page">Export to GitHub</button>
           <button id="exportBtn" title="Export current settings to INI and reset to baseline">Export & Reset</button>
           <button id="resetLocalBtn" title="Discard local edits and reload baseline">Discard Local</button>
         </div>
@@ -128,6 +129,7 @@
     const categorySelect = document.getElementById('categorySelect');
     const manageBox = document.getElementById('manageBox');
     const optionsBtn = document.getElementById('optionsBtn');
+    const exportGithubBtn = document.getElementById('exportGithubBtn');
     const exportBtn = document.getElementById('exportBtn');
     const resetLocalBtn = document.getElementById('resetLocalBtn');
 
@@ -314,7 +316,8 @@
           const a = document.createElement('a');
           a.href = link.url;
           a.textContent = link.name;
-          a.target = '_blank';
+          a.target = '_self'; // same tab
+          // a.target = '_blank'; // new tab
           liEl.appendChild(a);
 
           const linkBtns = document.createElement('div');
@@ -454,6 +457,33 @@
       });
     }
 
+    // function getGithubRepoInfo() {
+    //   const host = window.location.hostname;
+    //   const pathParts = window.location.pathname.split("/").filter(Boolean);
+    //
+    //   if (!host.endsWith("github.io")) return null;
+    //
+    //   const username = host.replace(".github.io", "");
+    //   let repo, subpathParts = [];
+    //
+    //   if (pathParts.length === 0) {
+    //     // User/org root page: repo is username.github.io
+    //     repo = `${username}.github.io`;
+    //   } else {
+    //     // Project page: first part is repo, rest is subdir path
+    //     repo = pathParts[0];
+    //     subpathParts = pathParts.slice(1);
+    //   }
+    //
+    //   // file path relative to repo root
+    //   const filePath = subpathParts.length
+    //     ? `${subpathParts.join("/")}/${BASE_FILENAME}`
+    //     : BASE_FILENAME;
+    //
+    //   return { username, repo, filePath };
+    // }
+
+
     // -------------------------
     // EVENT HANDLERS
     document.getElementById('addCategoryForm').addEventListener('submit', e => {
@@ -489,6 +519,30 @@
       document.body.classList.toggle('edit-mode', isEditMode);
       manageBox.style.display = isEditMode ? 'block' : 'none';
       render();
+    });
+
+    exportGithubBtn.addEventListener("click", () => {
+      const ini = toINI(data);
+      navigator.clipboard.writeText(ini).then(() => {
+        alert("Data copied to clipboard. A new tab will open — paste it into GitHub and commit.");
+
+        // const info = getGithubRepoInfo();
+        // if (!info) {
+        //   alert("Could not detect GitHub repo. Please set it manually.");
+        //   return;
+        // }
+        //
+        // const { username, repo, filePath } = info;
+        // const editUrl = `https://github.com/${username}/${repo}/edit/master/${filePath}`;
+        const editUrl = `https://github.com/haimheled/haimheled.github.io/edit/master/tmp2/data.txt`;
+        // Open in SAME window
+        clearLocalAndReloadBaseline();
+        window.location.href = editUrl;
+        // window.open(editUrl, "_blank");
+      }).catch(err => {
+        console.error("Clipboard copy failed", err);
+        alert("Failed to copy to clipboard. You can copy manually." + editUrl);
+      });
     });
 
     exportBtn.addEventListener('click', () => {
