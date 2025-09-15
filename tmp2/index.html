@@ -13,6 +13,9 @@
       --btn: #333;
       --btn-hover: #444;
       --danger: #b55e5e; /*#ff4d4d;*/
+      --card-width: 260px;
+      --line-spacing: 6px;
+      --font-size: 1rem;
     }
     html,body { height: 100%; margin: 0; background: var(--bg); color: #f0f0f0; font-family: system-ui, Arial, sans-serif; }
     .wrap { margin: 20px auto; padding: 0 18px; }
@@ -24,6 +27,9 @@
       padding:8px 10px; border-radius:8px; border: none; outline: none; background:#141414; color:inherit;
       min-width: 200px;
     }
+    /* new color input allowed without changing styling */
+    input[type="color"] { padding:6px; height:36px; min-width:56px; }
+
     button { padding:8px 10px; border-radius:8px; border:none; background:var(--btn); color:#fff; cursor:pointer; }
     button:hover { background:var(--btn-hover); }
     #optionsBtn { position: fixed; top: 14px; right: 14px; width:42px; height:42px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:18px; background:transparent; border:none; color:var(--muted); cursor:pointer; }
@@ -38,16 +44,16 @@
     .search-boxes { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:14px; }
     .filter-box { display:flex; justify-content:center; margin-bottom:14px; }
 
-    /* categories grid */
-    .categories { display:grid; gap:18px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    /* categories grid — card width uses CSS var now */
+    .categories { display:grid; gap:18px; grid-template-columns: repeat(auto-fit, minmax(var(--card-width), 1fr)); }
     .category { background: var(--card); border-radius:12px; padding:14px; box-shadow: 0 6px 14px rgba(0,0,0,0.4); }
     .category-header { display:flex; align-items:center; gap:8px; border-bottom:1px solid rgba(255,255,255,0.03); padding-bottom:8px; margin-bottom:10px; }
     .category-header h2 { margin:0; font-size:1.06rem; color:var(--accent); flex:1; }
     .header-buttons, .link-buttons { display:none; gap:6px; align-items:center; }
     body.edit-mode .header-buttons, body.edit-mode .link-buttons { display:flex; }
     .category ul { list-style:none; padding:0; margin:0; }
-    .category li { display:flex; gap:8px; align-items:center; margin:6px 0; }
-    .category a { color: var(--accent); text-decoration:none; flex:1; word-break:break-word; }
+    .category li { display:flex; gap:8px; align-items:center; margin:var(--line-spacing) 0; }
+    .category a { color: var(--accent); text-decoration:none; flex:1; word-break:break-word; font-size: var(--font-size); }
     .category a:hover { text-decoration: underline; }
 
     /* drag helpers */
@@ -61,7 +67,7 @@
     /* small screens */
     @media (max-width:520px) {
       .manage-row { flex-direction:column; align-items:stretch; }
-      input[type="text"], input[type="url"], select { min-width: 100%; }
+      input[type="text"], input[type="url"], select, input[type="color"] { min-width: 100%; }
     }
   </style>
 </head>
@@ -90,6 +96,30 @@
           <button id="exportBtn" title="Export current settings to INI and reset to baseline">Export & Reset</button>
           <button id="resetLocalBtn" title="Discard local edits and reload baseline">Discard Local</button>
         </div>
+      </div>
+
+      <!-- NEW: General view properties (minimal, non-destructive addition) -->
+      <h3 style="margin-bottom:6px; margin-top:12px">General View Properties</h3>
+      <div class="manage-row" style="align-items:center;">
+        <label style="display:inline-flex; align-items:center; gap:8px;">
+          Link color:
+          <input type="color" id="propLinkColor" title="Link color" />
+        </label>
+
+        <label style="display:inline-flex; align-items:center; gap:8px;">
+          Card width:
+          <input type="text" id="propCardWidth" placeholder="260px" title="Example: 260px or 20rem" />
+        </label>
+
+        <label style="display:inline-flex; align-items:center; gap:8px;">
+          Line spacing:
+          <input type="text" id="propLineSpacing" placeholder="6px" title="Vertical margin between links, e.g. 6px" />
+        </label>
+
+        <label style="display:inline-flex; align-items:center; gap:8px;">
+          Font size:
+          <input type="text" id="propFontSize" placeholder="1rem" title="Link font size, e.g. 1rem or 14px" />
+        </label>
       </div>
     </div>
 
@@ -122,9 +152,14 @@
     const COMMENT_PREFIX = '#';
     // -------------------------
 
-    // app state
-    let baseData = [];
-    let data = [];
+    // app state (keeps the original array structure for categories)
+    let baseData = [];       // baseline categories (array) — original structure preserved
+    let data = [];           // working categories (array) — original structure preserved
+
+    // new: view props (category-less lines at top of data.txt)
+    let baseProps = {};      // baseline props from file
+    let viewProps = {};      // current (editable) props in memory
+
     let isEditMode = false;
 
     // DOM
@@ -136,11 +171,22 @@
     const exportBtn = document.getElementById('exportBtn');
     const resetLocalBtn = document.getElementById('resetLocalBtn');
 
+    // default view props (used when baseline doesn't include them)
+    const defaultProps = {
+      linkColor: '#80cbc4',
+      cardWidth: '260px',
+      lineSpacing: '6px',
+      fontSize: '1rem'
+    };
+
     // -------------------------
     // UTIL: parse INI-style (with # comments)
+    // Extended to parse category-less "props" lines at the start:
+    // key = value
     function parseINI(text) {
       const lines = text.split(/\r?\n/);
       const cats = [];
+      const props = {};
       let current = null;
       for (let rawLine of lines) {
         if (!rawLine) continue;
@@ -180,64 +226,70 @@
           continue;
         }
 
-        // Non-commented link line
-        if (!current) continue;
+        // Non-commented key=value
         const idx = trimmed.indexOf('=');
         if (idx >= 0) {
-          const name = trimmed.slice(0, idx).trim();
-          const url = trimmed.slice(idx + 1).trim();
-          if (name) current.links.push({ name, url, commented: false });
+          const left = trimmed.slice(0, idx).trim();
+          const right = trimmed.slice(idx + 1).trim();
+          if (!current) {
+            // before first category: treat as a (page) prop
+            props[left] = right;
+          } else {
+            // a regular link line
+            const name = left;
+            const url = right;
+            if (name) current.links.push({ name, url, commented: false });
+          }
         }
       }
-      return cats;
+      return { props, cats };
     }
 
-    function toINI(arr) {
-      return arr.map(cat => {
-        const lines = [];
-        if (cat.commented) {
-          lines.push(`# [${cat.name}]`);
-        } else {
-          lines.push(`[${cat.name}]`);
-        }
+    // toINI: write props at top (category-less) then categories
+    function toINI(propsObj, catsArr) {
+      const lines = [];
+      // props first
+      for (const key of Object.keys(propsObj || {})) {
+        lines.push(`${key} = ${propsObj[key]}`);
+      }
+      if (lines.length) lines.push(''); // blank separator
+
+      // categories and links (preserve commented flags)
+      for (const cat of catsArr) {
+        if (cat.commented) lines.push(`# [${cat.name}]`);
+        else lines.push(`[${cat.name}]`);
         for (const l of cat.links) {
           if (l.commented) lines.push(`# ${l.name} = ${l.url}`);
           else lines.push(`${l.name} = ${l.url}`);
         }
-        return lines.join('\n');
-      }).join('\n\n');
+        lines.push(''); // blank line between categories
+      }
+
+      // remove trailing blank line
+      while (lines.length && lines[lines.length - 1].trim() === '') lines.pop();
+      return lines.join('\n');
     }
 
     function deepEqual(a, b) {
       if (a === b) return true;
-      if (typeof a !== typeof b) return false;
-      if (Array.isArray(a)) {
-        if (!Array.isArray(b) || a.length !== b.length) return false;
-        for (let i = 0; i < a.length; i++) if (!deepEqual(a[i], b[i])) return false;
-        return true;
+      try {
+        return JSON.stringify(a) === JSON.stringify(b);
+      } catch (e) {
+        return false;
       }
-      if (a && typeof a === 'object') {
-        const aKeys = Object.keys(a);
-        const bKeys = Object.keys(b);
-        if (aKeys.length !== bKeys.length) return false;
-        for (const k of aKeys) {
-          if (!deepEqual(a[k], b[k])) return false;
-        }
-        return true;
-      }
-      return false;
     }
 
     function clone(obj) { return JSON.parse(JSON.stringify(obj)); }
 
     function updateDirtyFlag() {
-      const dirty = !deepEqual(data, baseData);
+      const dirty = !deepEqual(data, baseData) || !deepEqual(viewProps, baseProps);
       if (dirty) optionsBtn.classList.add('dirty');
       else optionsBtn.classList.remove('dirty');
     }
 
     function persistLocal() {
-      localStorage.setItem('homepageData', JSON.stringify(data));
+      // store both categories and props
+      localStorage.setItem('homepageData', JSON.stringify({ props: viewProps, cats: data }));
       updateDirtyFlag();
     }
 
@@ -248,38 +300,104 @@
       });
     }
 
+    function applyProps(p) {
+      const props = Object.assign({}, defaultProps, p || {});
+      document.documentElement.style.setProperty('--accent', props.linkColor);
+      document.documentElement.style.setProperty('--card-width', props.cardWidth);
+      document.documentElement.style.setProperty('--line-spacing', props.lineSpacing);
+      document.documentElement.style.setProperty('--font-size', props.fontSize);
+    }
+
     async function loadBaseline() {
       try {
         const res = await fetch(BASE_FILENAME, { cache: 'no-cache' });
         if (!res.ok) throw new Error('Failed to fetch baseline file');
         const txt = await res.text();
-        baseData = parseINI(txt);
+
+        const parsed = parseINI(txt);
+        baseProps = parsed.props || {};
+        baseData = parsed.cats || [];
+
         const local = localStorage.getItem('homepageData');
         if (local) {
           try {
-            data = JSON.parse(local);
-          } catch { data = clone(baseData); }
+            const parsedLocal = JSON.parse(local);
+            // support new shape { props, cats } or old shape (array) for backward compatibility
+            if (parsedLocal && Array.isArray(parsedLocal.cats)) {
+              data = parsedLocal.cats;
+              viewProps = Object.assign({}, defaultProps, parsedLocal.props || baseProps);
+            } else if (Array.isArray(parsedLocal)) {
+              // old format: array of categories only
+              data = parsedLocal;
+              viewProps = Object.assign({}, defaultProps, baseProps);
+            } else {
+              data = clone(baseData);
+              viewProps = Object.assign({}, defaultProps, baseProps);
+            }
+          } catch (e) {
+            data = clone(baseData);
+            viewProps = Object.assign({}, defaultProps, baseProps);
+          }
         } else {
           data = clone(baseData);
+          viewProps = Object.assign({}, defaultProps, baseProps);
         }
+
+        // ensure baseProps has defaults for missing keys
+        baseProps = Object.assign({}, defaultProps, baseProps);
+
+        applyProps(viewProps);
         updateDirtyFlag();
         render();
+        syncPropInputs();
       } catch (err) {
         console.error(err);
         const local = localStorage.getItem('homepageData');
-        if (local) data = JSON.parse(local);
-        else data = [];
+        if (local) {
+          try {
+            const parsedLocal = JSON.parse(local);
+            if (parsedLocal && Array.isArray(parsedLocal.cats)) {
+              data = parsedLocal.cats;
+              viewProps = Object.assign({}, defaultProps, parsedLocal.props || {});
+            } else if (Array.isArray(parsedLocal)) {
+              data = parsedLocal;
+              viewProps = Object.assign({}, defaultProps);
+            } else {
+              data = [];
+              viewProps = Object.assign({}, defaultProps);
+            }
+          } catch {
+            data = [];
+            viewProps = Object.assign({}, defaultProps);
+          }
+        } else {
+          data = [];
+          viewProps = Object.assign({}, defaultProps);
+        }
         baseData = clone(data);
+        baseProps = Object.assign({}, viewProps);
+        applyProps(viewProps);
         updateDirtyFlag();
         render();
+        syncPropInputs();
       }
     }
 
     // -------------------------
     // RENDER / UI
+    function syncPropInputs() {
+      document.getElementById('propLinkColor').value = viewProps.linkColor || defaultProps.linkColor;
+      document.getElementById('propCardWidth').value = viewProps.cardWidth || defaultProps.cardWidth;
+      document.getElementById('propLineSpacing').value = viewProps.lineSpacing || defaultProps.lineSpacing;
+      document.getElementById('propFontSize').value = viewProps.fontSize || defaultProps.fontSize;
+    }
+
     function render() {
       categoriesDiv.innerHTML = '';
       categorySelect.innerHTML = '';
+
+      // apply view props every render (keeps UI in sync)
+      applyProps(viewProps);
 
       data.forEach((cat, ci) => {
         // In regular (non-edit) mode, hide commented categories completely
@@ -533,33 +651,6 @@
       });
     }
 
-    // function getGithubRepoInfo() {
-    //   const host = window.location.hostname;
-    //   const pathParts = window.location.pathname.split("/").filter(Boolean);
-    //
-    //   if (!host.endsWith("github.io")) return null;
-    //
-    //   const username = host.replace(".github.io", "");
-    //   let repo, subpathParts = [];
-    //
-    //   if (pathParts.length === 0) {
-    //     // User/org root page: repo is username.github.io
-    //     repo = `${username}.github.io`;
-    //   } else {
-    //     // Project page: first part is repo, rest is subdir path
-    //     repo = pathParts[0];
-    //     subpathParts = pathParts.slice(1);
-    //   }
-    //
-    //   // file path relative to repo root
-    //   const filePath = subpathParts.length
-    //     ? `${subpathParts.join("/")}/${BASE_FILENAME}`
-    //     : BASE_FILENAME;
-    //
-    //   return { username, repo, filePath };
-    // }
-
-
     // -------------------------
     // EVENT HANDLERS
     document.getElementById('addCategoryForm').addEventListener('submit', e => {
@@ -596,35 +687,29 @@
       isEditMode = !isEditMode;
       document.body.classList.toggle('edit-mode', isEditMode);
       manageBox.style.display = isEditMode ? 'block' : 'none';
+      // sync inputs when entering edit mode
+      if (isEditMode) syncPropInputs();
       render();
     });
 
     exportGithubBtn.addEventListener("click", () => {
-      const ini = toINI(data);
+      const ini = toINI(viewProps, data);
       navigator.clipboard.writeText(ini).then(() => {
         alert("Data copied to clipboard. A new tab will open — paste it into GitHub and commit.");
 
-        // const info = getGithubRepoInfo();
-        // if (!info) {
-        //   alert("Could not detect GitHub repo. Please set it manually.");
-        //   return;
-        // }
-        //
-        // const { username, repo, filePath } = info;
-        // const editUrl = `https://github.com/${username}/${repo}/edit/master/${filePath}`;
+        // preserve original behavior: clear local and open the edit URL
+        clearLocalAndReloadBaseline();
         const editUrl = `https://github.com/haimheled/haimheled.github.io/edit/master/tmp2/data.txt`;
         // Open in SAME window
-        clearLocalAndReloadBaseline();
         window.location.href = editUrl;
-        // window.open(editUrl, "_blank");
       }).catch(err => {
         console.error("Clipboard copy failed", err);
-        alert("Failed to copy to clipboard. You can copy manually." + editUrl);
+        alert("Failed to copy to clipboard. You can copy manually.");
       });
     });
 
     exportBtn.addEventListener('click', () => {
-      const blob = new Blob([toINI(data)], { type: 'text/plain' });
+      const blob = new Blob([toINI(viewProps, data)], { type: 'text/plain' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
       a.download = BASE_FILENAME;
@@ -656,6 +741,33 @@
       if (!q) return;
       form.action = `https://chatgpt.com/?q=${encodeURIComponent(q)}`;
     }
+
+    // -------------------------
+    // Sync view props inputs -> state
+    function updateViewPropsFromInputs() {
+      const lc = document.getElementById('propLinkColor').value || defaultProps.linkColor;
+      const cw = document.getElementById('propCardWidth').value || defaultProps.cardWidth;
+      const ls = document.getElementById('propLineSpacing').value || defaultProps.lineSpacing;
+      const fs = document.getElementById('propFontSize').value || defaultProps.fontSize;
+
+      viewProps.linkColor = lc;
+      viewProps.cardWidth = cw;
+      viewProps.lineSpacing = ls;
+      viewProps.fontSize = fs;
+
+      // immediately apply and persist
+      applyProps(viewProps);
+      persistLocal();
+      render();
+    }
+
+    // attach listeners to prop inputs
+    ['propLinkColor','propCardWidth','propLineSpacing','propFontSize'].forEach(id=>{
+      const el = document.getElementById(id);
+      el.addEventListener('input', updateViewPropsFromInputs);
+      // also listen to 'change' for color pickers in some browsers
+      el.addEventListener('change', updateViewPropsFromInputs);
+    });
 
     // -------------------------
     // INIT
