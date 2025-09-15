@@ -1,192 +1,190 @@
-# My homepage categories
+linkColor = #ffffff
+cardWidth = 260px
+lineSpacing = 6px
+fontSize = 1rem
 
 [General]
-Gmail    = https://www.gmail.com
+Gmail = https://www.gmail.com
 Facebook = https://www.facebook.com
-Twitter  = https://www.twitter.com
-YouTube  = https://www.youtube.com
-Spotify  = https://open.spotify.com
+Twitter = https://www.twitter.com
+YouTube = https://www.youtube.com
+Spotify = https://open.spotify.com
 Whatsapp = https://web.whatsapp.com
-Google   = https://www.google.com
+Google = https://www.google.com
 
 [TV & Radio]
 # Israel Split TV = http://www.split-tv.co.il/p/il.html
-Split TV          = https://split-tv.blogspot.com
-Guru TV           = https://gurutv.online
-Kan 11            = http://www.kan.org.il/live/tv.aspx?stationId=2
-Keshet 12         = https://www.mako.co.il/mako-vod-live-tv/VOD-6540b8dcb64fd31006.htm
-Reshet 13         = http://reshet.tv/live/
-# US TV           = https://ustv247.tv/
-US TV             = https://tv247.us/all-channels/
-Kan B             = https://www.kan.org.il/player?itemId=4483&playerType=Kaltura
-Galaz             = http://glzwizzlv.bynetcdn.com/glz_mp3?awCollectionId=misc&awEpisodeId=glz
-Gal Galaz         = http://glzwizzlv.bynetcdn.com/glglz_mp3?awCollectionId=misc&awEpisodeId=glglz
-TLV Radio         = https://102.livecdn.biz/102fm_aac
-88FM              = https://www.kan.org.il/player?itemId=4504&playerType=Kaltura
+Split TV = https://split-tv.blogspot.com
+Guru TV = https://gurutv.online
+Kan 11 = http://www.kan.org.il/live/tv.aspx?stationId=2
+Keshet 12 = https://www.mako.co.il/mako-vod-live-tv/VOD-6540b8dcb64fd31006.htm
+Reshet 13 = http://reshet.tv/live/
+# US TV = https://ustv247.tv/
+US TV = https://tv247.us/all-channels/
+Kan B = https://www.kan.org.il/player?itemId=4483&playerType=Kaltura
+Galaz = http://glzwizzlv.bynetcdn.com/glz_mp3?awCollectionId=misc&awEpisodeId=glz
+Gal Galaz = http://glzwizzlv.bynetcdn.com/glglz_mp3?awCollectionId=misc&awEpisodeId=glglz
+TLV Radio = https://102.livecdn.biz/102fm_aac
+88FM = https://www.kan.org.il/player?itemId=4504&playerType=Kaltura
 
 [News]
-Rotter       = http://rotter.net/scoopscache.html
-Ynet         = http://www.ynet.co.il
-Walla        = http://www.walla.co.il
-Mako         = http://www.mako.co.il
-# NRG        = http://www.nrg.co.il
-Haaretz      = http://www.haaretz.co.il
-News Israel  = http://www.news-israel.net
+Rotter = http://rotter.net/scoopscache.html
+Ynet = http://www.ynet.co.il
+Walla = http://www.walla.co.il
+Mako = http://www.mako.co.il
+# NRG = http://www.nrg.co.il
+Haaretz = http://www.haaretz.co.il
+News Israel = http://www.news-israel.net
 Israel Today = http://www.israelhayom.co.il
-Google News  = https://news.google.co.il
-CNN          = http://www.cnn.com
-Fox          = http://www.foxnews.com
-Tikun Olam   = https://www.richardsilverstein.com/
+Google News = https://news.google.co.il
+CNN = http://www.cnn.com
+Fox = http://www.foxnews.com
+Tikun Olam = https://www.richardsilverstein.com/
 
 [Sport]
-Sport5            = http://www.sport5.co.il
-One               = http://www.one.co.il
-NBA Games         = https://www.nba.com/games
+Sport5 = http://www.sport5.co.il
+One = http://www.one.co.il
+NBA Games = https://www.nba.com/games
 # Wizards Streams = https://topstreams.info/nba/wizards
-Blazers Streams   = https://topstreams.info/nba/trailblazers
-NBA Streams       = https://nbabite.com
-NBA Replay        = https://basketball-video.com // = https://nbareplay.net
+Blazers Streams = https://topstreams.info/nba/trailblazers
+NBA Streams = https://nbabite.com
+NBA Replay = https://basketball-video.com // = https://nbareplay.net
 
 [Business]
-Globes     = http://www.globes.co.il
+Globes = http://www.globes.co.il
 The Marker = http://www.themarker.co.il
-Calcalist  = http://www.calcalist.co.il
+Calcalist = http://www.calcalist.co.il
 
 [Finance]
-Mizrahi Bank   = https://www.mizrahi-tefahot.co.il/login/bv5x83ut/index.html#/auth-page-he
-Discount Bank  = https://start.telebank.co.il/login/#/LOGIN_PAGE
+Mizrahi Bank = https://www.mizrahi-tefahot.co.il/login/bv5x83ut/index.html#/auth-page-he
+Discount Bank = https://start.telebank.co.il/login/#/LOGIN_PAGE
 Exchange Rates = http://www.boi.org.il/he/Markets/ExchangeRates/Pages/Default.aspx
-Visa Cal       = https://services.cal-online.co.il/Card-Holders/SCREENS/AccountManagement/Login.aspx?ReturnUrl=%2fcard-holders%2fScreens%2fAccountManagement%2fHomePage.aspx
+Visa Cal = https://services.cal-online.co.il/Card-Holders/SCREENS/AccountManagement/Login.aspx?ReturnUrl=%2fcard-holders%2fScreens%2fAccountManagement%2fHomePage.aspx
 
 [Shopping]
 Israel Post = https://israelpost.co.il/%d7%a9%d7%99%d7%a8%d7%95%d7%aa%d7%99%d7%9d/%d7%94%d7%97%d7%91%d7%99%d7%9c%d7%95%d7%aa-%d7%a9%d7%9c%d7%99/
-Reut Buy    = https://reutbuyitforme.com
-Ali Buy     = https://ali-buy.com
-I Need It   = https://ineedit.co.il
-Rami Levy   = https://www.rami-levy.co.il
-Wolt        = https://wolt.com
+Reut Buy = https://reutbuyitforme.com
+Ali Buy = https://ali-buy.com
+I Need It = https://ineedit.co.il
+Rami Levy = https://www.rami-levy.co.il
+Wolt = https://wolt.com
 Ali Express = https://www.aliexpress.com/?lan=en
-# Amazon    = https://www.amazon.com
-Amazon      = https://www.amazon.com/Best-Sellers/zgbs
+# Amazon = https://www.amazon.com
+Amazon = https://www.amazon.com/Best-Sellers/zgbs
 
 [Health]
-Clalit         = https://e-services.clalit.org.il/onlineweb/general/login.aspx
+Clalit = https://e-services.clalit.org.il/onlineweb/general/login.aspx
 My Fitness Pal = https://www.myfitnesspal.com/account/login
-Cronometer     = https://cronometer.com
+Cronometer = https://cronometer.com
 
 [Utilities]
-Babylon            = http://online.babylon.com/trans_box/myindex.php?lang=EN&affiliate=CD1
-Quick Email        = https://nospam.today
-Wikipedia          = https://he.wikipedia.org
-IP Address         = https://ipecho.net/plain
-IP Location        = https://iplocation.com/
-Speed Test         = http://www.speedtest.net
-Google             = https://www.google.com
-Duckduckgo         = https://duckduckgo.com/
-Bing               = https://www.bing.com/
-ChatGPT            = https://chat.openai.com/auth/login
-GPT Playground     = https://beta.openai.com/playground
-Claude             = https://claude.ai/onboarding
-Remote Access      = https://150.co.il
-PC Builder         = https://pcpartpicker.com
-Gemini             = https://gemini.google.com/
-True Caller        = https://www.truecaller.com/
-Drum Machine       = https://www.virtualdrumming.com/drums/virtual-drum-machine-online/drum-machine-online-free.html
-AutoDesk Viewer    = https://viewer.autodesk.com
-# novnc            = http://ivory:6080/vnc.html?host=ivory&port=6080
-# IP Address       = ifconfig.me
-# IP Location      = https://www.iplocation.net/
-Tuya Smart         = https://protect-eu.ismartlife.me/playback
+Babylon = http://online.babylon.com/trans_box/myindex.php?lang=EN&affiliate=CD1
+Quick Email = https://nospam.today
+Wikipedia = https://he.wikipedia.org
+IP Address = https://ipecho.net/plain
+IP Location = https://iplocation.com/
+Speed Test = http://www.speedtest.net
+Google = https://www.google.com
+Duckduckgo = https://duckduckgo.com/
+Bing = https://www.bing.com/
+ChatGPT = https://chat.openai.com/auth/login
+GPT Playground = https://beta.openai.com/playground
+Claude = https://claude.ai/onboarding
+Remote Access = https://150.co.il
+PC Builder = https://pcpartpicker.com
+Gemini = https://gemini.google.com/
+True Caller = https://www.truecaller.com/
+Drum Machine = https://www.virtualdrumming.com/drums/virtual-drum-machine-online/drum-machine-online-free.html
+AutoDesk Viewer = https://viewer.autodesk.com
+# novnc = http://ivory:6080/vnc.html?host=ivory&port=6080
+# IP Address = ifconfig.me
+# IP Location = https://www.iplocation.net/
+Tuya Smart = https://protect-eu.ismartlife.me/playback
 
 [Development]
-Github Edit        = https://github.com/haimheled/haimheled.github.io/edit/master/js/config.js
-Github Page        = https://github.com/haimheled/haimheled.github.io
-Github Edit Old    = https://github.com/haimheled/haimheled.github.io/blob/master/startpage.rwrt.old_site/index.html
-EDA Playground     = https://www.edaplayground.com
-Appimage           = https://github.com/AppImageCommunity/awesome-appimage
-
+Github Edit = https://github.com/haimheled/haimheled.github.io/edit/master/js/config.js
+Github Page = https://github.com/haimheled/haimheled.github.io
+Github Edit Old = https://github.com/haimheled/haimheled.github.io/blob/master/startpage.rwrt.old_site/index.html
+EDA Playground = https://www.edaplayground.com
+Appimage = https://github.com/AppImageCommunity/awesome-appimage
 
 [Bills]
-012 Mobile     = https://www.012mobile.co.il/n/login
-019 Mobile     = https://019mobile.co.il/userarea/
+012 Mobile = https://www.012mobile.co.il/n/login
+019 Mobile = https://019mobile.co.il/userarea/
 ISP & Landline = https://bmy.bezeq.co.il/
-# ISP & Phone  = https://www.hot.net.il/heb/SelfService/Login
-# ISP content  = https://www.hotnet.net.il
-Credit Card    = https://www.cal-online.co.il
-Super Gas      = http://sgas.co.il
-Water          = https://www.mast.co.il/101/mail-invoice
-City Tax       = https://www.ramat-gan.muni.il/waterbillsubscribe
-Electricity    = https://www.iec.co.il
+# ISP & Phone = https://www.hot.net.il/heb/SelfService/Login
+# ISP content = https://www.hotnet.net.il
+Credit Card = https://www.cal-online.co.il
+Super Gas = http://sgas.co.il
+Water = https://www.mast.co.il/101/mail-invoice
+City Tax = https://www.ramat-gan.muni.il/waterbillsubscribe
+Electricity = https://www.iec.co.il
 
 [Stocks]
-Inter IL Portal   = https://www.clientam.com/sso/Login?partnerID=Inter_il
-Inter IL          = https://www.inter-il.com
-IBI NextGen       = https://ibi.orbisfn.io/login
-IBI Spark         = https://sparkibi.ordernet.co.il/#/auth
-Trading View      = https://www.tradingview.com/screener/
-Investing         = https://www.investing.com
-Trade Economics   = https://tradingeconomics.com/calendar
-# 24H Trading     = https://robinhood.com/us/en/stocks/TSLA/
-24H Trading       = https://robinhood.com/lists/custom/94897901-821e-4de9-a108-8636032dd3b2
-Extrade Pro       = https://extradepro.xnes.co.il/login
-Earnings Whisper  = https://www.reddit.com/r/EarningsWhisper
-Market Cap        = https://companiesmarketcap.com
-Bizportal         = https://www.bizportal.co.il
-Funder            = https://www.funder.co.il
-S&P 500 YTD       = https://www.slickcharts.com/sp500/returns/ytd
-Portfolio Visual  = https://www.portfoliovisualizer.com/backtest-portfolio?action=open
-eToro             = https://www.etoro.com/watchlists
-Finviz            = https://finviz.com/screener.ashx
-Bilello Blog      = https://bilello.blog/2024/the-week-in-charts-11-13-24
+Inter IL Portal = https://www.clientam.com/sso/Login?partnerID=Inter_il
+Inter IL = https://www.inter-il.com
+IBI NextGen = https://ibi.orbisfn.io/login
+IBI Spark = https://sparkibi.ordernet.co.il/#/auth
+Trading View = https://www.tradingview.com/screener/
+Investing = https://www.investing.com
+Trade Economics = https://tradingeconomics.com/calendar
+# 24H Trading = https://robinhood.com/us/en/stocks/TSLA/
+24H Trading = https://robinhood.com/lists/custom/94897901-821e-4de9-a108-8636032dd3b2
+Extrade Pro = https://extradepro.xnes.co.il/login
+Earnings Whisper = https://www.reddit.com/r/EarningsWhisper
+Market Cap = https://companiesmarketcap.com
+Bizportal = https://www.bizportal.co.il
+Funder = https://www.funder.co.il
+S&P 500 YTD = https://www.slickcharts.com/sp500/returns/ytd
+Portfolio Visual = https://www.portfoliovisualizer.com/backtest-portfolio?action=open
+eToro = https://www.etoro.com/watchlists
+Finviz = https://finviz.com/screener.ashx
+Bilello Blog = https://bilello.blog/2024/the-week-in-charts-11-13-24
 
 [AI]
-ChatGPT       = https://chat.openai.com/auth/login
-Grok          = https://grok.com
-Gemini        = https://gemini.google.com/
-Claude        = https://claude.ai/onboarding
+ChatGPT = https://chat.openai.com/auth/login
+Grok = https://grok.com
+Gemini = https://gemini.google.com/
+Claude = https://claude.ai/onboarding
 
 [Work]
-Portal        = https://urldefense.proofpoint.com/v2/url?u=https-3A__renesasgroup.sharepoint.com_sites_GIPen&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=4Kqhc4V8ADEctMewZo2ovz_tkInA2Hj3KO5aRWPhaQk&e=
-Service Portal= https://globalserviceportal.renesas.com/esc
-Renesas Exceed   = https://sl-etx.diasemi.com
+Portal = https://urldefense.proofpoint.com/v2/url?u=https-3A__renesasgroup.sharepoint.com_sites_GIPen&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=4Kqhc4V8ADEctMewZo2ovz_tkInA2Hj3KO5aRWPhaQk&e=
+Service Portal = https://globalserviceportal.renesas.com/esc
+Renesas Exceed = https://sl-etx.diasemi.com
 Confluence RFMux = https://confluence.renesas.com/display/Rubium/RF+Multiplexer+-+RFMux
-Confluence FDMA  = https://confluence.renesas.com/display/Rubium/Fast-DMA+Controller+-+FDMA
-Mail             = https://outlook.office365.com/mail/inbox
-Calendar         = https://outlook.office365.com/calendar/view/month
-Teams            = https://urldefense.proofpoint.com/v2/url?u=https-3A__teams.microsoft.com_&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=ZI48vGgauYmwc5Z8e3P34MCT2xW3toYIFT_1sk_j0Hs&e=
-Goals            = https://jpn01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fperformancemanager5.successfactors.eu%2Flogin%3Fcompany%3Drenesasele%23%2Flogin&data=04%7C01%7Chaim.heled.ks%40renesas.com%7C7af5adfd98474c88f47908da1bb4846e%7C53d82571da1947e49cb4625a166a4a2a%7C0%7C0%7C637852759489302374%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000&sdata=IQYFM7WPoibj9WREZs0bm6vpH5TYLh%2F%2B2NsERq5tEK0%3D&reserved=0
-Auth Setup       = https://aka.ms/mfasetup
-SVN Project      = http://172.25.90.250/svn/celeno-sys/Project
-SVN Personal     = http://172.25.90.250/svn/celeno-people/haim.heled
-SharePoint       = https://renesasgroup.sharepoint.com/sites/CelenoRnD
-Cibus            = http://www.mysodexo.co.il
-Tasks            = https://tasks.office.com/celeno.com/en-US/Home/Planner/#/mytasks
-Soc CL3000B      = http://172.26.30.84/soc-cl3000_b0/soconline/app/index.cgi?
-Soc CL6000       = http://172.26.30.84/soc-cl6000/soconline/app/index.cgi?
-Soc CL6000B      = http://172.26.30.84/soc-cl6000_b0/soconline/app/index.cgi?
-Soc CL7000       = http://slocelsoc001p.adwin.renesas.com/soc-cl7000_a0/soconline/app/login.cgi?
-Wiki IP list     = http://172.25.90.250/wiki/index.php/Palladium_Protium_IPs
-Jira             = https://celeno.atlassian.net/jira/software/c/projects/AD/issues/?filter=myopenissues
-# Jira           = https://celeno.atlassian.net/issues/?filter=10368
-Matlab           = http://172.25.90.250/svn/celeno-sys/Project/CL3000/Algo/MatlabRelease/distrib/
-DSP              = http://172.25.90.250/svn/dsp/code/Everest_A0/build
-Documents        = http://172.25.90.250/svn/celeno-sys/Project/CL3000/MAC%20Documents/
-Hours Report     = https://harmony.synel.co.il/eharmonynew
-Exceed           = https://192.168.13.65/etx
-Exceed Old       = https://172.29.149.65/etx
-ADP              = https://portal.people.adp.com
-Service Desk     = https://renesas.service-now.com
-IPMI edk-4171    = http://172.18.3.44/cgi/url_redirect.cgi?url_name=man_chassis
-IPMI edk-4172    = http://172.18.3.34/cgi/url_redirect.cgi?url_name=man_chassis
-IPMI edk-4173    = http://172.18.3.52/cgi/url_redirect.cgi?url_name=man_chassis
-IPMI edk-4174    = http://172.18.3.38/cgi/url_redirect.cgi?url_name=man_chassis
-IPMI edk-4175    = http://172.18.3.42/cgi/url_redirect.cgi?url_name=man_chassis
-IPMI edk-4177    = http://172.18.3.41/cgi/url_redirect.cgi?url_name=man_chassis
-IPMI edk-4178    = http://172.18.3.46/cgi/url_redirect.cgi?url_name=man_chassis
-IPMI edk-4179    = http://172.18.3.50/cgi/url_redirect.cgi?url_name=man_chassis
-Redwood Matlab   = http://moon/svn/celeno-algo/docs/AX/Docs/Algo/TFU/HW%20Modem%20-%20Rx%20TFU%20TD%20Processing%20-%20HW%20Spec.docx
-REL Systems      = https://renesasgroup.sharepoint.com/sites/REL-portal/ISD_SYSTEM/SitePages/REL%20Systems.aspx
-
-
-
-
+Confluence FDMA = https://confluence.renesas.com/display/Rubium/Fast-DMA+Controller+-+FDMA
+Mail = https://outlook.office365.com/mail/inbox
+Calendar = https://outlook.office365.com/calendar/view/month
+Teams = https://urldefense.proofpoint.com/v2/url?u=https-3A__teams.microsoft.com_&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=ZI48vGgauYmwc5Z8e3P34MCT2xW3toYIFT_1sk_j0Hs&e=
+Goals = https://jpn01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fperformancemanager5.successfactors.eu%2Flogin%3Fcompany%3Drenesasele%23%2Flogin&data=04%7C01%7Chaim.heled.ks%40renesas.com%7C7af5adfd98474c88f47908da1bb4846e%7C53d82571da1947e49cb4625a166a4a2a%7C0%7C0%7C637852759489302374%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000&sdata=IQYFM7WPoibj9WREZs0bm6vpH5TYLh%2F%2B2NsERq5tEK0%3D&reserved=0
+Auth Setup = https://aka.ms/mfasetup
+SVN Project = http://172.25.90.250/svn/celeno-sys/Project
+SVN Personal = http://172.25.90.250/svn/celeno-people/haim.heled
+SharePoint = https://renesasgroup.sharepoint.com/sites/CelenoRnD
+Cibus = http://www.mysodexo.co.il
+Tasks = https://tasks.office.com/celeno.com/en-US/Home/Planner/#/mytasks
+Soc CL3000B = http://172.26.30.84/soc-cl3000_b0/soconline/app/index.cgi?
+Soc CL6000 = http://172.26.30.84/soc-cl6000/soconline/app/index.cgi?
+Soc CL6000B = http://172.26.30.84/soc-cl6000_b0/soconline/app/index.cgi?
+Soc CL7000 = http://slocelsoc001p.adwin.renesas.com/soc-cl7000_a0/soconline/app/login.cgi?
+Wiki IP list = http://172.25.90.250/wiki/index.php/Palladium_Protium_IPs
+Jira = https://celeno.atlassian.net/jira/software/c/projects/AD/issues/?filter=myopenissues
+# Jira = https://celeno.atlassian.net/issues/?filter=10368
+Matlab = http://172.25.90.250/svn/celeno-sys/Project/CL3000/Algo/MatlabRelease/distrib/
+DSP = http://172.25.90.250/svn/dsp/code/Everest_A0/build
+Documents = http://172.25.90.250/svn/celeno-sys/Project/CL3000/MAC%20Documents/
+Hours Report = https://harmony.synel.co.il/eharmonynew
+Exceed = https://192.168.13.65/etx
+Exceed Old = https://172.29.149.65/etx
+ADP = https://portal.people.adp.com
+Service Desk = https://renesas.service-now.com
+IPMI edk-4171 = http://172.18.3.44/cgi/url_redirect.cgi?url_name=man_chassis
+IPMI edk-4172 = http://172.18.3.34/cgi/url_redirect.cgi?url_name=man_chassis
+IPMI edk-4173 = http://172.18.3.52/cgi/url_redirect.cgi?url_name=man_chassis
+IPMI edk-4174 = http://172.18.3.38/cgi/url_redirect.cgi?url_name=man_chassis
+IPMI edk-4175 = http://172.18.3.42/cgi/url_redirect.cgi?url_name=man_chassis
+IPMI edk-4177 = http://172.18.3.41/cgi/url_redirect.cgi?url_name=man_chassis
+IPMI edk-4178 = http://172.18.3.46/cgi/url_redirect.cgi?url_name=man_chassis
+IPMI edk-4179 = http://172.18.3.50/cgi/url_redirect.cgi?url_name=man_chassis
+Redwood Matlab = http://moon/svn/celeno-algo/docs/AX/Docs/Algo/TFU/HW%20Modem%20-%20Rx%20TFU%20TD%20Processing%20-%20HW%20Spec.docx
+REL Systems = https://renesasgroup.sharepoint.com/sites/REL-portal/ISD_SYSTEM/SitePages/REL%20Systems.aspx
