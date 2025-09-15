@@ -407,9 +407,9 @@
             const { cat: fromCat, index: fromLink } = dragSrc;
             const moved = data[fromCat].links.splice(fromLink, 1)[0];
             data[targetCatIndex].links.push(moved);
-            if (data[fromCat] && data[fromCat].links.length === 0) {
-              data.splice(fromCat, 1);
-            }
+            // if (data[fromCat] && data[fromCat].links.length === 0) {
+            //   data.splice(fromCat, 1);
+            // }
             persistLocal();
             render();
           }
