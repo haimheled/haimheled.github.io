@@ -55,6 +55,9 @@
     .drag-handle { cursor:grab; margin-right:6px; color:var(--muted); display:inline-flex; align-items:center; }
     .drag-handle:active { cursor:grabbing; }
 
+    /* commented visuals */
+    .commented { text-decoration: line-through; opacity: 0.6; }
+
     /* small screens */
     @media (max-width:520px) {
       .manage-row { flex-direction:column; align-items:stretch; }
@@ -140,21 +143,50 @@
       const cats = [];
       let current = null;
       for (let rawLine of lines) {
-        let line = rawLine.trim();
-        if (!line) continue;
-        if (line.startsWith(COMMENT_PREFIX)) continue;
-        if (line.startsWith('[') && line.endsWith(']')) {
-          const name = line.slice(1, -1).trim();
-          current = { name, links: [] };
+        if (!rawLine) continue;
+        // preserve leading/trailing spaces only for comment detection
+        const trimmed = rawLine.trim();
+        if (!trimmed) continue;
+
+        // Commented line
+        if (trimmed.startsWith(COMMENT_PREFIX)) {
+          const uncomment = trimmed.slice(1).trim();
+          if (!uncomment) continue;
+
+          // commented category header
+          if (uncomment.startsWith('[') && uncomment.endsWith(']')) {
+            const name = uncomment.slice(1, -1).trim();
+            current = { name, links: [], commented: true };
+            cats.push(current);
+            continue;
+          }
+
+          // commented link line (name = url)
+          const idx2 = uncomment.indexOf('=');
+          if (idx2 >= 0 && current) {
+            const name = uncomment.slice(0, idx2).trim();
+            const url = uncomment.slice(idx2 + 1).trim();
+            if (name) current.links.push({ name, url, commented: true });
+          }
+          // other comment lines are ignored for structure
+          continue;
+        }
+
+        // Non-commented category header
+        if (trimmed.startsWith('[') && trimmed.endsWith(']')) {
+          const name = trimmed.slice(1, -1).trim();
+          current = { name, links: [], commented: false };
           cats.push(current);
           continue;
         }
+
+        // Non-commented link line
         if (!current) continue;
-        const idx = line.indexOf('=');
+        const idx = trimmed.indexOf('=');
         if (idx >= 0) {
-          const name = line.slice(0, idx).trim();
-          const url = line.slice(idx + 1).trim();
-          if (name) current.links.push({ name, url });
+          const name = trimmed.slice(0, idx).trim();
+          const url = trimmed.slice(idx + 1).trim();
+          if (name) current.links.push({ name, url, commented: false });
         }
       }
       return cats;
@@ -162,8 +194,16 @@
 
     function toINI(arr) {
       return arr.map(cat => {
-        const lines = [`[${cat.name}]`];
-        for (const l of cat.links) lines.push(`${l.name} = ${l.url}`);
+        const lines = [];
+        if (cat.commented) {
+          lines.push(`# [${cat.name}]`);
+        } else {
+          lines.push(`[${cat.name}]`);
+        }
+        for (const l of cat.links) {
+          if (l.commented) lines.push(`# ${l.name} = ${l.url}`);
+          else lines.push(`${l.name} = ${l.url}`);
+        }
         return lines.join('\n');
       }).join('\n\n');
     }
@@ -242,6 +282,9 @@
       categorySelect.innerHTML = '';
 
       data.forEach((cat, ci) => {
+        // In regular (non-edit) mode, hide commented categories completely
+        if (!isEditMode && cat.commented) return;
+
         const opt = document.createElement('option');
         opt.value = ci;
         opt.textContent = cat.name;
@@ -256,6 +299,9 @@
 
         const h2 = document.createElement('h2');
         h2.textContent = cat.name;
+        if (isEditMode && cat.commented) {
+          h2.classList.add('commented');
+        }
         header.appendChild(h2);
 
         const hdrBtns = document.createElement('div');
@@ -303,12 +349,27 @@
         });
         hdrBtns.appendChild(delCatBtn);
 
+        // Checkbox: checked = visible (not commented). unchecked = commented
+        const catCheckbox = document.createElement('input');
+        catCheckbox.type = 'checkbox';
+        catCheckbox.title = 'Checked = visible. Unchecked = commented/hidden.';
+        catCheckbox.checked = !Boolean(cat.commented);
+        catCheckbox.addEventListener('change', () => {
+          cat.commented = !catCheckbox.checked;
+          persistLocal();
+          render();
+        });
+        hdrBtns.appendChild(catCheckbox);
+
 
         header.appendChild(hdrBtns);
         card.appendChild(header);
 
         const ul = document.createElement('ul');
         cat.links.forEach((link, li) => {
+          // In regular mode, hide commented links
+          if (!isEditMode && link.commented) return;
+
           const liEl = document.createElement('li');
           liEl.dataset.catIndex = ci;
           liEl.dataset.linkIndex = li;
@@ -318,6 +379,9 @@
           a.textContent = link.name;
           a.target = '_self'; // same tab
           // a.target = '_blank'; // new tab
+          if (isEditMode && link.commented) {
+            a.classList.add('commented');
+          }
           liEl.appendChild(a);
 
           const linkBtns = document.createElement('div');
@@ -341,7 +405,7 @@
             const nn = prompt('Link name:', link.name);
             const uu = prompt('Link URL:', link.url);
             if (!nn || !uu) return;
-            data[ci].links[li] = { name: nn.trim(), url: uu.trim() };
+            data[ci].links[li] = { name: nn.trim(), url: uu.trim(), commented: Boolean(link.commented) };
             persistLocal();
             render();
           });
@@ -359,6 +423,18 @@
             render();
           });
           linkBtns.appendChild(delL);
+
+          // Checkbox for link: checked = visible (not commented)
+          const linkCheckbox = document.createElement('input');
+          linkCheckbox.type = 'checkbox';
+          linkCheckbox.title = 'Checked = visible. Unchecked = commented/hidden.';
+          linkCheckbox.checked = !Boolean(link.commented);
+          linkCheckbox.addEventListener('change', () => {
+            link.commented = !linkCheckbox.checked;
+            persistLocal();
+            render();
+          });
+          linkBtns.appendChild(linkCheckbox);
 
 
           liEl.appendChild(linkBtns);
@@ -495,7 +571,8 @@
         alert('Category already exists.');
         return;
       }
-      data.push({ name, links: [] });
+      // default commented: false
+      data.push({ name, links: [], commented: false });
       input.value = '';
       persistLocal();
       render();
@@ -507,7 +584,8 @@
       const name = document.getElementById('linkName').value.trim();
       const url = document.getElementById('linkUrl').value.trim();
       if (!name || !url) return;
-      data[ci].links.push({ name, url });
+      // default commented: false
+      data[ci].links.push({ name, url, commented: false });
       document.getElementById('linkName').value = '';
       document.getElementById('linkUrl').value = '';
       persistLocal();
