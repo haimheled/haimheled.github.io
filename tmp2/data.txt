@@ -1,5 +1,6 @@
 linkColor = #ffffff
-cardWidth = 260px
+cardWidth = 160px
+cardWidthEdit = 260px
 lineSpacing = 6px
 fontSize = 1rem
 
@@ -11,6 +12,20 @@ YouTube = https://www.youtube.com
 Spotify = https://open.spotify.com
 Whatsapp = https://web.whatsapp.com
 Google = https://www.google.com
+
+[News]
+Rotter = http://rotter.net/scoopscache.html
+Ynet = http://www.ynet.co.il
+Walla = http://www.walla.co.il
+Mako = http://www.mako.co.il
+# NRG = http://www.nrg.co.il
+Haaretz = http://www.haaretz.co.il
+News Israel = http://www.news-israel.net
+Israel Today = http://www.israelhayom.co.il
+Google News = https://news.google.co.il
+CNN = http://www.cnn.com
+Fox = http://www.foxnews.com
+Tikun Olam = https://www.richardsilverstein.com/
 
 [TV & Radio]
 # Israel Split TV = http://www.split-tv.co.il/p/il.html
@@ -27,20 +42,6 @@ Gal Galaz = http://glzwizzlv.bynetcdn.com/glglz_mp3?awCollectionId=misc&awEpisod
 TLV Radio = https://102.livecdn.biz/102fm_aac
 88FM = https://www.kan.org.il/player?itemId=4504&playerType=Kaltura
 
-[News]
-Rotter = http://rotter.net/scoopscache.html
-Ynet = http://www.ynet.co.il
-Walla = http://www.walla.co.il
-Mako = http://www.mako.co.il
-# NRG = http://www.nrg.co.il
-Haaretz = http://www.haaretz.co.il
-News Israel = http://www.news-israel.net
-Israel Today = http://www.israelhayom.co.il
-Google News = https://news.google.co.il
-CNN = http://www.cnn.com
-Fox = http://www.foxnews.com
-Tikun Olam = https://www.richardsilverstein.com/
-
 [Sport]
 Sport5 = http://www.sport5.co.il
 One = http://www.one.co.il
@@ -49,6 +50,12 @@ NBA Games = https://www.nba.com/games
 Blazers Streams = https://topstreams.info/nba/trailblazers
 NBA Streams = https://nbabite.com
 NBA Replay = https://basketball-video.com // = https://nbareplay.net
+
+[AI]
+ChatGPT = https://chat.openai.com/auth/login
+Grok = https://grok.com
+Gemini = https://gemini.google.com/
+Claude = https://claude.ai/onboarding
 
 [Business]
 Globes = http://www.globes.co.il
@@ -77,6 +84,25 @@ Clalit = https://e-services.clalit.org.il/onlineweb/general/login.aspx
 My Fitness Pal = https://www.myfitnesspal.com/account/login
 Cronometer = https://cronometer.com
 
+[Development]
+Github Edit = https://github.com/haimheled/haimheled.github.io/edit/master/js/config.js
+Github Page = https://github.com/haimheled/haimheled.github.io
+Github Edit Old = https://github.com/haimheled/haimheled.github.io/blob/master/startpage.rwrt.old_site/index.html
+EDA Playground = https://www.edaplayground.com
+Appimage = https://github.com/AppImageCommunity/awesome-appimage
+
+[Bills]
+012 Mobile = https://www.012mobile.co.il/n/login
+019 Mobile = https://019mobile.co.il/userarea/
+ISP & Landline = https://bmy.bezeq.co.il/
+# ISP & Phone = https://www.hot.net.il/heb/SelfService/Login
+# ISP content = https://www.hotnet.net.il
+Credit Card = https://www.cal-online.co.il
+Super Gas = http://sgas.co.il
+Water = https://www.mast.co.il/101/mail-invoice
+City Tax = https://www.ramat-gan.muni.il/waterbillsubscribe
+Electricity = https://www.iec.co.il
+
 [Utilities]
 Babylon = http://online.babylon.com/trans_box/myindex.php?lang=EN&affiliate=CD1
 Quick Email = https://nospam.today
@@ -101,25 +127,6 @@ AutoDesk Viewer = https://viewer.autodesk.com
 # IP Location = https://www.iplocation.net/
 Tuya Smart = https://protect-eu.ismartlife.me/playback
 
-[Development]
-Github Edit = https://github.com/haimheled/haimheled.github.io/edit/master/js/config.js
-Github Page = https://github.com/haimheled/haimheled.github.io
-Github Edit Old = https://github.com/haimheled/haimheled.github.io/blob/master/startpage.rwrt.old_site/index.html
-EDA Playground = https://www.edaplayground.com
-Appimage = https://github.com/AppImageCommunity/awesome-appimage
-
-[Bills]
-012 Mobile = https://www.012mobile.co.il/n/login
-019 Mobile = https://019mobile.co.il/userarea/
-ISP & Landline = https://bmy.bezeq.co.il/
-# ISP & Phone = https://www.hot.net.il/heb/SelfService/Login
-# ISP content = https://www.hotnet.net.il
-Credit Card = https://www.cal-online.co.il
-Super Gas = http://sgas.co.il
-Water = https://www.mast.co.il/101/mail-invoice
-City Tax = https://www.ramat-gan.muni.il/waterbillsubscribe
-Electricity = https://www.iec.co.il
-
 [Stocks]
 Inter IL Portal = https://www.clientam.com/sso/Login?partnerID=Inter_il
 Inter IL = https://www.inter-il.com
@@ -140,12 +147,6 @@ Portfolio Visual = https://www.portfoliovisualizer.com/backtest-portfolio?action
 eToro = https://www.etoro.com/watchlists
 Finviz = https://finviz.com/screener.ashx
 Bilello Blog = https://bilello.blog/2024/the-week-in-charts-11-13-24
-
-[AI]
-ChatGPT = https://chat.openai.com/auth/login
-Grok = https://grok.com
-Gemini = https://gemini.google.com/
-Claude = https://claude.ai/onboarding
 
 [Work]
 Portal = https://urldefense.proofpoint.com/v2/url?u=https-3A__renesasgroup.sharepoint.com_sites_GIPen&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=4Kqhc4V8ADEctMewZo2ovz_tkInA2Hj3KO5aRWPhaQk&e=

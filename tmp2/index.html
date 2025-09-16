@@ -107,8 +107,14 @@
         </label>
 
         <label style="display:inline-flex; align-items:center; gap:8px;">
-          Card width:
+          Card width (regular):
           <input type="text" id="propCardWidth" placeholder="260px" title="Example: 260px or 20rem" />
+        </label>
+
+        <!-- NEW: separate edit-mode card width -->
+        <label style="display:inline-flex; align-items:center; gap:8px;">
+          Card width (edit mode):
+          <input type="text" id="propCardWidthEdit" placeholder="300px" title="Card width when in edit mode" />
         </label>
 
         <label style="display:inline-flex; align-items:center; gap:8px;">
@@ -175,6 +181,8 @@
     const defaultProps = {
       linkColor: '#80cbc4',
       cardWidth: '260px',
+      // NEW: edit-mode card width default equals regular by default
+      cardWidthEdit: '260px',
       lineSpacing: '6px',
       fontSize: '1rem'
     };
@@ -302,8 +310,10 @@
 
     function applyProps(p) {
       const props = Object.assign({}, defaultProps, p || {});
+      // Use different card width depending on edit mode
+      const cardWidthToUse = isEditMode ? (props.cardWidthEdit || props.cardWidth) : (props.cardWidth || props.cardWidthEdit);
       document.documentElement.style.setProperty('--accent', props.linkColor);
-      document.documentElement.style.setProperty('--card-width', props.cardWidth);
+      document.documentElement.style.setProperty('--card-width', cardWidthToUse);
       document.documentElement.style.setProperty('--line-spacing', props.lineSpacing);
       document.documentElement.style.setProperty('--font-size', props.fontSize);
     }
@@ -388,6 +398,8 @@
     function syncPropInputs() {
       document.getElementById('propLinkColor').value = viewProps.linkColor || defaultProps.linkColor;
       document.getElementById('propCardWidth').value = viewProps.cardWidth || defaultProps.cardWidth;
+      // NEW: sync edit-mode card width input
+      document.getElementById('propCardWidthEdit').value = viewProps.cardWidthEdit || defaultProps.cardWidthEdit;
       document.getElementById('propLineSpacing').value = viewProps.lineSpacing || defaultProps.lineSpacing;
       document.getElementById('propFontSize').value = viewProps.fontSize || defaultProps.fontSize;
     }
@@ -747,11 +759,14 @@
     function updateViewPropsFromInputs() {
       const lc = document.getElementById('propLinkColor').value || defaultProps.linkColor;
       const cw = document.getElementById('propCardWidth').value || defaultProps.cardWidth;
+      const cwe = document.getElementById('propCardWidthEdit').value || defaultProps.cardWidthEdit;
       const ls = document.getElementById('propLineSpacing').value || defaultProps.lineSpacing;
       const fs = document.getElementById('propFontSize').value || defaultProps.fontSize;
 
       viewProps.linkColor = lc;
       viewProps.cardWidth = cw;
+      // NEW: store edit-mode card width separately
+      viewProps.cardWidthEdit = cwe;
       viewProps.lineSpacing = ls;
       viewProps.fontSize = fs;
 
@@ -762,7 +777,7 @@
     }
 
     // attach listeners to prop inputs
-    ['propLinkColor','propCardWidth','propLineSpacing','propFontSize'].forEach(id=>{
+    ['propLinkColor','propCardWidth','propCardWidthEdit','propLineSpacing','propFontSize'].forEach(id=>{
       const el = document.getElementById(id);
       el.addEventListener('input', updateViewPropsFromInputs);
       // also listen to 'change' for color pickers in some browsers
