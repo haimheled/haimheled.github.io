@@ -92,6 +92,48 @@ Github Edit Old = https://github.com/haimheled/haimheled.github.io/blob/master/s
 EDA Playground = https://www.edaplayground.com
 Appimage = https://github.com/AppImageCommunity/awesome-appimage
 
+[Work]
+Portal = https://urldefense.proofpoint.com/v2/url?u=https-3A__renesasgroup.sharepoint.com_sites_GIPen&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=4Kqhc4V8ADEctMewZo2ovz_tkInA2Hj3KO5aRWPhaQk&e=
+Service Portal = https://globalserviceportal.renesas.com/esc
+Renesas Exceed = https://sl-etx.diasemi.com
+Confluence RFMux = https://confluence.renesas.com/display/Rubium/RF+Multiplexer+-+RFMux
+Confluence FDMA = https://confluence.renesas.com/display/Rubium/Fast-DMA+Controller+-+FDMA
+Mail = https://outlook.office365.com/mail/inbox
+Calendar = https://outlook.office365.com/calendar/view/month
+Teams = https://urldefense.proofpoint.com/v2/url?u=https-3A__teams.microsoft.com_&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=ZI48vGgauYmwc5Z8e3P34MCT2xW3toYIFT_1sk_j0Hs&e=
+Goals = https://jpn01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fperformancemanager5.successfactors.eu%2Flogin%3Fcompany%3Drenesasele%23%2Flogin&data=04%7C01%7Chaim.heled.ks%40renesas.com%7C7af5adfd98474c88f47908da1bb4846e%7C53d82571da1947e49cb4625a166a4a2a%7C0%7C0%7C637852759489302374%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000&sdata=IQYFM7WPoibj9WREZs0bm6vpH5TYLh%2F%2B2NsERq5tEK0%3D&reserved=0
+ADP = https://portal.people.adp.com
+Exceed = https://192.168.13.65/etx
+SVN Project = http://172.25.90.250/svn/celeno-sys/Project
+SVN Personal = http://172.25.90.250/svn/celeno-people/haim.heled
+SharePoint = https://renesasgroup.sharepoint.com/sites/CelenoRnD
+Cibus = http://www.mysodexo.co.il
+Tasks = https://tasks.office.com/celeno.com/en-US/Home/Planner/#/mytasks
+# Auth Setup = https://aka.ms/mfasetup
+# Soc CL3000B = http://172.26.30.84/soc-cl3000_b0/soconline/app/index.cgi?
+# Soc CL6000 = http://172.26.30.84/soc-cl6000/soconline/app/index.cgi?
+# Soc CL6000B = http://172.26.30.84/soc-cl6000_b0/soconline/app/index.cgi?
+Soc CL7000 = http://slocelsoc001p.adwin.renesas.com/soc-cl7000_a0/soconline/app/login.cgi?
+# Wiki IP list = http://172.25.90.250/wiki/index.php/Palladium_Protium_IPs
+Jira = https://celeno.atlassian.net/jira/software/c/projects/AD/issues/?filter=myopenissues
+# Jira = https://celeno.atlassian.net/issues/?filter=10368
+Matlab = http://172.25.90.250/svn/celeno-sys/Project/CL3000/Algo/MatlabRelease/distrib/
+DSP = http://172.25.90.250/svn/dsp/code/Everest_A0/build
+Documents = http://172.25.90.250/svn/celeno-sys/Project/CL3000/MAC%20Documents/
+Hours Report = https://harmony.synel.co.il/eharmonynew
+Service Desk = https://renesas.service-now.com
+# Exceed Old = https://172.29.149.65/etx
+# IPMI edk-4171 = http://172.18.3.44/cgi/url_redirect.cgi?url_name=man_chassis
+# IPMI edk-4172 = http://172.18.3.34/cgi/url_redirect.cgi?url_name=man_chassis
+# IPMI edk-4173 = http://172.18.3.52/cgi/url_redirect.cgi?url_name=man_chassis
+# IPMI edk-4174 = http://172.18.3.38/cgi/url_redirect.cgi?url_name=man_chassis
+# IPMI edk-4175 = http://172.18.3.42/cgi/url_redirect.cgi?url_name=man_chassis
+# IPMI edk-4177 = http://172.18.3.41/cgi/url_redirect.cgi?url_name=man_chassis
+# IPMI edk-4178 = http://172.18.3.46/cgi/url_redirect.cgi?url_name=man_chassis
+# IPMI edk-4179 = http://172.18.3.50/cgi/url_redirect.cgi?url_name=man_chassis
+Redwood Matlab = http://moon/svn/celeno-algo/docs/AX/Docs/Algo/TFU/HW%20Modem%20-%20Rx%20TFU%20TD%20Processing%20-%20HW%20Spec.docx
+REL Systems = https://renesasgroup.sharepoint.com/sites/REL-portal/ISD_SYSTEM/SitePages/REL%20Systems.aspx
+
 [Bills]
 012 Mobile = https://www.012mobile.co.il/n/login
 019 Mobile = https://019mobile.co.il/userarea/
@@ -148,45 +190,3 @@ Portfolio Visual = https://www.portfoliovisualizer.com/backtest-portfolio?action
 eToro = https://www.etoro.com/watchlists
 Finviz = https://finviz.com/screener.ashx
 Bilello Blog = https://bilello.blog/2024/the-week-in-charts-11-13-24
-
-[Work]
-Portal = https://urldefense.proofpoint.com/v2/url?u=https-3A__renesasgroup.sharepoint.com_sites_GIPen&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=4Kqhc4V8ADEctMewZo2ovz_tkInA2Hj3KO5aRWPhaQk&e=
-Service Portal = https://globalserviceportal.renesas.com/esc
-Renesas Exceed = https://sl-etx.diasemi.com
-Confluence RFMux = https://confluence.renesas.com/display/Rubium/RF+Multiplexer+-+RFMux
-Confluence FDMA = https://confluence.renesas.com/display/Rubium/Fast-DMA+Controller+-+FDMA
-Mail = https://outlook.office365.com/mail/inbox
-Calendar = https://outlook.office365.com/calendar/view/month
-Teams = https://urldefense.proofpoint.com/v2/url?u=https-3A__teams.microsoft.com_&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=ZI48vGgauYmwc5Z8e3P34MCT2xW3toYIFT_1sk_j0Hs&e=
-Goals = https://jpn01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fperformancemanager5.successfactors.eu%2Flogin%3Fcompany%3Drenesasele%23%2Flogin&data=04%7C01%7Chaim.heled.ks%40renesas.com%7C7af5adfd98474c88f47908da1bb4846e%7C53d82571da1947e49cb4625a166a4a2a%7C0%7C0%7C637852759489302374%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000&sdata=IQYFM7WPoibj9WREZs0bm6vpH5TYLh%2F%2B2NsERq5tEK0%3D&reserved=0
-Auth Setup = https://aka.ms/mfasetup
-SVN Project = http://172.25.90.250/svn/celeno-sys/Project
-SVN Personal = http://172.25.90.250/svn/celeno-people/haim.heled
-SharePoint = https://renesasgroup.sharepoint.com/sites/CelenoRnD
-Cibus = http://www.mysodexo.co.il
-Tasks = https://tasks.office.com/celeno.com/en-US/Home/Planner/#/mytasks
-Soc CL3000B = http://172.26.30.84/soc-cl3000_b0/soconline/app/index.cgi?
-Soc CL6000 = http://172.26.30.84/soc-cl6000/soconline/app/index.cgi?
-Soc CL6000B = http://172.26.30.84/soc-cl6000_b0/soconline/app/index.cgi?
-Soc CL7000 = http://slocelsoc001p.adwin.renesas.com/soc-cl7000_a0/soconline/app/login.cgi?
-Wiki IP list = http://172.25.90.250/wiki/index.php/Palladium_Protium_IPs
-Jira = https://celeno.atlassian.net/jira/software/c/projects/AD/issues/?filter=myopenissues
-# Jira = https://celeno.atlassian.net/issues/?filter=10368
-Matlab = http://172.25.90.250/svn/celeno-sys/Project/CL3000/Algo/MatlabRelease/distrib/
-DSP = http://172.25.90.250/svn/dsp/code/Everest_A0/build
-Documents = http://172.25.90.250/svn/celeno-sys/Project/CL3000/MAC%20Documents/
-Hours Report = https://harmony.synel.co.il/eharmonynew
-Exceed = https://192.168.13.65/etx
-Exceed Old = https://172.29.149.65/etx
-ADP = https://portal.people.adp.com
-Service Desk = https://renesas.service-now.com
-IPMI edk-4171 = http://172.18.3.44/cgi/url_redirect.cgi?url_name=man_chassis
-IPMI edk-4172 = http://172.18.3.34/cgi/url_redirect.cgi?url_name=man_chassis
-IPMI edk-4173 = http://172.18.3.52/cgi/url_redirect.cgi?url_name=man_chassis
-IPMI edk-4174 = http://172.18.3.38/cgi/url_redirect.cgi?url_name=man_chassis
-IPMI edk-4175 = http://172.18.3.42/cgi/url_redirect.cgi?url_name=man_chassis
-IPMI edk-4177 = http://172.18.3.41/cgi/url_redirect.cgi?url_name=man_chassis
-IPMI edk-4178 = http://172.18.3.46/cgi/url_redirect.cgi?url_name=man_chassis
-IPMI edk-4179 = http://172.18.3.50/cgi/url_redirect.cgi?url_name=man_chassis
-Redwood Matlab = http://moon/svn/celeno-algo/docs/AX/Docs/Algo/TFU/HW%20Modem%20-%20Rx%20TFU%20TD%20Processing%20-%20HW%20Spec.docx
-REL Systems = https://renesasgroup.sharepoint.com/sites/REL-portal/ISD_SYSTEM/SitePages/REL%20Systems.aspx
