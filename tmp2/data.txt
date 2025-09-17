@@ -1,8 +1,9 @@
 linkColor = #ffffff
 cardWidth = 160px
 cardWidthEdit = 260px
-lineSpacing = 6px
+lineSpacing = 0px
 fontSize = 1rem
+siteName =
 
 [General]
 Gmail = https://www.gmail.com
