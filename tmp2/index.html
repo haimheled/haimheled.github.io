@@ -44,9 +44,12 @@
     .site-title { font-size:1.6rem; font-weight:600; text-align:center; }
     .search-wrap { display:flex; align-items:center; gap:8px; background: #141414; padding:6px 8px; border-radius:10px; min-width:360px; max-width:760px; }
     .unified-input { background:transparent; border:0; color:inherit; outline:none; font-size:1rem; min-width:220px; }
-    .mode-toggle { display:flex; background:transparent; border-radius:8px; overflow:hidden; }
-    .mode-toggle button { background:transparent; border:0; padding:6px 8px; color:var(--muted); cursor:pointer; }
-    .mode-toggle button.active { color:#fff; background: rgba(255,255,255,0.02); }
+    /* compact mode selector (replaces three adjacent buttons) */
+    .mode-toggle { background:transparent; border-radius:8px; overflow:hidden; min-width:30px; font-size:1rem; text-align: center; }
+    .mode-toggle { padding:0; }
+    .mode-toggle.select { padding:0; }
+    .mode-toggle:focus { outline: none; }
+    .mode-toggle::-ms-expand { display: none; } /* hide IE arrow if needed */
     .search-action { padding:6px 8px; border-radius:8px; border:none; cursor:pointer; }
 
     h1 { display:none; } /* keep original h1 hidden since we now render dynamic site title */
@@ -147,17 +150,18 @@
       </div>
     </div>
 
-    <!-- TOP BAR: site title + unified search + mode toggle; gear remains fixed at top-right -->
+    <!-- TOP BAR: site title + unified search + compact mode selector (dropdown); gear remains fixed at top-right -->
     <div class="topbar" role="banner">
       <div class="brand-search">
         <div id="siteTitle" class="site-title">My Homepage</div>
         <div class="search-wrap" role="search" aria-label="Unified search / task input">
-          <input id="unifiedInput" class="unified-input" placeholder="Quick filter / Google / Ask ChatGPT" autocomplete="off" autofocus/>
-          <div class="mode-toggle" id="modeToggle" title="Switch mode">
-            <button data-mode="filter" class="active" title="Quick filter (live)">Filter</button>
-            <button data-mode="google" title="Google search">Google</button>
-            <button data-mode="chatgpt" title="Ask ChatGPT">ChatGPT</button>
-          </div>
+          <!-- Changed: compact dropdown select replaces the three adjacent buttons -->
+          <select id="modeToggle" class="mode-toggle" title="Mode: Filter / Google / ChatGPT">
+            <option value="filter">Filter</option>
+            <option value="google">Google</option>
+            <option value="chatgpt">ChatGPT</option>
+          </select>
+          <input id="unifiedInput" class="unified-input" placeholder="Search" autocomplete="off" autofocus/>
           <button id="searchAction" class="search-action" title="Run action">Go</button>
         </div>
       </div>
@@ -195,7 +199,7 @@
     const resetLocalBtn = document.getElementById('resetLocalBtn');
     const siteTitleEl = document.getElementById('siteTitle');
     const unifiedInput = document.getElementById('unifiedInput');
-    const modeToggle = document.getElementById('modeToggle');
+    const modeToggle = document.getElementById('modeToggle'); // now the select
     const searchAction = document.getElementById('searchAction');
 
     // default view props (used when baseline doesn't include them)
@@ -772,16 +776,15 @@
     // Modes: filter (live), google, chatgpt
     let currentMode = 'filter'; // default on page load
 
-    // mode toggle clicks
-    modeToggle.querySelectorAll('button').forEach(btn => {
-      btn.addEventListener('click', () => {
-        modeToggle.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        currentMode = btn.dataset.mode;
+    // mode select (dropdown) change handling (replaces previous button clicks)
+    if (modeToggle) {
+      modeToggle.value = currentMode;
+      modeToggle.addEventListener('change', () => {
+        currentMode = modeToggle.value;
         // if switched to filter, run immediate filtering on current input
         if (currentMode === 'filter') runFilter(unifiedInput.value || '');
       });
-    });
+    }
 
     // live input handler: only active in filter mode
     unifiedInput.addEventListener('input', (e) => {
