@@ -268,9 +268,9 @@
     const searchAction = document.getElementById('searchAction');
 
     // NEW: read GET param to enable "old" simplified view
-    // If URL contains ?version=old then isOldMode === true
+    // If URL contains ?v=old then isOldMode === true
     const urlParams = new URLSearchParams(window.location.search);
-    const isOldMode = urlParams.get('version') === 'old';
+    const isOldMode = true; // urlParams.get('v') === 'old';
 
     // If old mode: hide modern UI bits and prevent edit-mode activation
     if (isOldMode) {
