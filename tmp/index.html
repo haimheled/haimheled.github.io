@@ -299,7 +299,12 @@
       cardWidthEdit: '260px',
       lineSpacing: '6px',
       fontSize: '1rem',
-      siteName: 'My Homepage'
+      if (isOldMode) {
+        siteName: 'My Old Homepage'
+      }
+      else {
+        siteName: 'My Homepage'
+      }
     };
 
     // -------------------------
