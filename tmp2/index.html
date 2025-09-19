@@ -56,19 +56,24 @@
 
     /* categories grid — card width uses CSS var now */
     .categories { display:grid; gap:18px; grid-template-columns: repeat(auto-fit, minmax(var(--card-width), 1fr)); }
-    .category { background: var(--card); border-radius:12px; padding:14px; box-shadow: 0 6px 14px rgba(0,0,0,0.4); }
-    .category-header { display:flex; align-items:center; gap:8px; border-bottom:1px solid rgba(255,255,255,0.03); padding-bottom:8px; margin-bottom:10px; }
+    .category { background: var(--card); border-radius:12px; padding:14px; box-shadow: 0 6px 14px rgba(0,0,0,0.4); overflow: visible; }
+    .category-header { display:flex; align-items:center; gap:8px; border-bottom:1px solid rgba(255,255,255,0.03); padding-bottom:8px; margin-bottom:10px; position: relative; }
     .category-header h2 { margin:0; font-size:1.06rem; color:var(--accent); flex:1; }
     .header-buttons, .link-buttons { display:none; gap:6px; align-items:center; }
-    body.edit-mode .header-buttons, body.edit-mode .link-buttons { display:flex; }
+
+    /* EDIT MODE: do NOT show all header/link buttons globally.
+       Instead, show them only for the hovered header / hovered link row,
+       as a right-adjacent extension to that same row (no gap).
+       Only the hovered row extends, not the entire card. */
+
     .category ul { list-style:none; padding:0; margin:0; }
-    .category li { display:flex; gap:8px; align-items:center; margin:var(--line-spacing) 0; }
+    .category li { display:flex; gap:8px; align-items:center; margin:var(--line-spacing) 0; position: relative; }
     .category a { color: var(--accent); text-decoration:none; flex:1; word-break:break-word; font-size: var(--font-size); }
     .category a:hover { text-decoration: underline; }
 
     /* drag helpers */
     .drag-over { outline: 2px dashed rgba(128,203,196,0.9); border-radius:10px; }
-    .drag-handle { cursor:grab; margin-right:6px; color:var(--muted); display:inline-flex; align-items:center; }
+    .drag-handle { cursor:grab; margin-right:6px; color:var(--muted); display:inline-flex; align-items:center; visibility: visible; }
     .drag-handle:active { cursor:grabbing; }
 
     /* commented visuals */
@@ -81,6 +86,66 @@
       .search-wrap { min-width: auto; width: 100%; }
       .topbar { padding: 0 8px; }
     }
+
+    /* --------------------
+       Adjacent-extension behavior for edit-mode:
+       - Controls are hidden by default in edit mode
+       - When hovering a specific .category-header or .category li we display
+         the associated controls as a right extension directly adjacent to the hovered row.
+       - The extension is a child of the hovered row (so moving the mouse into it doesn't lose hover)
+       - The extension may overlap the next card (it won't push layout).
+       -------------------- */
+
+    /* Hide controls by default in edit mode (do not remove capability) */
+    body.edit-mode .header-buttons,
+    body.edit-mode .link-buttons,
+    body.edit-mode .drag-handle {
+      visibility: hidden;
+      display: none;
+    }
+
+    /* Adjacent extension: no gap (left:100% and margin-left:0).
+       Because the buttons are children of the hovered row and absolutely positioned,
+       moving the mouse directly into the extension will keep the row hovered. */
+    body.edit-mode .category-header:hover .header-buttons,
+    body.edit-mode .category li:hover .link-buttons {
+      display: flex;
+      visibility: visible;
+      position: absolute;
+      /* Changed: center vertically relative to the hovered row to fix slight vertical misalignment */
+      top: 50%;
+      left: 100%;
+      margin-left: 0; /* adjacent: no gap */
+      z-index: 40;
+      background: var(--card);
+      padding: 8px;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.55);
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      min-height: 36px;
+      /* small negative translate to slightly overlap the border and ensure no micro-gap
+         Updated: translate both horizontally and vertically to maintain previous horizontal overlap
+         while vertically centering (-50%). */
+      transform: translate(-40px, -50%);
+    }
+
+    /* Show drag handle inline inside the adjacent extension on hover */
+    body.edit-mode .category-header:hover .drag-handle,
+    body.edit-mode .category li:hover .drag-handle {
+      visibility: visible;
+      display: inline-flex;
+    }
+
+    /* Bring hovered row to front so its extension can overlap neighbors */
+    body.edit-mode .category-header:hover,
+    body.edit-mode .category li:hover {
+      z-index: 30;
+    }
+
+    /* Ensure cards do not clip the extension */
+    .categories, .category { overflow: visible; }
   </style>
 </head>
 <body>
@@ -336,8 +401,10 @@
 
     function applyProps(p) {
       const props = Object.assign({}, defaultProps, p || {});
-      // Use different card width depending on edit mode
-      const cardWidthToUse = isEditMode ? (props.cardWidthEdit || props.cardWidth) : (props.cardWidth || props.cardWidthEdit);
+      // Use regular card width ALWAYS — even in edit mode ignore cardWidthEdit for sizing.
+      // This implements: "render the card width in edit mode exactly as it would in the regular mode"
+      const cardWidthToUse = (props.cardWidth || defaultProps.cardWidth);
+
       document.documentElement.style.setProperty('--accent', props.linkColor);
       document.documentElement.style.setProperty('--card-width', cardWidthToUse);
       document.documentElement.style.setProperty('--line-spacing', props.lineSpacing);
@@ -855,7 +922,7 @@
 
       viewProps.linkColor = lc;
       viewProps.cardWidth = cw;
-      // NEW: store edit-mode card width separately
+      // NEW: store edit-mode card width separately (but it's not used for sizing in edit mode)
       viewProps.cardWidthEdit = cwe;
       viewProps.lineSpacing = ls;
       viewProps.fontSize = fs;
