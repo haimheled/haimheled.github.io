@@ -146,46 +146,6 @@
 
     /* Ensure cards do not clip the extension */
     .categories, .category { overflow: visible; }
-
-    /* --------------------
-       Old-mode (very simplified) overrides
-       When ?v=old is set we apply the .old-mode class to body and make the page
-       as plain and minimal as possible — simple headings + plain list links,
-       reduced styling, no shadows, white background, readable default fonts,
-       and link colors that old browsers can render.
-       -------------------- */
-    body.old-mode {
-      background: #ffffff;
-      color: #000000;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-    body.old-mode .wrap { margin: 12px; padding: 0 6px; max-width: 980px; }
-    body.old-mode #optionsBtn { display: none !important; }
-    body.old-mode .topbar,
-    body.old-mode .manage-box {
-      display: none !important;
-    }
-    /* make categories a simple block flow */
-    body.old-mode .categories { display: block; gap: 0; grid-template-columns: none; }
-    body.old-mode .category {
-      background: transparent !important;
-      box-shadow: none !important;
-      padding: 0 !important;
-      border-radius: 0 !important;
-      margin-bottom: 8px;
-      color: inherit;
-    }
-    body.old-mode .category-header { border-bottom: none !important; padding: 4px 0 !important; margin-bottom: 4px; }
-    body.old-mode .category-header h2 { color: #000; font-size: 1.1rem; margin: 0 0 6px 0; }
-    body.old-mode .category ul { padding-left: 18px; margin: 0 0 12px 0; }
-    body.old-mode .category li { display: list-item !important; margin: 2px 0 !important; padding: 0 !important; }
-    body.old-mode .category a { color: #0066cc !important; text-decoration: underline !important; font-size: 1rem !important; }
-    body.old-mode a:hover { text-decoration: none !important; }
-    /* hide edit-specific buttons */
-    body.old-mode .header-buttons,
-    body.old-mode .link-buttons,
-    body.old-mode .drag-handle,
-    body.old-mode button { display: none !important; }
   </style>
 </head>
 <body>
@@ -284,6 +244,10 @@
     const COMMENT_PREFIX = '#';
     // -------------------------
 
+    // Check for legacy bypass parameter: ?v=old
+    const searchParams = (typeof URLSearchParams !== 'undefined') ? new URLSearchParams(location.search) : null;
+    const isOldMode = !!(searchParams && searchParams.get && searchParams.get('v') === 'old');
+
     // app state (keeps the original array structure for categories)
     let baseData = [];       // baseline categories (array) — original structure preserved
     let data = [];           // working categories (array) — original structure preserved
@@ -306,33 +270,6 @@
     const unifiedInput = document.getElementById('unifiedInput');
     const modeToggle = document.getElementById('modeToggle'); // now the select
     const searchAction = document.getElementById('searchAction');
-
-    // NEW: read GET param to enable "old" simplified view
-    // If URL contains ?v=old then isOldMode === true
-    const urlParams = new URLSearchParams(window.location.search);
-    const isOldMode = urlParams.get('v') === 'old';
-
-    // If old mode: hide modern UI bits and prevent edit-mode activation
-    if (isOldMode) {
-      // add a body class to activate old-mode CSS overrides
-      document.body.classList.add('old-mode');
-
-      // hide the gear/options and manage box entirely
-      if (optionsBtn) optionsBtn.style.display = 'none';
-      if (manageBox) manageBox.style.display = 'none';
-      // hide the topbar (search + site title) to keep the view minimal/simple
-      const tb = document.querySelector('.topbar');
-      if (tb) tb.style.display = 'none';
-      // remove autofocus on unified input to avoid modern behaviors in older mode
-      if (unifiedInput) {
-        try { unifiedInput.removeAttribute('autofocus'); } catch (e) {}
-        // additionally disable input so search actions are not used in old minimal view
-        unifiedInput.setAttribute('readonly', 'readonly');
-      }
-      // ensure body doesn't show edit-mode
-      document.body.classList.remove('edit-mode');
-      isEditMode = false;
-    }
 
     // default view props (used when baseline doesn't include them)
     const defaultProps = {
@@ -488,84 +425,8 @@
       document.title = s || 'My Homepage';
     }
 
-    async function loadBaseline() {
-      try {
-        const res = await fetch(BASE_FILENAME, { cache: 'no-cache' });
-        if (!res.ok) throw new Error('Failed to fetch baseline file');
-        const txt = await res.text();
-
-        const parsed = parseINI(txt);
-        baseProps = parsed.props || {};
-        baseData = parsed.cats || [];
-
-        const local = localStorage.getItem('homepageData');
-        if (local) {
-          try {
-            const parsedLocal = JSON.parse(local);
-            // support new shape { props, cats } or old shape (array) for backward compatibility
-            if (parsedLocal && Array.isArray(parsedLocal.cats)) {
-              data = parsedLocal.cats;
-              viewProps = Object.assign({}, defaultProps, parsedLocal.props || baseProps);
-            } else if (Array.isArray(parsedLocal)) {
-              // old format: array of categories only
-              data = parsedLocal;
-              viewProps = Object.assign({}, defaultProps, baseProps);
-            } else {
-              data = clone(baseData);
-              viewProps = Object.assign({}, defaultProps, baseProps);
-            }
-          } catch (e) {
-            data = clone(baseData);
-            viewProps = Object.assign({}, defaultProps, baseProps);
-          }
-        } else {
-          data = clone(baseData);
-          viewProps = Object.assign({}, defaultProps, baseProps);
-        }
-
-        // ensure baseProps has defaults for missing keys
-        baseProps = Object.assign({}, defaultProps, baseProps);
-
-        applyProps(viewProps);
-        updateDirtyFlag();
-        render();
-        syncPropInputs();
-      } catch (err) {
-        console.error(err);
-        const local = localStorage.getItem('homepageData');
-        if (local) {
-          try {
-            const parsedLocal = JSON.parse(local);
-            if (parsedLocal && Array.isArray(parsedLocal.cats)) {
-              data = parsedLocal.cats;
-              viewProps = Object.assign({}, defaultProps, parsedLocal.props || {});
-            } else if (Array.isArray(parsedLocal)) {
-              data = parsedLocal;
-              viewProps = Object.assign({}, defaultProps);
-            } else {
-              data = [];
-              viewProps = Object.assign({}, defaultProps);
-            }
-          } catch {
-            data = [];
-            viewProps = Object.assign({}, defaultProps);
-          }
-        } else {
-          data = [];
-          viewProps = Object.assign({}, defaultProps);
-        }
-        baseData = clone(data);
-        baseProps = Object.assign({}, viewProps);
-        applyProps(viewProps);
-        updateDirtyFlag();
-        render();
-        syncPropInputs();
-      }
-    }
-
     // -------------------------
     // RENDER / UI
-
     function syncPropInputs() {
       document.getElementById('propLinkColor').value = viewProps.linkColor || defaultProps.linkColor;
       document.getElementById('propCardWidth').value = viewProps.cardWidth || defaultProps.cardWidth;
@@ -576,66 +437,7 @@
       document.getElementById('propSiteName').value = viewProps.siteName || defaultProps.siteName;
     }
 
-    // NEW: very minimal renderer for old/simple browsers (activated when ?v=old)
-    function renderSimple() {
-      // Clear current area
-      categoriesDiv.innerHTML = '';
-      if (categorySelect) categorySelect.innerHTML = '';
-
-      // headers/props applied (still use applyProps for site title etc.)
-      applyProps(viewProps);
-
-      // simple heading for the page if present
-      // (siteTitleEl is hidden by CSS in old mode topbar; but we keep semantic h1)
-      const pageTitle = document.createElement('h2');
-      pageTitle.textContent = viewProps.siteName || defaultProps.siteName;
-      pageTitle.style.margin = '0 0 8px 0';
-      pageTitle.style.fontSize = '1.25rem';
-      pageTitle.style.color = '#000';
-      categoriesDiv.appendChild(pageTitle);
-
-      // render each category as a simple heading + list (skip commented categories/links)
-      data.forEach((cat, ci) => {
-        if (cat.commented) return; // hide commented categories in simple view
-
-        // Category title
-        const catEl = document.createElement('div');
-        catEl.className = 'category';
-        const header = document.createElement('div');
-        header.className = 'category-header';
-        const h2 = document.createElement('h2');
-        h2.textContent = cat.name;
-        header.appendChild(h2);
-        catEl.appendChild(header);
-
-        const ul = document.createElement('ul');
-        // plain list items
-        cat.links.forEach(link => {
-          if (link.commented) return;
-          const li = document.createElement('li');
-          const a = document.createElement('a');
-          a.href = link.url;
-          a.textContent = link.name;
-          a.target = '_self';
-          li.appendChild(a);
-          ul.appendChild(li);
-        });
-
-        catEl.appendChild(ul);
-        categoriesDiv.appendChild(catEl);
-      });
-
-      // no drag-and-drop setup, no edit UI
-      updateDirtyFlag();
-    }
-
     function render() {
-      // If in very-old/simple mode — render minimal fallback and return early.
-      if (isOldMode) {
-        renderSimple();
-        return;
-      }
-
       categoriesDiv.innerHTML = '';
       if (categorySelect) categorySelect.innerHTML = '';
 
@@ -811,6 +613,78 @@
     }
 
     // -------------------------
+    // Simple "old" renderer for legacy devices when ?v=old
+    // Produces a minimal table markup (one column) and hides edit controls / search
+    function renderOld() {
+      // Hide heavy UI controls so old devices just see the simple table
+      try { optionsBtn.style.display = 'none'; } catch (e) {}
+      try { manageBox.style.display = 'none'; } catch (e) {}
+      try {
+        const searchWrap = document.querySelector('.search-wrap');
+        if (searchWrap) searchWrap.style.display = 'none';
+      } catch (e) {}
+      try {
+        const modeSel = document.querySelector('.mode-toggle');
+        if (modeSel) modeSel.style.display = 'none';
+      } catch (e) {}
+      // Ensure site title is visible (simple heading)
+      try { siteTitleEl.style.display = 'block'; } catch (e) {}
+
+      // Apply props (so colors and card width are respected)
+      applyProps(viewProps);
+
+      // Build a backward-compatible table (cellpadding/cellspacing) rather than modern grid/cards
+      var html = '<table cellpadding="12" cellspacing="0" border="0" style="width:100%; max-width:1000px; margin:0 auto; table-layout:fixed;">';
+      html += '<tr>'; // start the first row
+
+      var colCount = 3; // how many cards per row (adjust as needed)
+      var currentCol = 0;
+
+      // Category cells
+      for (var ci = 0; ci < data.length; ci++) {
+        var cat = data[ci];
+        if (!cat) continue;
+        if (cat.commented) continue; // in old mode we hide commented categories
+
+        // open a <td> "card"
+        html += '<td valign="top" style="background:var(--card); border-radius:12px; padding:12px; vertical-align:top;">';
+
+        // Category header
+        html += '<div style="font-weight:bold; font-size:1.05rem; color:var(--accent); margin-bottom:8px;">' + escapeHtml(cat.name) + '</div>';
+
+        // Category links
+        for (var li = 0; li < (cat.links || []).length; li++) {
+          var link = cat.links[li];
+          if (!link) continue;
+          if (link.commented) continue;
+          html += '<div style="margin:4px 0;"><a href="' + escapeHtmlAttr(link.url) + '" target="_self" style="color:var(--accent); text-decoration:none; font-size:var(--font-size);">' + escapeHtml(link.name) + '</a></div>';
+        }
+
+        html += '</td>'; // close card
+
+        currentCol++;
+        if (currentCol % colCount === 0) {
+          html += '</tr><tr>'; // new row after N cards
+        }
+      }
+
+      // close last row + table
+      html += '</tr></table>';
+
+      categoriesDiv.innerHTML = html;
+    }
+
+    // minimal escaping helpers for old-rendered HTML (keeps markup safe)
+    function escapeHtml(s) {
+      if (s == null) return '';
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+    function escapeHtmlAttr(s) {
+      if (s == null) return '';
+      return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    // -------------------------
     // DRAG & DROP
     let dragSrc = null;
 
@@ -926,12 +800,7 @@
       render();
     });
 
-    // Guarded options button: if in old mode, do nothing
     optionsBtn.addEventListener('click', () => {
-      if (isOldMode) {
-        // In old minimal mode we don't allow toggling edit mode.
-        return;
-      }
       isEditMode = !isEditMode;
       document.body.classList.toggle('edit-mode', isEditMode);
       manageBox.style.display = isEditMode ? 'block' : 'none';
@@ -1076,6 +945,98 @@
 
     // -------------------------
     // INIT
+    async function loadBaseline() {
+      try {
+        const res = await fetch(BASE_FILENAME, { cache: 'no-cache' });
+        if (!res.ok) throw new Error('Failed to fetch baseline file');
+        const txt = await res.text();
+
+        const parsed = parseINI(txt);
+        baseProps = parsed.props || {};
+        baseData = parsed.cats || [];
+
+        const local = localStorage.getItem('homepageData');
+        if (local) {
+          try {
+            const parsedLocal = JSON.parse(local);
+            // support new shape { props, cats } or old shape (array) for backward compatibility
+            if (parsedLocal && Array.isArray(parsedLocal.cats)) {
+              data = parsedLocal.cats;
+              viewProps = Object.assign({}, defaultProps, parsedLocal.props || baseProps);
+            } else if (Array.isArray(parsedLocal)) {
+              // old format: array of categories only
+              data = parsedLocal;
+              viewProps = Object.assign({}, defaultProps, baseProps);
+            } else {
+              data = clone(baseData);
+              viewProps = Object.assign({}, defaultProps, baseProps);
+            }
+          } catch (e) {
+            data = clone(baseData);
+            viewProps = Object.assign({}, defaultProps, baseProps);
+          }
+        } else {
+          data = clone(baseData);
+          viewProps = Object.assign({}, defaultProps, baseProps);
+        }
+
+        // ensure baseProps has defaults for missing keys
+        baseProps = Object.assign({}, defaultProps, baseProps);
+
+        // If old bypass mode requested — render in the simplest possible way and stop heavy logic
+        if (isOldMode) {
+          // Use viewProps from baseline (do not apply local persistence)
+          applyProps(viewProps);
+          renderOld();
+          // do not initialize edit-mode handlers, drag/drop, or other UI interactions
+          return;
+        }
+
+        applyProps(viewProps);
+        updateDirtyFlag();
+        render();
+        syncPropInputs();
+      } catch (err) {
+        console.error(err);
+        const local = localStorage.getItem('homepageData');
+        if (local) {
+          try {
+            const parsedLocal = JSON.parse(local);
+            if (parsedLocal && Array.isArray(parsedLocal.cats)) {
+              data = parsedLocal.cats;
+              viewProps = Object.assign({}, defaultProps, parsedLocal.props || {});
+            } else if (Array.isArray(parsedLocal)) {
+              data = parsedLocal;
+              viewProps = Object.assign({}, defaultProps);
+            } else {
+              data = [];
+              viewProps = Object.assign({}, defaultProps);
+            }
+          } catch {
+            data = [];
+            viewProps = Object.assign({}, defaultProps);
+          }
+        } else {
+          data = [];
+          viewProps = Object.assign({}, defaultProps);
+        }
+        baseData = clone(data);
+        baseProps = Object.assign({}, viewProps);
+
+        // If old bypass mode requested — render simple table even on error
+        if (isOldMode) {
+          applyProps(viewProps);
+          renderOld();
+          return;
+        }
+
+        applyProps(viewProps);
+        updateDirtyFlag();
+        render();
+        syncPropInputs();
+      }
+    }
+
     loadBaseline();
   </script>
 </body>
