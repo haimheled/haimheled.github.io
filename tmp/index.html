@@ -4,6 +4,156 @@
   <meta charset="utf-8" />
   <title>My Homepage</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <!--
+    IMMEDIATE "OLD" BYPASS:
+    If the URL includes ?v=old, replace the entire document immediately with a
+    very small, backwards-compatible page that fetches data.txt and renders a
+    simple dark grid of category cards. This runs before the rest of the page
+    can render (prevents any millisecond topbar flash).
+  -->
+  <script>
+    (function(){
+      try {
+        var params = (typeof URLSearchParams !== 'undefined') ? new URLSearchParams(location.search) : null;
+        var v = params ? params.get('v') : (location.search.match(/[\?&]v=([^&]+)/) || [])[1];
+        if (v === 'old') {
+          // Synchronously replace the document to avoid any original UI flash.
+          // We write a minimal, dark-themed page and then fetch data.txt to populate it.
+          var html = ''
+            + '<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\"/>'
+            + '<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"/>'
+            + '<title>My Homepage (Old)</title>'
+            // Minimal dark CSS — basic, widely compatible, avoids advanced selectors
+            + '<style>'
+            + 'html,body{height:100%;margin:0;background:#121212;color:#f0f0f0;font-family:Arial,Helvetica,sans-serif;}'
+            + '.wrap{max-width:1100px;margin:18px auto;padding:12px;}'
+            + '.grid{display:block;}'
+            + '.card{background:#1a1a1a;border-radius:8px;padding:12px;margin-bottom:12px;box-shadow:0 6px 14px rgba(0,0,0,0.4);}'
+            + '.cathead{font-weight:600;color:#80cbc4;margin:0 0 8px 0;font-size:1.05rem;}'
+            + '.links{list-style:none;margin:0;padding:0;}'
+            + '.links li{margin:6px 0;}'
+            + '.links a{color:inherit;text-decoration:none;display:block;word-break:break-word;}'
+            + '.links a:hover{text-decoration:underline;}'
+            + '.muted{color:#aaa;font-size:0.9rem;margin-top:6px;}'
+            + '.topinfo{margin-bottom:12px;font-size:0.95rem;color:#ddd;}'
+            + '@media(min-width:720px){.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));grid-gap:14px;}}'
+            + '</style></head><body>'
+            + '<div class=\"wrap\">'
+
+
+
+
+
+            + '<script>'
+            // lightweight INI parser (compatible with older JS engines)
+            + 'function parseINImini(txt){'
+            + '  var lines = txt.split(/\\r?\\n/);'
+            + '  var cats = []; var current = null;'
+            + '  for(var i=0;i<lines.length;i++){'
+            + '    var raw = lines[i]; if(!raw) continue;'
+            + '    var trimmed = raw.replace(/^\\s+|\\s+$/g,\"\");'
+            + '    if(!trimmed) continue;'
+            + '    if(trimmed.charAt(0)==\'#\'){'
+            + '      var uncomment = trimmed.slice(1).replace(/^\\s+|\\s+$/g,\"\");'
+            + '      if(!uncomment) continue;'
+            + '      if(uncomment.charAt(0)==\'[\' && uncomment.charAt(uncomment.length-1)==\']\'){'
+            + '        var name = uncomment.slice(1,-1).replace(/^\\s+|\\s+$/g,\"\");'
+            + '        current = {name:name,links:[],commented:true}; cats.push(current); continue;'
+            + '      }'
+            + '      var eq = uncomment.indexOf(\'=\');'
+            + '      if(eq>=0 && current){'
+            + '        var n = uncomment.slice(0,eq).replace(/^\\s+|\\s+$/g,\"\");'
+            + '        var u = uncomment.slice(eq+1).replace(/^\\s+|\\s+$/g,\"\");'
+            + '        if(n) current.links.push({name:n,url:u,commented:true});'
+            + '      }'
+            + '      continue;'
+            + '    }'
+            + '    if(trimmed.charAt(0)==\'[\' && trimmed.charAt(trimmed.length-1)==\']\'){'
+            + '      var nm = trimmed.slice(1,-1).replace(/^\\s+|\\s+$/g,\"\");'
+            + '      current = {name:nm,links:[],commented:false}; cats.push(current); continue;'
+            + '    }'
+            + '    var eq2 = trimmed.indexOf(\'=\');'
+            + '    if(eq2>=0){'
+            + '      var left = trimmed.slice(0,eq2).replace(/^\\s+|\\s+$/g,\"\");'
+            + '      var right = trimmed.slice(eq2+1).replace(/^\\s+|\\s+$/g,\"\");'
+            + '      if(!current){ /* skip page props in old view */ continue; }'
+            + '      if(left) current.links.push({name:left,url:right,commented:false});'
+            + '    }'
+            + '  }'
+            + '  return cats;'
+            + '}'
+            + 'function safeText(s){return String(s||\"\").replace(/[&<>]/g,function(c){return {\"&\":\"&amp;\",\"<\":\"&lt;\",\">\":\"&gt;\"}[c];});}'
+            + 'function renderOld(cats){'
+            + '  var out = document.getElementById(\"oldGrid\"); out.innerHTML = \"\";'
+            + '  for(var i=0;i<cats.length;i++){'
+            + '    var c = cats[i];'
+            + '    // show even commented categories in this old view? keep them visible but marked?'
+            + '    // As requested: render categories in a plain grid similar to card layout. Show all by default.'
+            + '    var card = document.createElement(\"div\"); card.className = \"card\";'
+            + '    var h = document.createElement(\"h2\"); h.className = \"cathead\"; h.appendChild(document.createTextNode(c.name||\"Unnamed\"));'
+            + '    card.appendChild(h);'
+            + '    var ul = document.createElement(\"ul\"); ul.className = \"links\";'
+            + '    for(var j=0;j<(c.links||[]).length;j++){'
+            + '      var l = c.links[j];'
+            + '      // skip empty urls'
+            + '      if(!l || !l.url) continue;'
+            + '      var li = document.createElement(\"li\");'
+            + '      var a = document.createElement(\"a\");'
+            + '      a.href = l.url; a.appendChild(document.createTextNode(l.name || l.url));'
+            + '      // open in same tab to be more backward-friendly'
+            + '      a.target = \"_self\";'
+            + '      li.appendChild(a); ul.appendChild(li);'
+            + '    }'
+            + '    card.appendChild(ul); out.appendChild(card);'
+            + '  }'
+            + '}'
+            + '/* Fetch baseline INI file and render simple grid. Use basic XHR for old browser compatibility. */'
+            + '(function(){'
+            + '  var file = \"data.txt\";'
+            + '  try{'
+            + '    var xhr = null;'
+            + '    if(window.XMLHttpRequest) xhr = new XMLHttpRequest(); else xhr = new ActiveXObject(\"Microsoft.XMLHTTP\");'
+            + '    xhr.open(\"GET\", file, true);'
+            + '    xhr.onreadystatechange = function(){'
+            + '      if(xhr.readyState===4){'
+            + '        if(xhr.status>=200 && xhr.status<300){'
+            + '          var txt = xhr.responseText || \"\";'
+            + '          var cats = parseINImini(txt);'
+            + '          // If no categories found, show a friendly note'
+            + '          if(!cats || cats.length===0){'
+            + '            var out = document.getElementById(\"oldGrid\"); out.innerHTML = \"<div class=\\\"card\\\">No categories found in data.txt</div>\";'
+            + '          } else {'
+            + '            renderOld(cats);'
+            + '          }'
+            + '        } else {'
+            + '          var out2 = document.getElementById(\"oldGrid\"); out2.innerHTML = \"<div class=\\\"card\\\">Failed to load data.txt (status: \"+xhr.status+\").</div>\";'
+            + '        }'
+            + '      }'
+            + '    };'
+            + '    xhr.send(null);'
+            + '  }catch(e){'
+            + '    var out3 = document.getElementById(\"oldGrid\"); out3.innerHTML = \"<div class=\\\"card\\\">Error loading data.txt.</div>\";'
+            + '  }'
+            + '})();'
+            + '<\/script>'
+            + '</body></html>';
+
+
+          document.open();
+          document.write(html);
+          document.close();
+          // stop executing the rest of the original page by returning from the IIFE
+          return;
+        }
+      } catch (e) {
+        // If anything goes wrong, fallthrough to normal page (do not block)
+        // but do not throw — keep original behavior.
+        try { console.error('old-bypass error', e); } catch(_) {}
+      }
+    })();
+  </script>
+
   <style>
     :root {
       --bg: #121212;
@@ -244,10 +394,6 @@
     const COMMENT_PREFIX = '#';
     // -------------------------
 
-    // Check for legacy bypass parameter: ?v=old
-    const searchParams = (typeof URLSearchParams !== 'undefined') ? new URLSearchParams(location.search) : null;
-    const isOldMode = !!(searchParams && searchParams.get && searchParams.get('v') === 'old');
-
     // app state (keeps the original array structure for categories)
     let baseData = [];       // baseline categories (array) — original structure preserved
     let data = [];           // working categories (array) — original structure preserved
@@ -423,6 +569,81 @@
 
       // also set document title for clarity
       document.title = s || 'My Homepage';
+    }
+
+    async function loadBaseline() {
+      try {
+        const res = await fetch(BASE_FILENAME, { cache: 'no-cache' });
+        if (!res.ok) throw new Error('Failed to fetch baseline file');
+        const txt = await res.text();
+
+        const parsed = parseINI(txt);
+        baseProps = parsed.props || {};
+        baseData = parsed.cats || [];
+
+        const local = localStorage.getItem('homepageData');
+        if (local) {
+          try {
+            const parsedLocal = JSON.parse(local);
+            // support new shape { props, cats } or old shape (array) for backward compatibility
+            if (parsedLocal && Array.isArray(parsedLocal.cats)) {
+              data = parsedLocal.cats;
+              viewProps = Object.assign({}, defaultProps, parsedLocal.props || baseProps);
+            } else if (Array.isArray(parsedLocal)) {
+              // old format: array of categories only
+              data = parsedLocal;
+              viewProps = Object.assign({}, defaultProps, baseProps);
+            } else {
+              data = clone(baseData);
+              viewProps = Object.assign({}, defaultProps, baseProps);
+            }
+          } catch (e) {
+            data = clone(baseData);
+            viewProps = Object.assign({}, defaultProps, baseProps);
+          }
+        } else {
+          data = clone(baseData);
+          viewProps = Object.assign({}, defaultProps, baseProps);
+        }
+
+        // ensure baseProps has defaults for missing keys
+        baseProps = Object.assign({}, defaultProps, baseProps);
+
+        applyProps(viewProps);
+        updateDirtyFlag();
+        render();
+        syncPropInputs();
+      } catch (err) {
+        console.error(err);
+        const local = localStorage.getItem('homepageData');
+        if (local) {
+          try {
+            const parsedLocal = JSON.parse(local);
+            if (parsedLocal && Array.isArray(parsedLocal.cats)) {
+              data = parsedLocal.cats;
+              viewProps = Object.assign({}, defaultProps, parsedLocal.props || {});
+            } else if (Array.isArray(parsedLocal)) {
+              data = parsedLocal;
+              viewProps = Object.assign({}, defaultProps);
+            } else {
+              data = [];
+              viewProps = Object.assign({}, defaultProps);
+            }
+          } catch {
+            data = [];
+            viewProps = Object.assign({}, defaultProps);
+          }
+        } else {
+          data = [];
+          viewProps = Object.assign({}, defaultProps);
+        }
+        baseData = clone(data);
+        baseProps = Object.assign({}, viewProps);
+        applyProps(viewProps);
+        updateDirtyFlag();
+        render();
+        syncPropInputs();
+      }
     }
 
     // -------------------------
@@ -610,78 +831,6 @@
 
       setupDragAndDrop();
       updateDirtyFlag();
-    }
-
-    // -------------------------
-    // Simple "old" renderer for legacy devices when ?v=old
-    // Produces a minimal table markup (one column) and hides edit controls / search
-    function renderOld() {
-      // Hide heavy UI controls so old devices just see the simple table
-      try { optionsBtn.style.display = 'none'; } catch (e) {}
-      try { manageBox.style.display = 'none'; } catch (e) {}
-      try {
-        const searchWrap = document.querySelector('.search-wrap');
-        if (searchWrap) searchWrap.style.display = 'none';
-      } catch (e) {}
-      try {
-        const modeSel = document.querySelector('.mode-toggle');
-        if (modeSel) modeSel.style.display = 'none';
-      } catch (e) {}
-      // Ensure site title is visible (simple heading)
-      try { siteTitleEl.style.display = 'block'; } catch (e) {}
-
-      // Apply props (so colors and card width are respected)
-      applyProps(viewProps);
-
-      // Build a backward-compatible table (cellpadding/cellspacing) rather than modern grid/cards
-      var html = '<table cellpadding="12" cellspacing="0" border="0" style="width:100%; max-width:1000px; margin:0 auto; table-layout:fixed;">';
-      html += '<tr>'; // start the first row
-
-      var colCount = 3; // how many cards per row (adjust as needed)
-      var currentCol = 0;
-
-      // Category cells
-      for (var ci = 0; ci < data.length; ci++) {
-        var cat = data[ci];
-        if (!cat) continue;
-        if (cat.commented) continue; // in old mode we hide commented categories
-
-        // open a <td> "card"
-        html += '<td valign="top" style="background:var(--card); border-radius:12px; padding:12px; vertical-align:top;">';
-
-        // Category header
-        html += '<div style="font-weight:bold; font-size:1.05rem; color:var(--accent); margin-bottom:8px;">' + escapeHtml(cat.name) + '</div>';
-
-        // Category links
-        for (var li = 0; li < (cat.links || []).length; li++) {
-          var link = cat.links[li];
-          if (!link) continue;
-          if (link.commented) continue;
-          html += '<div style="margin:4px 0;"><a href="' + escapeHtmlAttr(link.url) + '" target="_self" style="color:var(--accent); text-decoration:none; font-size:var(--font-size);">' + escapeHtml(link.name) + '</a></div>';
-        }
-
-        html += '</td>'; // close card
-
-        currentCol++;
-        if (currentCol % colCount === 0) {
-          html += '</tr><tr>'; // new row after N cards
-        }
-      }
-
-      // close last row + table
-      html += '</tr></table>';
-
-      categoriesDiv.innerHTML = html;
-    }
-
-    // minimal escaping helpers for old-rendered HTML (keeps markup safe)
-    function escapeHtml(s) {
-      if (s == null) return '';
-      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-    }
-    function escapeHtmlAttr(s) {
-      if (s == null) return '';
-      return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
     }
 
     // -------------------------
@@ -945,98 +1094,6 @@
 
     // -------------------------
     // INIT
-    async function loadBaseline() {
-      try {
-        const res = await fetch(BASE_FILENAME, { cache: 'no-cache' });
-        if (!res.ok) throw new Error('Failed to fetch baseline file');
-        const txt = await res.text();
-
-        const parsed = parseINI(txt);
-        baseProps = parsed.props || {};
-        baseData = parsed.cats || [];
-
-        const local = localStorage.getItem('homepageData');
-        if (local) {
-          try {
-            const parsedLocal = JSON.parse(local);
-            // support new shape { props, cats } or old shape (array) for backward compatibility
-            if (parsedLocal && Array.isArray(parsedLocal.cats)) {
-              data = parsedLocal.cats;
-              viewProps = Object.assign({}, defaultProps, parsedLocal.props || baseProps);
-            } else if (Array.isArray(parsedLocal)) {
-              // old format: array of categories only
-              data = parsedLocal;
-              viewProps = Object.assign({}, defaultProps, baseProps);
-            } else {
-              data = clone(baseData);
-              viewProps = Object.assign({}, defaultProps, baseProps);
-            }
-          } catch (e) {
-            data = clone(baseData);
-            viewProps = Object.assign({}, defaultProps, baseProps);
-          }
-        } else {
-          data = clone(baseData);
-          viewProps = Object.assign({}, defaultProps, baseProps);
-        }
-
-        // ensure baseProps has defaults for missing keys
-        baseProps = Object.assign({}, defaultProps, baseProps);
-
-        // If old bypass mode requested — render in the simplest possible way and stop heavy logic
-        if (isOldMode) {
-          // Use viewProps from baseline (do not apply local persistence)
-          applyProps(viewProps);
-          renderOld();
-          // do not initialize edit-mode handlers, drag/drop, or other UI interactions
-          return;
-        }
-
-        applyProps(viewProps);
-        updateDirtyFlag();
-        render();
-        syncPropInputs();
-      } catch (err) {
-        console.error(err);
-        const local = localStorage.getItem('homepageData');
-        if (local) {
-          try {
-            const parsedLocal = JSON.parse(local);
-            if (parsedLocal && Array.isArray(parsedLocal.cats)) {
-              data = parsedLocal.cats;
-              viewProps = Object.assign({}, defaultProps, parsedLocal.props || {});
-            } else if (Array.isArray(parsedLocal)) {
-              data = parsedLocal;
-              viewProps = Object.assign({}, defaultProps);
-            } else {
-              data = [];
-              viewProps = Object.assign({}, defaultProps);
-            }
-          } catch {
-            data = [];
-            viewProps = Object.assign({}, defaultProps);
-          }
-        } else {
-          data = [];
-          viewProps = Object.assign({}, defaultProps);
-        }
-        baseData = clone(data);
-        baseProps = Object.assign({}, viewProps);
-
-        // If old bypass mode requested — render simple table even on error
-        if (isOldMode) {
-          applyProps(viewProps);
-          renderOld();
-          return;
-        }
-
-        applyProps(viewProps);
-        updateDirtyFlag();
-        render();
-        syncPropInputs();
-      }
-    }
-
     loadBaseline();
   </script>
 </body>
