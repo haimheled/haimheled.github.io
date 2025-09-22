@@ -7,7 +7,7 @@
 
   <!--
     IMMEDIATE "OLD" BYPASS:
-    If the URL includes #v=old, replace the entire document immediately with a
+    If the URL includes ?v=old, replace the entire document immediately with a
     very small, backwards-compatible page that fetches data.txt and renders a
     simple dark grid of category cards. This runs before the rest of the page
     can render (prevents any millisecond topbar flash).
@@ -15,9 +15,8 @@
   <script>
     (function(){
       try {
-        // switched from GET param to hash
-        var hash = (typeof location.hash === 'string') ? location.hash : '';
-        var v = (hash.match(/[#&]v=([^&]+)/) || [])[1];
+        var params = (typeof URLSearchParams !== 'undefined') ? new URLSearchParams(location.search) : null;
+        var v = params ? params.get('v') : (location.search.match(/[\?&]v=([^&]+)/) || [])[1];
         if (v === 'old') {
           // Synchronously replace the document to avoid any original UI flash.
           // We write a minimal, dark-themed page and then fetch data.txt to populate it.
@@ -89,22 +88,27 @@
             + '  var out = document.getElementById(\"oldGrid\"); out.innerHTML = \"\";'
             + '  for(var i=0;i<cats.length;i++){'
             + '    var c = cats[i];'
+            + '    // show even commented categories in this old view? keep them visible but marked?'
+            + '    // As requested: render categories in a plain grid similar to card layout. Show all by default.'
             + '    var card = document.createElement(\"div\"); card.className = \"card\";'
             + '    var h = document.createElement(\"h2\"); h.className = \"cathead\"; h.appendChild(document.createTextNode(c.name||\"Unnamed\"));'
             + '    card.appendChild(h);'
             + '    var ul = document.createElement(\"ul\"); ul.className = \"links\";'
             + '    for(var j=0;j<(c.links||[]).length;j++){'
             + '      var l = c.links[j];'
+            + '      // skip empty urls'
             + '      if(!l || !l.url) continue;'
             + '      var li = document.createElement(\"li\");'
             + '      var a = document.createElement(\"a\");'
             + '      a.href = l.url; a.appendChild(document.createTextNode(l.name || l.url));'
+            + '      // open in same tab to be more backward-friendly'
             + '      a.target = \"_self\";'
             + '      li.appendChild(a); ul.appendChild(li);'
             + '    }'
             + '    card.appendChild(ul); out.appendChild(card);'
             + '  }'
             + '}'
+            + '/* Fetch baseline INI file and render simple grid. Use basic XHR for old browser compatibility. */'
             + '(function(){'
             + '  var file = \"data.txt\";'
             + '  try{'
@@ -116,6 +120,7 @@
             + '        if(xhr.status>=200 && xhr.status<300){'
             + '          var txt = xhr.responseText || \"\";'
             + '          var cats = parseINImini(txt);'
+            + '          // If no categories found, show a friendly note'
             + '          if(!cats || cats.length===0){'
             + '            var out = document.getElementById(\"oldGrid\"); out.innerHTML = \"<div class=\\\"card\\\">No categories found in data.txt</div>\";'
             + '          } else {'
@@ -134,12 +139,16 @@
             + '<\/script>'
             + '</body></html>';
 
+
           document.open();
           document.write(html);
           document.close();
+          // stop executing the rest of the original page by returning from the IIFE
           return;
         }
       } catch (e) {
+        // If anything goes wrong, fallthrough to normal page (do not block)
+        // but do not throw — keep original behavior.
         try { console.error('old-bypass error', e); } catch(_) {}
       }
     })();
