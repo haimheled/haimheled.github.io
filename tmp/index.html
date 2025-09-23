@@ -5,17 +5,25 @@
   <title>Old Startpage</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    :root {
+      --link-color: #66b2ff;
+      --font-size: 1rem;
+      --card-width: 220px;
+      --line-spacing: 6px;
+    }
+
     body {
       margin: 0;
       padding: 0;
       font-family: sans-serif;
       background: #1e1e1e;
       color: #eee;
+      font-size: var(--font-size);
     }
 
     .container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(var(--card-width), 1fr));
       gap: 20px;
       padding: 40px;
     }
@@ -42,11 +50,11 @@
     }
 
     .category li {
-      margin: 6px 0;
+      margin: var(--line-spacing) 0;
     }
 
     .category a {
-      color: #66b2ff;
+      color: var(--link-color);
       text-decoration: none;
     }
 
@@ -67,17 +75,31 @@
         const lines = text.split(/\r?\n/);
         const categories = [];
         let currentCategory = null;
+        const config = {};
 
         for (let line of lines) {
           line = line.trim();
-          if (!line || line.startsWith("#")) continue; // skip empty or comments
+          if (!line || line.startsWith("#")) continue;
 
+          // Config parameters (before first [Category])
+          if (!currentCategory && line.includes("=") && !line.startsWith("[")) {
+            const [key, val] = line.split("=").map(s => s.trim());
+            if (key && val !== undefined) {
+              config[key] = val;
+            }
+            continue;
+          }
+
+          // Category header
           if (line.startsWith("[")) {
-            // New category
             const catName = line.replace(/^\[|\]$/g, "");
             currentCategory = { title: catName, links: [] };
             categories.push(currentCategory);
-          } else if (line.includes("=") && currentCategory) {
+            continue;
+          }
+
+          // Links inside category
+          if (line.includes("=") && currentCategory) {
             const [name, url] = line.split("=").map(s => s.trim());
             if (name && url) {
               currentCategory.links.push({ name, url });
@@ -85,6 +107,14 @@
           }
         }
 
+        // Apply config → CSS variables
+        const root = document.documentElement;
+        if (config.linkColor) root.style.setProperty("--link-color", config.linkColor);
+        if (config.fontSize) root.style.setProperty("--font-size", config.fontSize);
+        if (config.cardWidth) root.style.setProperty("--card-width", config.cardWidth);
+        if (config.lineSpacing) root.style.setProperty("--line-spacing", config.lineSpacing);
+
+        // Render categories
         const container = document.getElementById("categories");
         container.innerHTML = "";
 
