@@ -87,7 +87,7 @@
   <script>
     async function loadCategories() {
       try {
-        const res = await fetch("data.txt");
+        const res = await fetch("../data.txt");
         const text = await res.text();
 
         const lines = text.split(/\r?\n/);
