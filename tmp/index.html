@@ -21,7 +21,24 @@
       font-size: var(--font-size);
     }
 
-    /*.container {
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 40px;
+      justify-content: center; /*flex-start;*/
+    }
+
+    .category {
+      background: #2c2c2c;
+      padding: 16px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      flex: 1 1 var(--card-width); /* grow/shrink but prefer cardWidth */
+      box-sizing: border-box;
+    }
+
+        /*.container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(var(--card-width), 1fr));
       gap: 20px;
@@ -35,22 +52,12 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.5);
     }*/
 
-    .container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      padding: 40px;
-      justify-content: flex-start;
-    }
-
-
-    .category {
-      background: #2c2c2c;
-      padding: 16px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-      flex: 1 1 var(--card-width); /* grow/shrink but prefer cardWidth */
-      box-sizing: border-box;
+    .category.placeholder {
+      visibility: hidden; /* takes up space but invisible */
+      box-shadow: none;
+      background: transparent;
+      border: none;
+      padding: 0;
     }
 
     .category h2 {
@@ -159,6 +166,36 @@
           container.appendChild(catDiv);
         });
 
+        // Add placeholders to align final row
+        addPlaceholders();
+
+        // Recalculate on resize
+        window.addEventListener("resize", () => {
+          [...container.querySelectorAll(".placeholder")].forEach(p => p.remove());
+          addPlaceholders();
+        });
+
+        function addPlaceholders() {
+          const cardWidth = parseInt(getComputedStyle(root).getPropertyValue("--card-width"));
+          const gap = 20; // must match .container gap
+          const containerWidth = container.clientWidth;
+
+          const perRow = Math.floor((containerWidth + gap) / (cardWidth + gap));
+          if (perRow < 1) return;
+
+          const currentCount = container.querySelectorAll(".category:not(.placeholder)").length;
+          const remainder = currentCount % perRow;
+
+          if (remainder !== 0) {
+            const toAdd = perRow - remainder;
+            for (let i = 0; i < toAdd; i++) {
+              const ph = document.createElement("div");
+              ph.className = "category placeholder";
+              container.appendChild(ph);
+            }
+          }
+        }
+
       } catch (e) {
         console.error("Error loading data.txt", e);
       }
@@ -168,3 +205,4 @@
   </script>
 </body>
 </html>
+
