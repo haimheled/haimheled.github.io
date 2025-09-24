@@ -3,7 +3,7 @@ cardWidth = 160px
 cardWidthEdit = 260px
 lineSpacing = 0px
 fontSize = 1rem
-siteName =
+siteName = 
 
 [General]
 Gmail = https://www.gmail.com
@@ -86,9 +86,9 @@ My Fitness Pal = https://www.myfitnesspal.com/account/login
 Cronometer = https://cronometer.com
 
 [Development]
-Github Edit = https://github.com/haimheled/haimheled.github.io/edit/master/js/config.js
+# Github Edit = https://github.com/haimheled/haimheled.github.io/edit/master/js/config.js
 Github Page = https://github.com/haimheled/haimheled.github.io
-Github Edit Old = https://github.com/haimheled/haimheled.github.io/blob/master/startpage.rwrt.old_site/index.html
+# Github Edit Old = https://github.com/haimheled/haimheled.github.io/blob/master/startpage.rwrt.old_site/index.html
 EDA Playground = https://www.edaplayground.com
 Appimage = https://github.com/AppImageCommunity/awesome-appimage
 
@@ -103,7 +103,7 @@ Calendar = https://outlook.office365.com/calendar/view/month
 Teams = https://urldefense.proofpoint.com/v2/url?u=https-3A__teams.microsoft.com_&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=ZI48vGgauYmwc5Z8e3P34MCT2xW3toYIFT_1sk_j0Hs&e=
 Goals = https://jpn01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fperformancemanager5.successfactors.eu%2Flogin%3Fcompany%3Drenesasele%23%2Flogin&data=04%7C01%7Chaim.heled.ks%40renesas.com%7C7af5adfd98474c88f47908da1bb4846e%7C53d82571da1947e49cb4625a166a4a2a%7C0%7C0%7C637852759489302374%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000&sdata=IQYFM7WPoibj9WREZs0bm6vpH5TYLh%2F%2B2NsERq5tEK0%3D&reserved=0
 ADP = https://portal.people.adp.com
-Exceed = https://192.168.13.65/etx
+# Exceed = https://192.168.13.65/etx
 SVN Project = http://172.25.90.250/svn/celeno-sys/Project
 SVN Personal = http://172.25.90.250/svn/celeno-people/haim.heled
 SharePoint = https://renesasgroup.sharepoint.com/sites/CelenoRnD
@@ -147,7 +147,7 @@ City Tax = https://www.ramat-gan.muni.il/waterbillsubscribe
 Electricity = https://www.iec.co.il
 
 [Utilities]
-Babylon = http://online.babylon.com/trans_box/myindex.php?lang=EN&affiliate=CD1
+# Babylon = http://online.babylon.com/trans_box/myindex.php?lang=EN&affiliate=CD1
 Quick Email = https://nospam.today
 Wikipedia = https://he.wikipedia.org
 IP Address = https://ipecho.net/plain
