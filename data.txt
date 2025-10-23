@@ -50,7 +50,8 @@ NBA Games = https://www.nba.com/games
 # Wizards Streams = https://topstreams.info/nba/wizards
 Blazers Streams = https://topstreams.info/nba/trailblazers
 NBA Streams = https://nbabite.com
-NBA Replay = https://basketball-video.com // = https://nbareplay.net
+# NBA Replay = https://basketball-video.com // = https://nbareplay.net
+Basketball Replay = https://basketball-video.com/
 
 [AI]
 ChatGPT = https://chat.openai.com/auth/login
