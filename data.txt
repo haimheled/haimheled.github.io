@@ -103,6 +103,7 @@ Service Portal = https://globalserviceportal.renesas.com/esc
 Service Desk = https://renesas.service-now.com
 Confluence RFMux = https://confluence.renesas.com/display/Rubium/RF+Multiplexer+-+RFMux
 Confluence FDMA = https://confluence.renesas.com/display/Rubium/Fast-DMA+Controller+-+FDMA
+RFMux Excel = https://renesasgroup.sharepoint.com/:x:/r/sites/RedwoodPHY/_layouts/15/doc2.aspx?sourcedoc=%7BDEFE149F-0C87-4472-92A9-025BCBEED018%7D&file=rfmux.xlsx&action=default&mobileredirect=true
 Mail = https://outlook.office365.com/mail/inbox
 Calendar = https://outlook.office365.com/calendar/view/month
 Teams = https://urldefense.proofpoint.com/v2/url?u=https-3A__teams.microsoft.com_&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=ZI48vGgauYmwc5Z8e3P34MCT2xW3toYIFT_1sk_j0Hs&e=
