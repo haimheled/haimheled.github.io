@@ -98,7 +98,7 @@ Renesas Exceed = https://sl-etx.diasemi.com
 Hours Report = https://harmony.synel.co.il/eharmonynew
 ADP = https://portal.people.adp.com
 CoPilot = https://m365.cloud.microsoft/chat?auth=2
-Open A Ticket = https://globalserviceportal.renesas.com/esc?id=sc_cat_item&sys_id=9531047253230010fa75ddeeff7b1262
+Open Ticket = https://globalserviceportal.renesas.com/esc?id=sc_cat_item&sys_id=9531047253230010fa75ddeeff7b1262
 Portal = https://urldefense.proofpoint.com/v2/url?u=https-3A__renesasgroup.sharepoint.com_sites_GIPen&d=DwMFAg&c=euGZstcaTDllvimEN8b7jXrwqOf-v5A_CdpgnVfiiMM&r=UwQdxjYfFiaTT2Adbb4SkV5eaLla8cQDERLmGpwUsXM&m=sjsiFNIloFkDZSS7YbIl_lvjnK7-laA3IhuC8HqK3Eg&s=4Kqhc4V8ADEctMewZo2ovz_tkInA2Hj3KO5aRWPhaQk&e=
 Service Portal = https://globalserviceportal.renesas.com/esc
 Service Desk = https://renesas.service-now.com
