@@ -100,6 +100,7 @@ Hours Report = https://harmony.synel.co.il/eharmonynew
 ADP = https://portal.people.adp.com
 CoPilot = https://m365.cloud.microsoft/chat?auth=2
 Equity Gateway = https://renesas.globalsharesequity.co.uk/en/Participant
+Jira = https://jira.global.renesas.com/projects/RUBIUM/issues/RUBIUM-3630?filter=myopenissues
 Open Ticket = https://globalserviceportal.renesas.com/esc?id=sc_cat_item&sys_id=9531047253230010fa75ddeeff7b1262
 Service Portal = https://globalserviceportal.renesas.com/esc
 Service Desk = https://renesas.service-now.com
@@ -122,7 +123,6 @@ Tasks = https://tasks.office.com/celeno.com/en-US/Home/Planner/#/mytasks
 # Soc CL6000B = http://172.26.30.84/soc-cl6000_b0/soconline/app/index.cgi?
 Soc CL7000 = http://slocelsoc001p.adwin.renesas.com/soc-cl7000_a0/soconline/app/login.cgi?
 # Wiki IP list = http://172.25.90.250/wiki/index.php/Palladium_Protium_IPs
-Jira = https://celeno.atlassian.net/jira/software/c/projects/AD/issues/?filter=myopenissues
 # Jira = https://celeno.atlassian.net/issues/?filter=10368
 Matlab = http://172.25.90.250/svn/celeno-sys/Project/CL3000/Algo/MatlabRelease/distrib/
 DSP = http://172.25.90.250/svn/dsp/code/Everest_A0/build
