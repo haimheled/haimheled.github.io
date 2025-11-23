@@ -596,6 +596,25 @@
         hdrBtns.appendChild(catCheckbox);
 
 
+        const addCatBtn = document.createElement('button');
+        addCatBtn.textContent = '+';
+        addCatBtn.title = 'Add new category after this';
+        addCatBtn.addEventListener('click', () => {
+          let cname = prompt('Category name:', 'New Category');
+          if (!cname) return;
+          cname = cname.trim();
+          if (!cname) return;
+          const newCat = { name: cname, links: [{ name: 'New Link', url: '', commented: false }], commented: false };
+          data.splice(ci+1, 0, newCat);
+          persistLocal();
+          render();
+        });
+        hdrBtns.appendChild(addCatBtn);
+
+
+
+
+
         header.appendChild(hdrBtns);
         card.appendChild(header);
 
@@ -669,6 +688,23 @@
             render();
           });
           linkBtns.appendChild(linkCheckbox);
+
+          const addLinkBtn = document.createElement('button');
+          addLinkBtn.textContent = '+';
+          addLinkBtn.title = 'Add new link below this';
+          addLinkBtn.addEventListener('click', () => {
+            const nn = prompt('Link name:', 'New Link');
+            if (!nn) return;
+            const uu = prompt('Link URL:', '');
+            if (uu === null) return;
+            const newLink = { name: nn.trim(), url: uu.trim(), commented: false };
+            data[ci].links.splice(li+1, 0, newLink);
+            persistLocal();
+            render();
+          });
+          linkBtns.appendChild(addLinkBtn);
+
+
 
 
           liEl.appendChild(linkBtns);
