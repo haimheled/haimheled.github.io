@@ -101,6 +101,7 @@ ADP = https://portal.people.adp.com
 CoPilot = https://m365.cloud.microsoft/chat?auth=2
 Equity Gateway = https://renesas.globalsharesequity.co.uk/en/Participant
 Jira = https://jira.global.renesas.com/projects/RUBIUM/issues/RUBIUM-3630?filter=myopenissues
+Memory Map = https://confluence.renesas.com/pages/viewpage.action?spaceKey=Rubium&title=Memory+Map
 Open Ticket = https://globalserviceportal.renesas.com/esc?id=sc_cat_item&sys_id=9531047253230010fa75ddeeff7b1262
 Service Portal = https://globalserviceportal.renesas.com/esc
 Service Desk = https://renesas.service-now.com
