@@ -55,6 +55,7 @@ Basketball Replay = https://basketball-video.com/
 
 [AI]
 ChatGPT = https://chat.openai.com/auth/login
+TempGPT = https://chatgpt.com/?temporary-chat=true
 Grok = https://grok.com
 Gemini = https://gemini.google.com/
 Claude = https://claude.ai/onboarding
