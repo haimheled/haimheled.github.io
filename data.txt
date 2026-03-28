@@ -143,6 +143,9 @@ Redwood Matlab = http://moon/svn/celeno-algo/docs/AX/Docs/Algo/TFU/HW%20Modem%20
 REL Systems = https://renesasgroup.sharepoint.com/sites/REL-portal/ISD_SYSTEM/SitePages/REL%20Systems.aspx
 
 [Bills]
+Electricity = https://www.iec.co.il
+Water = https://www.mast.co.il/101/mail-invoice
+City Tax = https://www.ramat-gan.muni.il/waterbillsubscribe
 012 Mobile = https://www.012mobile.co.il/n/login
 019 Mobile = https://019mobile.co.il/userarea/
 ISP & Landline = https://bmy.bezeq.co.il/
@@ -150,9 +153,6 @@ ISP & Landline = https://bmy.bezeq.co.il/
 # ISP content = https://www.hotnet.net.il
 Credit Card = https://www.cal-online.co.il
 Super Gas = http://sgas.co.il
-Water = https://www.mast.co.il/101/mail-invoice
-City Tax = https://www.ramat-gan.muni.il/waterbillsubscribe
-Electricity = https://www.iec.co.il
 
 [Utilities]
 # Babylon = http://online.babylon.com/trans_box/myindex.php?lang=EN&affiliate=CD1
