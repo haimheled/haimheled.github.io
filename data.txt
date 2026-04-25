@@ -48,10 +48,15 @@ Sport5 = http://www.sport5.co.il
 One = http://www.one.co.il
 NBA Games = https://www.nba.com/games
 # Wizards Streams = https://topstreams.info/nba/wizards
-Blazers Streams = https://topstreams.info/nba/trailblazers
+# Blazers Streams = https://topstreams.info/nba/trailblazers
+Blazers Streams = https://topstreamer.info/nba/trailblazers
+Meth Streams = https://methstreams.ms/league/nbastreams
 # NBA Streams = https://nbabite.com
 # NBA Replay = https://basketball-video.com // = https://nbareplay.net
 Basketball Replay = https://basketball-video.com/
+Free Media = https://fmhy.net/
+StreamX TV = https://www.streamxtv.tech/
+MovieZ = https://1moviesz.to/home
 
 [AI]
 ChatGPT = https://chat.openai.com/auth/login
