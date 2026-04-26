@@ -36,7 +36,7 @@ Kan 11 = http://www.kan.org.il/live/tv.aspx?stationId=2
 Keshet 12 = https://www.mako.co.il/mako-vod-live-tv/VOD-6540b8dcb64fd31006.htm
 Reshet 13 = http://reshet.tv/live/
 # US TV = https://ustv247.tv/
-US TV = https://tv247.us/all-channels/
+US TV = https://tv247.us/tv-channels/
 Kan B = https://www.kan.org.il/player?itemId=4483&playerType=Kaltura
 Galaz = http://glzwizzlv.bynetcdn.com/glz_mp3?awCollectionId=misc&awEpisodeId=glz
 Gal Galaz = http://glzwizzlv.bynetcdn.com/glglz_mp3?awCollectionId=misc&awEpisodeId=glglz
