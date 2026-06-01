@@ -207,3 +207,6 @@ Portfolio Visual = https://www.portfoliovisualizer.com/backtest-portfolio?action
 eToro = https://www.etoro.com/watchlists
 Finviz = https://finviz.com/screener.ashx
 Bilello Blog = https://bilello.blog/2024/the-week-in-charts-11-13-24
+
+[Watch List]
+USDILS = https://www.tradingview.com/chart/XdOqyk50/?symbol=FOREXCOM%3AUSDILS
