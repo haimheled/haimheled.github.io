@@ -109,12 +109,14 @@ CoPilot = https://m365.cloud.microsoft/chat?auth=2
 # Equity Gateway = https://renesas.globalsharesequity.co.uk/en/Participant
 MyEquity = https://renesas.globalsharesequity.co.uk/EN/Authentication/SSO?idp=RenesasSSO
 Jira = https://jira.global.renesas.com/projects/RUBIUM/issues/RUBIUM-3630?filter=myopenissues
+RMAC Confluence = https://confluence.renesas.com/spaces/RMACIP/pages/315953488/RMAC+IP+Home
+RMAC SharePoint = https://renesasgroup.sharepoint.com/sites/NextGenerationBluetoothArchitectureandSystemDesign?CT=1780327839997&OR=OWA-NT-Mail&CID=e96da3d3-11cd-e904-45a0-c1d4abe6fa79&SI=NonSentItems
 Memory Map = https://confluence.renesas.com/pages/viewpage.action?spaceKey=Rubium&title=Memory+Map
 Open Ticket = https://globalserviceportal.renesas.com/esc?id=sc_cat_item&sys_id=9531047253230010fa75ddeeff7b1262
 Service Portal = https://globalserviceportal.renesas.com/esc
 Service Desk = https://renesas.service-now.com
-Confluence RFMux = https://confluence.renesas.com/display/Rubium/RF+Multiplexer+-+RFMux
-Confluence FDMA = https://confluence.renesas.com/display/Rubium/Fast-DMA+Controller+-+FDMA
+RFMux Confluence = https://confluence.renesas.com/display/Rubium/RF+Multiplexer+-+RFMux
+FDMA Confluence = https://confluence.renesas.com/display/Rubium/Fast-DMA+Controller+-+FDMA
 RFMux Excel = https://renesasgroup.sharepoint.com/:x:/r/sites/RedwoodPHY/_layouts/15/doc2.aspx?sourcedoc=%7BDEFE149F-0C87-4472-92A9-025BCBEED018%7D&file=rfmux.xlsx&action=default&mobileredirect=true
 Mail = https://outlook.office365.com/mail/inbox
 Calendar = https://outlook.office365.com/calendar/view/month
