@@ -186,6 +186,7 @@ AutoDesk Viewer = https://viewer.autodesk.com
 # IP Address = ifconfig.me
 # IP Location = https://www.iplocation.net/
 Tuya Smart = https://protect-eu.ismartlife.me/playback
+# Linstall = https://www.dropbox.com/scl/fi/txp4m25b502dg1ge7l88k/install?rlkey=n4afhfrj9pvcnogew09i2nl7s&st=6cpvkjka&dl=0
 
 [Stocks]
 Inter IL Portal = https://www.clientam.com/sso/Login?partnerID=Inter_il
