@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+SCRIPT_NAME=$(basename $0)
+SCRIPT_PATH=$(dirname $0)
+
+
+TOKEN="$(rclone authorize dropbox  | grep access_token)"
+
+
+source /etc/os-release
+
+case "$ID" in
+    arch)
+        # echo "Running Arch Linux"
+        rclone --dropbox-token "$TOKEN" copyto :dropbox:/linuxfs/tmp/archinstall /tmp/archinstall
+        chmod +
+        ;;
+    ubuntu)
+        echo "Running Ubuntu"
+        ;;
+    debian)
+        echo "Running Debian"
+        ;;
+    *)
+        echo "Running $PRETTY_NAME"
+        ;;
+esac
+
+curl -X POST https://api.dropboxapi.com/2/auth/token/revoke -H "Authorization: Bearer $(echo "$TOKEN" | sed -n 's/.*"access_token":"\([^"]*\)".*/\1/p')" -o /dev/null -s
